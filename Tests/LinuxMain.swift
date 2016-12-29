@@ -3,4 +3,5 @@ import XCTest
 
 XCTMain([
      testCase(DateSugarTests.allTests),
+     testCase(CreatorMySQLTests.allTests),
 ])
