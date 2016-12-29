@@ -25,7 +25,42 @@ class DateSugarTests: XCTestCase {
         } catch {
             XCTAssertEqual(true, true)
         }
+    }
+    
+    func testParseFallback() {
+        let notValidDateTimeString = "2016-12-29T12:35:51+0100"
+        let fallback = Date()
+        XCTAssertEqual(try Date.parse(.dateTime, notValidDateTimeString, fallback).to(.dateTime), try fallback.toDateTimeString())
+    }
+    
+    func testPast() {
+        let past = Date().addingTimeInterval(-1)
+        XCTAssertTrue(past.isPast())
+    }
+    
+    func testFuture() {
+        let future = Date().addingTimeInterval(1)
+        XCTAssertTrue(future.isFuture())
+    }
+    
+    func testIsBefore() {
+        let now = Date()
+        let future = Date().addingTimeInterval(-1)
         
+        XCTAssertTrue(now.isAfter(future))
+    }
+    
+    func testIsAfter() {
+        let now = Date()
+        let past = Date().addingTimeInterval(1)
+        
+        XCTAssertTrue(now.isBefore(past))
+    }
+    
+    func testEqual() {
+        let now = Date()
+        
+        XCTAssertTrue(now.isEqual(now))
     }
     
     static var allTests : [(String, (DateSugarTests) -> () throws -> Void)] {
@@ -33,6 +68,13 @@ class DateSugarTests: XCTestCase {
             ("testDateTime", testDateTime),
             ("testDate", testDate),
             ("testISO8601", testISO8601),
+            ("testParseOrFail", testParseOrFail),
+            ("testParseFallback", testParseFallback),
+            ("testPast", testPast),
+            ("testFuture", testFuture),
+            ("testIsBefore", testIsBefore),
+            ("testIsAfter", testIsAfter),
+            ("testEqual", testEqual),
         ]
     }
 }

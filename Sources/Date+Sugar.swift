@@ -82,11 +82,15 @@ extension Date {
     }
     
     public func isAfter(_ date: Date) -> Bool {
-        return self.compare(date).rawValue < 0
+        return self.compare(date).rawValue > 0
     }
     
     public func isBefore(_ date: Date) -> Bool {
-        return self.compare(date).rawValue > 0
+        return self.compare(date).rawValue < 0
+    }
+    
+    public func isEqual(_ date: Date) -> Bool {
+        return self.compare(date).rawValue == 0
     }
  
 }
