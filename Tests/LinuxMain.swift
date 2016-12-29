@@ -1,5 +1,5 @@
 import XCTest
-@testable import DateSugarTests
+@testable import SugarTests
 
 XCTMain([
      testCase(DateSugarTests.allTests),
