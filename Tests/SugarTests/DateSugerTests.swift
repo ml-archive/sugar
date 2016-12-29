@@ -13,13 +13,13 @@ class DateSugarTests: XCTestCase {
     }
     
     func testISO8601() {
-        let iso8601Str = "2016-12-29T12:35:51+0100"
+        let iso8601Str = "2016-12-29T12:35:51+0000"
         XCTAssertEqual(try Date.parse(.ISO8601, iso8601Str)?.to(.ISO8601), iso8601Str)
     }
     
     func testParseOrFail() {
         do {
-            let notValidDateTimeString = "2016-12-29T12:35:51+0100"
+            let notValidDateTimeString = "2016-12-29T12:35:51+0000"
             _ = try Date.parseOrFail(.dateTime, notValidDateTimeString)
             XCTAssertEqual(false, true)
         } catch {
