@@ -6,6 +6,12 @@ extension Date {
         case couldNotParse
     }
     
+    public enum Format: String {
+        case dateTime = "yyyy-MM-dd HH:mm:ss"
+        case date = "yyyy-MM-dd"
+        case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
+    }
+    
     //MARK Custom parsers
     public static func parse(_ format: String, _ date: String) -> Date? {
         let dateFormatter = DateFormatter()
@@ -37,12 +43,6 @@ extension Date {
     }
     
     //MARK Enum parsers
-    public enum Format: String {
-        case dateTime = "yyyy-MM-dd HH:mm:ss"
-        case date = "yyyy-MM-dd"
-    }
-    
-    
     public static func parse(_ format: Format, _ date: String) -> Date? {
         return parse(format.rawValue, date)
     }
