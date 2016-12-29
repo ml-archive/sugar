@@ -12,7 +12,7 @@ extension Date {
         case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
     
-    //MARK Custom parsers
+    //MARK:  Custom parsers
     public static func parse(_ format: String, _ date: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -42,7 +42,7 @@ extension Date {
         return date
     }
     
-    //MARK Enum parsers
+    //MARK: Enum parsers
     public static func parse(_ format: Format, _ date: String) -> Date? {
         return parse(format.rawValue, date)
     }
@@ -56,7 +56,7 @@ extension Date {
     }
     
 
-    //MARK Formatters
+    //MARK: Formatters
     public func to(_ format: String) throws -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -72,7 +72,7 @@ extension Date {
         return try self.to(.dateTime)
     }
     
-    //Mark compares
+    //MARK:  compares
     public func isPast() -> Bool {
         return self.compare(Date()).rawValue < 0
     }
