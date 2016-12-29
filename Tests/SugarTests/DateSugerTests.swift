@@ -28,7 +28,7 @@ class DateSugarTests: XCTestCase {
     }
     
     func testParseFallback() {
-        let notValidDateTimeString = "2016-12-29T12:35:51+0100"
+        let notValidDateTimeString = "2016-12-29T12:35:51+0000"
         let fallback = Date()
         XCTAssertEqual(try Date.parse(.dateTime, notValidDateTimeString, fallback).to(.dateTime), try fallback.toDateTimeString())
     }
