@@ -6,7 +6,7 @@ import Fluent
 class CreatorMySQLTests: XCTestCase {
    
     // MARK: DATETIME
-    func testDateTime1() {
+    func testDateTimeOnlyColumn() {
         let builder = Schema.Creator("table")
         builder.datetime("column")
         
@@ -19,7 +19,7 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
-    func testDateTime2() {
+    func testDateTimeOptional() {
         let builder = Schema.Creator("table")
         builder.datetime("column", optional: true)
         
@@ -32,7 +32,7 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
-    func testDateTime3() {
+    func testDateTimeDefaultValue() {
         let builder = Schema.Creator("table")
         builder.datetime("column", optional: true, defaultValue: "2000-01-01 00:00:00")
         
@@ -62,6 +62,9 @@ class CreatorMySQLTests: XCTestCase {
     
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
+            ("testDateTimeOnlyColumn", testDateTimeOnlyColumn),
+            ("testDateTimeOptional", testDateTimeOptional),
+            ("testDateTimeDefaultValue", testDateTimeDefaultValue),
             ("testString", testString),
         ]
     }
