@@ -1,5 +1,6 @@
 import XCTest
 import Fluent
+import FluentMySQL
 
 @testable import Sugar
 
@@ -11,7 +12,7 @@ class CreatorMySQLTests: XCTestCase {
         builder.datetime("column")
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
         
@@ -24,7 +25,7 @@ class CreatorMySQLTests: XCTestCase {
         builder.datetime("column", optional: true)
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
         
@@ -37,7 +38,7 @@ class CreatorMySQLTests: XCTestCase {
         builder.datetime("column", optional: true, unique: true)
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
         
@@ -50,11 +51,11 @@ class CreatorMySQLTests: XCTestCase {
         builder.datetime("column", optional: true, defaultValue: "2000-01-01 00:00:00")
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
         
-        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME DEFAULT 2000-01-01 00:00:00)") // TOOD this SQL is not valid
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME DEFAULT 2000-01-01 00:00:00)") // Waiting for PR to add '2000-01-01 00:00:00'
         XCTAssertEqual(values.count, 0)
     }
     
@@ -63,28 +64,29 @@ class CreatorMySQLTests: XCTestCase {
         builder.timestamps()
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
-        print(statement)
+        
         XCTAssertEqual(statement, "CREATE TABLE `table` (`created_at` DATETIME, `updated_at` DATETIME)")
         XCTAssertEqual(values.count, 0)
     }
     
-    func testString() {
+    // MARK: TEMP TEST
+    func test() {
         let builder = Schema.Creator("table")
-        builder.string("column")
+        builder.string("column", default: "test")
         
         let sql = builder.schema.sql
-        let serializer = GeneralSQLSerializer(sql: sql)
+        let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
-        
-        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` STRING NOT NULL)")
+        print("")
+        print("")
+        print(statement)
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` VARCHAR(255) NOT NULL DEFAULT test)") // Waiting for PR to add 'test'
         XCTAssertEqual(values.count, 0)
     }
-    
-    
     
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
@@ -93,7 +95,7 @@ class CreatorMySQLTests: XCTestCase {
             ("testDateTimeDefaultValue", testDateTimeDefaultValue),
             ("testDateTimeUnique", testDateTimeUnique),
             ("testTimestamps", testTimestamps),
-            ("testString", testString),
+            ("test", test),
         ]
     }
 }
