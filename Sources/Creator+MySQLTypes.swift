@@ -7,13 +7,18 @@ extension Schema.Creator {
      MARK: Date and time datatypes
      */
     
+    /**
+     Creates a DATETIME type
+     - parameter name: name of column
+     - parameter optional: make column optional
+     - parameter default: Default value
+     */
     public func datetime(
         _ name: String,
         optional: Bool = false,
-        unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "DATETIME", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "DATETIME", optional: optional, default: defaultValue)
     }
     
     public func timestamps() {
