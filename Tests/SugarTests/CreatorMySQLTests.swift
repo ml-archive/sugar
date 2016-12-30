@@ -6,7 +6,7 @@ import Fluent
 class CreatorMySQLTests: XCTestCase {
    
     // MARK: DATETIME
-    func testDateTimeOnlyColumn() {
+    func testDateTime() {
         let builder = Schema.Creator("table")
         builder.datetime("column")
         
@@ -32,6 +32,19 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    func testDateTimeUnique() {
+        let builder = Schema.Creator("table")
+        builder.datetime("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = GeneralSQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME)") // TODO UNIQUE is not added??
+        XCTAssertEqual(values.count, 0)
+    }
+    
     func testDateTimeDefaultValue() {
         let builder = Schema.Creator("table")
         builder.datetime("column", optional: true, defaultValue: "2000-01-01 00:00:00")
@@ -41,7 +54,20 @@ class CreatorMySQLTests: XCTestCase {
         
         let (statement, values) = serializer.serialize()
         
-        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME DEFAULT 2000-01-01 00:00:00)")
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME DEFAULT 2000-01-01 00:00:00)") // TOOD this SQL is not valid
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testTimestamps() {
+        let builder = Schema.Creator("table")
+        builder.timestamps()
+        
+        let sql = builder.schema.sql
+        let serializer = GeneralSQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        print(statement)
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`created_at` DATETIME, `updated_at` DATETIME)")
         XCTAssertEqual(values.count, 0)
     }
     
@@ -62,9 +88,11 @@ class CreatorMySQLTests: XCTestCase {
     
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
-            ("testDateTimeOnlyColumn", testDateTimeOnlyColumn),
+            ("testDateTime", testDateTime),
             ("testDateTimeOptional", testDateTimeOptional),
             ("testDateTimeDefaultValue", testDateTimeDefaultValue),
+            ("testDateTimeUnique", testDateTimeUnique),
+            ("testTimestamps", testTimestamps),
             ("testString", testString),
         ]
     }

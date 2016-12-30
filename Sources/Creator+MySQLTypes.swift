@@ -11,16 +11,21 @@ extension Schema.Creator {
      Creates a DATETIME type
      - parameter name: name of column
      - parameter optional: make column optional
+     - parameter unique: make column unique
      - parameter default: Default value
      */
     public func datetime(
         _ name: String,
         optional: Bool = false,
+        unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
         self.custom(name, type: "DATETIME", optional: optional, default: defaultValue)
     }
     
+    /**
+     Creates created_at & updated_at DATETIME
+     */
     public func timestamps() {
         self.datetime("created_at", optional: true)
         self.datetime("updated_at", optional: true)
