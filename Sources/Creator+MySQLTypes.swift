@@ -20,7 +20,7 @@ extension Schema.Creator {
         unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "DATETIME", optional: optional, default: defaultValue)
+        self.custom(name, type: "DATETIME", optional: optional, unique: unique, default: defaultValue)
     }
     
     /**

@@ -42,7 +42,7 @@ class CreatorMySQLTests: XCTestCase {
         
         let (statement, values) = serializer.serialize()
         
-        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME)") // TODO UNIQUE is not added??
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DATETIME UNIQUE)")
         XCTAssertEqual(values.count, 0)
     }
     
@@ -81,9 +81,7 @@ class CreatorMySQLTests: XCTestCase {
         let serializer = MySQLSerializer(sql: sql)
         
         let (statement, values) = serializer.serialize()
-        print("")
-        print("")
-        print(statement)
+        
         XCTAssertEqual(statement, "CREATE TABLE `table` (`column` VARCHAR(255) NOT NULL DEFAULT test)") // Waiting for PR to add 'test'
         XCTAssertEqual(values.count, 0)
     }
