@@ -126,6 +126,72 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: INT
+    func testInteger() {
+        let builder = Schema.Creator("table")
+        builder.integer("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` INTEGER(11) NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testIntegerSigned() {
+        let builder = Schema.Creator("table")
+        builder.integer("column", signed: false)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` INTEGER(10) UNSIGNED NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testIntegerOptional() {
+        let builder = Schema.Creator("table")
+        builder.integer("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` INTEGER(11))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testIntegerUnique() {
+        let builder = Schema.Creator("table")
+        builder.integer("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` INTEGER(11) UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testIntegerDefault() {
+        let builder = Schema.Creator("table")
+        builder.integer("column", optional: true, defaultValue: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` INTEGER(11) DEFAULT 0)") // Waiting for PR to add '0'
+        XCTAssertEqual(values.count, 0)
+    }
+    
     // MARK: TEMP TEST
     func test() {
         let builder = Schema.Creator("table")
@@ -156,6 +222,13 @@ class CreatorMySQLTests: XCTestCase {
             
             // TIMESTAMPS
             ("testTimestamps", testTimestamps),
+            
+            //INT
+            ("testInteger", testInteger),
+            ("testIntegerSigned", testIntegerSigned),
+            ("testIntegerOptional", testIntegerOptional),
+            ("testIntegerUnique", testIntegerUnique),
+            ("testIntegerDefault", testIntegerDefault),
             
             //
             ("test", test),

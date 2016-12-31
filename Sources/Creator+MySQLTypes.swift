@@ -68,12 +68,12 @@ extension Schema.Creator {
         defaultValue: NodeRepresentable? = nil
         ) {
         
-        var typeSQL: String = ""
+        var typeSQL: String = "INTEGER"
         
         if (signed) {
-            typeSQL = "INTEGER(11)"
+            typeSQL += "(11)"
         } else {
-            typeSQL = "INTEGER(10) UNSIGNED"
+            typeSQL += "(10) UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
