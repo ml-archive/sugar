@@ -40,6 +40,7 @@ extension Schema.Creator {
     }
     
     // MARK: DATE
+   
     /**
      Creates a DATE type
      - parameter name: name of column
@@ -60,6 +61,14 @@ extension Schema.Creator {
      MARK: Numeric datatypes
      */
     
+    /**
+     Creates a INT type
+     - parameter name: name of column
+     - parameter signed: make column signed/unsigned
+     - parameter optional: make column optional
+     - parameter unique: make column unique
+     - parameter default: Default value
+     */
     public func integer(
         _ name: String,
         signed: Bool = true,
