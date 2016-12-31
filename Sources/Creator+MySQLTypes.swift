@@ -4,7 +4,7 @@ import Fluent
 extension Schema.Creator {
     
     /*
-     MARK: Date and time datatypes
+     MARK: DATETIME
      */
     
     /**
@@ -23,6 +23,7 @@ extension Schema.Creator {
         self.custom(name, type: "DATETIME", optional: optional, unique: unique, default: defaultValue)
     }
     
+    // MARK: Timestamps
     /**
      Creates created_at & updated_at DATETIME
      */
@@ -31,6 +32,21 @@ extension Schema.Creator {
         self.datetime("updated_at", optional: true)
     }
     
+    /**
+     Creates deleted_at DATETIME
+     */
+    public func softDelete() {
+        self.datetime("deleted_at", optional: true)
+    }
+    
+    // MARK: DATE
+    /**
+     Creates a DATE type
+     - parameter name: name of column
+     - parameter optional: make column optional
+     - parameter unique: make column unique
+     - parameter default: Default value
+     */
     public func date(
         _ name: String,
         optional: Bool = false,
