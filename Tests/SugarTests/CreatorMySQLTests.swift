@@ -993,15 +993,16 @@ class CreatorMySQLTests: XCTestCase {
     
     func testIndex() {
         let builder = Schema.Creator("table")
-        builder.longText("column", optional: true, default: 0)
+        let statement = builder.index(table: "table", column: "column")
         
-        let sql = builder.schema.sql
-        let serializer = MySQLSerializer(sql: sql)
+        XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX (column)")
+    }
+    
+    func testIndexName() {
+        let builder = Schema.Creator("table")
+        let statement = builder.index(table: "table", column: "column", name: "index_test")
         
-        let (statement, values) = serializer.serialize()
-        
-        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT DEFAULT '0')")
-        XCTAssertEqual(values.count, 0)
+        XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX index_test (column)")
     }
     
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
@@ -1111,6 +1112,10 @@ class CreatorMySQLTests: XCTestCase {
             ("testLongTextOptional", testLongTextOptional),
             ("testLongTextUnique", testLongTextUnique),
             ("testLongTextDefault", testLongTextDefault),
+            
+            //INDEX
+            ("testIndex", testIndex),
+            ("testIndexName", testIndexName),
         ]
     }
 }

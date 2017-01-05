@@ -382,13 +382,13 @@ extension Schema.Creator {
         name: String? = nil
         ) -> String {
         
-        let indexName: String!
-        if let name = name?.string {
-            indexName = name
-        } else {
-            indexName = table + "_" + column  + "_index (" + column + ")"
+        var nameString = name ?? ""
+        
+        // Add trailing space
+        if(nameString.count > 0) {
+            nameString += " "
         }
         
-        return "ALTER TABLE " + table + " ADD INDEX " + indexName
+        return "ALTER TABLE " + table + " ADD INDEX " + nameString + "(" + column + ")"
     }
 }
