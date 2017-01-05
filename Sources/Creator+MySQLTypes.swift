@@ -180,6 +180,16 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
+    /// Create a DECIMAL type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - precision: precision of column
+    ///   - digits: digits of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func decimal(
         _ name: String,
         precision: UInt = 4,
@@ -189,12 +199,10 @@ extension Schema.Creator {
         unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        var typeSQL: String = ""
+        var typeSQL: String = "DECIMAL(" + String(precision) + "," + String(digits) + ")"
         
-        if (signed) {
-            typeSQL = "DECIMAL(" + String(precision) + "," + String(digits) + ")"
-        } else {
-            typeSQL = "DECIMAL(" + String(precision) + "," + String(digits) + ") UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)

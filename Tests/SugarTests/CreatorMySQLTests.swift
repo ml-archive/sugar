@@ -460,6 +460,86 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: DECIMAL
+    func testDecimal() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(4,2) NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testDecimalSigned() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column", signed: false)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(4,2) UNSIGNED NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testDecimalOptional() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(4,2))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    
+    func testDecimalUnique() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(4,2) UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testDecimalDefault() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column", optional: true, defaultValue: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(4,2) DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testDecimalPrecisionDigist() {
+        let builder = Schema.Creator("table")
+        builder.decimal("column", precision: 3, digits: 5, optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` DECIMAL(3,5))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -511,6 +591,13 @@ class CreatorMySQLTests: XCTestCase {
             ("testBigIntegerOptional", testBigIntegerOptional),
             ("testBigIntegerUnique", testBigIntegerUnique),
             ("testBigIntegerDefault", testBigIntegerDefault),
+            
+            //DECIMAL
+            ("testDecimal", testDecimal),
+            ("testDecimalSigned", testDecimalSigned),
+            ("testDecimalOptional", testDecimalOptional),
+            ("testDecimalUnique", testDecimalUnique),
+            ("testDecimalDefault", testDecimalDefault),
         ]
     }
 }
