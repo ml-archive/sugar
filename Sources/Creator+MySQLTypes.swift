@@ -147,12 +147,10 @@ extension Schema.Creator {
         unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        var typeSQL: String = ""
+        var typeSQL: String = "MEDIUMINT"
         
-        if (signed) {
-            typeSQL = "MEDIUMINT"
-        } else {
-            typeSQL = "MEDIUMINT UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
