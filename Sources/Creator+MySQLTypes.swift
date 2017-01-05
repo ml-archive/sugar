@@ -132,7 +132,7 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
-    /// Create a MEDIUM type
+    /// Create a MEDIUMINT type
     ///
     /// - Parameters:
     ///   - name: name of column
@@ -156,6 +156,14 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
+    /// Create a BIGINT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func bigInteger(
         _ name: String,
         signed: Bool = true,
@@ -163,12 +171,10 @@ extension Schema.Creator {
         unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        var typeSQL: String = ""
+        var typeSQL: String = "BIGINT"
         
-        if (signed) {
-            typeSQL = "BIGINT"
-        } else {
-            typeSQL = "BIGINT UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
