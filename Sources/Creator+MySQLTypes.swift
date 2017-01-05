@@ -380,44 +380,4 @@ extension Schema.Creator {
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
-    
-    // MARK: Indexes
-    
-    /// A helper function to create foreign keys
-    /// Use to execute the query drop.database.driver.raw()
-    ///
-    /// - Parameters:
-    ///   - parentTable: parent table
-    ///   - parentPrimaryKey: parent column
-    ///   - childTable: children table
-    ///   - childForeignKey: children column
-    /// - Returns: MySQL query
-    public func foreign(
-        parentTable: String,
-        parentPrimaryKey: String,
-        childTable: String,
-        childForeignKey: String
-        ) -> String {
-        return "ALTER TABLE " + childTable + " ADD CONSTRAINT " + childTable + "_" + parentTable + "_" + parentPrimaryKey + "_foreign FOREIGN KEY(" + childForeignKey + ") REFERENCES " + parentTable + "(" + parentPrimaryKey + ")"
-    }
-    
-    /// A helper function to index
-    /// Use to execute the query drop.database.driver.raw()
-    ///
-    /// - Parameters:
-    ///   - table: table
-    ///   - column: column
-    ///   - name: name of index
-    /// - Returns: MySQL query
-    public func index(table: String, column: String,name: String? = nil) -> String {
-        
-        var nameString = name ?? ""
-        
-        // Add trailing space
-        if(nameString.count > 0) {
-            nameString += " "
-        }
-        
-        return "ALTER TABLE " + table + " ADD INDEX " + nameString + "(" + column + ")"
-    }
 }

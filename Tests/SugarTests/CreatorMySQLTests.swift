@@ -1043,28 +1043,6 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
-    //MARK: Indexes
-    func testIndex() {
-        let builder = Schema.Creator("table")
-        let statement = builder.index(table: "table", column: "column")
-        
-        XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX (column)")
-    }
-    
-    func testIndexName() {
-        let builder = Schema.Creator("table")
-        let statement = builder.index(table: "table", column: "column", name: "index_test")
-        
-        XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX index_test (column)")
-    }
-    
-    func testForeign() {
-        let builder = Schema.Creator("table")
-        let statement = builder.foreign(parentTable: "table_a", parentPrimaryKey: "a", childTable: "table_b", childForeignKey: "b")
-        
-        XCTAssertEqual(statement, "ALTER TABLE table_b ADD CONSTRAINT table_b_table_a_a_foreign FOREIGN KEY(b) REFERENCES table_a(a)")
-    }
-    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -1178,12 +1156,6 @@ class CreatorMySQLTests: XCTestCase {
             ("testEnumOptional", testEnumOptional),
             ("testEnumUnique", testEnumUnique),
             ("testEnumDefault", testEnumDefault),
-            
-            //INDEX
-            ("testIndex", testIndex),
-            ("testIndexName", testIndexName),
-            
-            //FOREIGN
         ]
     }
 }
