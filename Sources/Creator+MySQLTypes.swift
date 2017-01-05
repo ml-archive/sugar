@@ -82,6 +82,15 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
+    
+    /// Create a TINYINT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func tinyInteger(
         _ name: String,
         signed: Bool = true,
@@ -90,12 +99,10 @@ extension Schema.Creator {
         defaultValue: NodeRepresentable? = nil
         ) {
         
-        var typeSQL: String = ""
+        var typeSQL: String = "TINYINT"
         
-        if (signed) {
-            typeSQL = "TINYINT"
-        } else {
-            typeSQL = "TINYINT UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
