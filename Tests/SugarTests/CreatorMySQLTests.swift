@@ -326,6 +326,73 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: MEDIUMINT
+    func testMediumInteger() {
+        let builder = Schema.Creator("table")
+        builder.mediumInteger("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMINT NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumIntegerSigned() {
+        let builder = Schema.Creator("table")
+        builder.mediumInteger("column", signed: false)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMINT UNSIGNED NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumIntegerOptional() {
+        let builder = Schema.Creator("table")
+        builder.mediumInteger("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMINT)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    
+    func testMediumIntegerUnique() {
+        let builder = Schema.Creator("table")
+        builder.mediumInteger("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMINT UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumIntegerDefault() {
+        let builder = Schema.Creator("table")
+        builder.mediumInteger("column", optional: true, defaultValue: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMINT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -363,6 +430,13 @@ class CreatorMySQLTests: XCTestCase {
             ("testSmallIntegerOptional", testSmallIntegerOptional),
             ("testSmallIntegerUnique", testSmallIntegerUnique),
             ("testSmallIntegerDefault", testSmallIntegerDefault),
+            
+            //MEDIUMTEST
+            ("testMediumInteger", testMediumInteger),
+            ("testMediumIntegerSigned", testMediumIntegerSigned),
+            ("testMediumIntegerOptional", testMediumIntegerOptional),
+            ("testMediumIntegerUnique", testMediumIntegerUnique),
+            ("testMediumIntegerDefault", testMediumIntegerDefault),
         ]
     }
 }

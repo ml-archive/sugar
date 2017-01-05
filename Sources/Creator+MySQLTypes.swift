@@ -132,6 +132,14 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
+    /// Create a MEDIUM type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func mediumInteger(
         _ name: String,
         signed: Bool = true,
