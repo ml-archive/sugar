@@ -2,18 +2,14 @@ import Vapor
 import Fluent
 
 extension Schema.Creator {
-    
-    /*
-     MARK: DATETIME
-     */
-    
-    /**
-     Creates a DATETIME type
-     - parameter name: name of column
-     - parameter optional: make column optional
-     - parameter unique: make column unique
-     - parameter default: Default value
-     */
+
+    /// Creates a DATETIME type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func datetime(
         _ name: String,
         optional: Bool = false,
@@ -24,30 +20,28 @@ extension Schema.Creator {
     }
     
     // MARK: Timestamps
-    /**
-     Creates created_at & updated_at DATETIME
-     */
+    
+    /// Creates created_at & updated_at DATETIME
     public func timestamps() {
         self.datetime("created_at", optional: true)
         self.datetime("updated_at", optional: true)
     }
     
-    /**
-     Creates deleted_at DATETIME
-     */
+    
+    /// Creates created_at & updated_at DATETIME
     public func softDelete() {
         self.datetime("deleted_at", optional: true)
     }
     
     // MARK: DATE
    
-    /**
-     Creates a DATE type
-     - parameter name: name of column
-     - parameter optional: make column optional
-     - parameter unique: make column unique
-     - parameter default: Default value
-     */
+    /// Creates a DATE type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func date(
         _ name: String,
         optional: Bool = false,
@@ -61,14 +55,14 @@ extension Schema.Creator {
      MARK: Numeric datatypes
      */
     
-    /**
-     Creates a INT type
-     - parameter name: name of column
-     - parameter signed: make column signed/unsigned
-     - parameter optional: make column optional
-     - parameter unique: make column unique
-     - parameter default: Default value
-     */
+    /// Creates a INT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func integer(
         _ name: String,
         signed: Bool = true,
