@@ -246,11 +246,11 @@ extension Schema.Creator {
     ///   - optional: make column optional
     ///   - unique: make column unique
     ///   - default: default value
-    public func double2(
+    public func double(
         _ name: String,
         precision: UInt = 4,
         digits: UInt = 2,
-        signed: Bool = true,
+        signed: Bool,
         optional: Bool = false,
         unique: Bool = false,
         default value: NodeRepresentable? = nil

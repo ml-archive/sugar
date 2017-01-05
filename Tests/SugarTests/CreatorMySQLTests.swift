@@ -622,7 +622,7 @@ class CreatorMySQLTests: XCTestCase {
     // MARK: DOUBLE
     func testDouble() {
         let builder = Schema.Creator("table")
-        builder.double2("column")
+        builder.double("column", signed: true)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -635,7 +635,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDoubleSigned() {
         let builder = Schema.Creator("table")
-        builder.double2("column", signed: false)
+        builder.double("column", signed: false)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -648,7 +648,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDoubleOptional() {
         let builder = Schema.Creator("table")
-        builder.double2("column", optional: true)
+        builder.double("column", signed: true, optional: true)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -662,7 +662,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDoubleUnique() {
         let builder = Schema.Creator("table")
-        builder.double2("column", optional: true, unique: true)
+        builder.double("column", signed: true, optional: true, unique: true)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -675,7 +675,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDoubleDefault() {
         let builder = Schema.Creator("table")
-        builder.double2("column", optional: true, default: 0)
+        builder.double("column", signed: true, optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -688,7 +688,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDoublePrecisionDigist() {
         let builder = Schema.Creator("table")
-        builder.double2("column", precision: 3, digits: 5, optional: true)
+        builder.double("column", precision: 3, digits: 5, signed: true, optional: true)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
