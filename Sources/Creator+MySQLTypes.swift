@@ -265,7 +265,7 @@ extension Schema.Creator {
     }
     
     
-    /// crete CHAR typ
+    /// crete CHAR type
     ///
     /// - Parameters:
     ///   - name: name of column
@@ -283,6 +283,14 @@ extension Schema.Creator {
         self.custom(name, type: "CHAR(" + String(length) + ")", optional: optional, unique: unique, default: value)
     }
     
+    /// crete VARCHAR type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - length: length of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
     public func varchar(
         _ name: String,
         length: UInt = 255,
