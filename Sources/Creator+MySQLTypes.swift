@@ -365,7 +365,7 @@ extension Schema.Creator {
         childTable: String,
         childForeignKey: String
         ) -> String {
-        return "ALTER TABLE " + childTable + " ADD CONSTRAINT " + childTable + "_" + parentTable + "_" + parentPrimaryKey + "_foreign FOREIGN KEY(" + childForeignKey + ") REFERENCES " + parentTable + "(" + parentPrimaryKey + ");"
+        return "ALTER TABLE " + childTable + " ADD CONSTRAINT " + childTable + "_" + parentTable + "_" + parentPrimaryKey + "_foreign FOREIGN KEY(" + childForeignKey + ") REFERENCES " + parentTable + "(" + parentPrimaryKey + ")"
     }
     
     /// A helper function to index
@@ -376,11 +376,7 @@ extension Schema.Creator {
     ///   - column: column
     ///   - name: name of index
     /// - Returns: MySQL query
-    public func index(
-        table: String,
-        column: String,
-        name: String? = nil
-        ) -> String {
+    public func index(table: String, column: String,name: String? = nil) -> String {
         
         var nameString = name ?? ""
         

@@ -1005,6 +1005,13 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX index_test (column)")
     }
     
+    func testForeign() {
+        let builder = Schema.Creator("table")
+        let statement = builder.foreign(parentTable: "table_a", parentPrimaryKey: "a", childTable: "table_b", childForeignKey: "b")
+        
+        XCTAssertEqual(statement, "ALTER TABLE table_b ADD CONSTRAINT table_b_table_a_a_foreign FOREIGN KEY(b) REFERENCES table_a(a)")
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -1116,6 +1123,8 @@ class CreatorMySQLTests: XCTestCase {
             //INDEX
             ("testIndex", testIndex),
             ("testIndexName", testIndexName),
+            
+            //FOREIGN
         ]
     }
 }
