@@ -540,6 +540,86 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: FLOAT
+    func testFloat() {
+        let builder = Schema.Creator("table")
+        builder.float("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(4,2) NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testFloatSigned() {
+        let builder = Schema.Creator("table")
+        builder.float("column", signed: false)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(4,2) UNSIGNED NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testFloatOptional() {
+        let builder = Schema.Creator("table")
+        builder.float("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(4,2))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    
+    func testFloatUnique() {
+        let builder = Schema.Creator("table")
+        builder.float("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(4,2) UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testFloatDefault() {
+        let builder = Schema.Creator("table")
+        builder.float("column", optional: true, defaultValue: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(4,2) DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testFloatPrecisionDigist() {
+        let builder = Schema.Creator("table")
+        builder.float("column", precision: 3, digits: 5, optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` FLOAT(3,5))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -598,6 +678,15 @@ class CreatorMySQLTests: XCTestCase {
             ("testDecimalOptional", testDecimalOptional),
             ("testDecimalUnique", testDecimalUnique),
             ("testDecimalDefault", testDecimalDefault),
+            ("testDecimalPrecisionDigist", testDecimalPrecisionDigist),
+            
+            //DECIMAL
+            ("testFloat", testFloat),
+            ("testFloatSigned", testFloatSigned),
+            ("testFloatOptional", testFloatOptional),
+            ("testFloatUnique", testFloatUnique),
+            ("testFloatDefault", testFloatDefault),
+            ("testFloatPrecisionDigist", testFloatPrecisionDigist),
         ]
     }
 }
