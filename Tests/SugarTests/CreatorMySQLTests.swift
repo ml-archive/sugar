@@ -991,6 +991,19 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    func testIndex() {
+        let builder = Schema.Creator("table")
+        builder.longText("column", optional: true, default: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
