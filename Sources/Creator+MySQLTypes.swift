@@ -9,14 +9,14 @@ extension Schema.Creator {
     ///   - name: name of column
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func datetime(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "DATETIME", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "DATETIME", optional: optional, unique: unique, default: value)
     }
     
     // MARK: Timestamps
@@ -41,14 +41,14 @@ extension Schema.Creator {
     ///   - name: name of column
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func date(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "DATE", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "DATE", optional: optional, unique: unique, default: value)
     }
     
     /*
@@ -62,13 +62,13 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func integer(
         _ name: String,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         
         var typeSQL: String = "INTEGER"
@@ -79,7 +79,7 @@ extension Schema.Creator {
             typeSQL += "(10) UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     
@@ -90,13 +90,13 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func tinyInteger(
         _ name: String,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         
         var typeSQL: String = "TINYINT"
@@ -105,7 +105,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a SMALLINT type
@@ -115,13 +115,13 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func smallInteger(
         _ name: String,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         var typeSQL: String = "SMALLINT"
         
@@ -129,7 +129,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a MEDIUMINT type
@@ -139,13 +139,13 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func mediumInteger(
         _ name: String,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         var typeSQL: String = "MEDIUMINT"
         
@@ -153,7 +153,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a BIGINT type
@@ -163,13 +163,13 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func bigInteger(
         _ name: String,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         var typeSQL: String = "BIGINT"
         
@@ -177,7 +177,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a DECIMAL type
@@ -189,7 +189,7 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func decimal(
         _ name: String,
         precision: UInt = 4,
@@ -197,7 +197,7 @@ extension Schema.Creator {
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         var typeSQL: String = "DECIMAL(" + String(precision) + "," + String(digits) + ")"
         
@@ -205,7 +205,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a FLOAT type
@@ -217,7 +217,7 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func float(
         _ name: String,
         precision: UInt = 4,
@@ -225,7 +225,7 @@ extension Schema.Creator {
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
         var typeSQL: String = "FLOAT(" + String(precision) + "," + String(digits) + ")"
         
@@ -233,7 +233,7 @@ extension Schema.Creator {
             typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /// Create a DOUBLE type
@@ -245,7 +245,7 @@ extension Schema.Creator {
     ///   - signed: make column signed/unsigned
     ///   - optional: make column optional
     ///   - unique: make column unique
-    ///   - defaultValue: default value
+    ///   - default: default value
     public func double2(
         _ name: String,
         precision: UInt = 4,

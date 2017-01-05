@@ -48,7 +48,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDateDefaultValue() {
         let builder = Schema.Creator("table")
-        builder.date("column", optional: true, defaultValue: "2000-01-01")
+        builder.date("column", optional: true, default: "2000-01-01")
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -101,7 +101,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDateTimeDefaultValue() {
         let builder = Schema.Creator("table")
-        builder.datetime("column", optional: true, defaultValue: "2000-01-01 00:00:00")
+        builder.datetime("column", optional: true, default: "2000-01-01 00:00:00")
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -181,7 +181,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testIntegerDefault() {
         let builder = Schema.Creator("table")
-        builder.integer("column", optional: true, defaultValue: 0)
+        builder.integer("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -248,7 +248,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testTinyIntegerDefault() {
         let builder = Schema.Creator("table")
-        builder.tinyInteger("column", optional: true, defaultValue: 0)
+        builder.tinyInteger("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -315,7 +315,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testSmallIntegerDefault() {
         let builder = Schema.Creator("table")
-        builder.smallInteger("column", optional: true, defaultValue: 0)
+        builder.smallInteger("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -382,7 +382,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testMediumIntegerDefault() {
         let builder = Schema.Creator("table")
-        builder.mediumInteger("column", optional: true, defaultValue: 0)
+        builder.mediumInteger("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -449,7 +449,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testBigIntegerDefault() {
         let builder = Schema.Creator("table")
-        builder.bigInteger("column", optional: true, defaultValue: 0)
+        builder.bigInteger("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -516,7 +516,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testDecimalDefault() {
         let builder = Schema.Creator("table")
-        builder.decimal("column", optional: true, defaultValue: 0)
+        builder.decimal("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
@@ -596,7 +596,7 @@ class CreatorMySQLTests: XCTestCase {
     
     func testFloatDefault() {
         let builder = Schema.Creator("table")
-        builder.float("column", optional: true, defaultValue: 0)
+        builder.float("column", optional: true, default: 0)
         
         let sql = builder.schema.sql
         let serializer = MySQLSerializer(sql: sql)
