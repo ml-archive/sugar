@@ -236,24 +236,32 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
-    public func double(
+    /// Create a DOUBLE type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - precision: precision of column
+    ///   - digits: digits of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
+    public func double2(
         _ name: String,
         precision: UInt = 4,
         digits: UInt = 2,
         signed: Bool = true,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        var typeSQL: String = ""
+        var typeSQL: String = "DOUBLE(" + String(precision) + "," + String(digits) + ")"
         
-        if (signed) {
-            typeSQL = "DOUBLE(" + String(precision) + "," + String(digits) + ")"
-        } else {
-            typeSQL = "DOUBLE(" + String(precision) + "," + String(digits) + ") UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
-        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
     /*
