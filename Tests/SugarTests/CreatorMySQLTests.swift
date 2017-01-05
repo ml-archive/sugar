@@ -991,6 +991,59 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    func testEnum() {
+        let builder = Schema.Creator("table")
+        builder.enum("column", options: ["one", "two", "three"])
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` ENUM('one','two','three') NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testEnumOptional() {
+        let builder = Schema.Creator("table")
+        builder.enum("column", options: ["one", "two", "three"], optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` ENUM('one','two','three'))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testEnumUnique() {
+        let builder = Schema.Creator("table")
+        builder.enum("column", options: ["one", "two", "three"], optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` ENUM('one','two','three') UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testEnumDefault() {
+        let builder = Schema.Creator("table")
+        builder.enum("column", options: ["one", "two", "three"], optional: true, default: "one")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` ENUM('one','two','three') DEFAULT 'one')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    //MARK: Indexes
     func testIndex() {
         let builder = Schema.Creator("table")
         let statement = builder.index(table: "table", column: "column")
@@ -1119,6 +1172,12 @@ class CreatorMySQLTests: XCTestCase {
             ("testLongTextOptional", testLongTextOptional),
             ("testLongTextUnique", testLongTextUnique),
             ("testLongTextDefault", testLongTextDefault),
+            
+            //ENUM
+            ("testEnum", testEnum),
+            ("testEnumOptional", testEnumOptional),
+            ("testEnumUnique", testEnumUnique),
+            ("testEnumDefault", testEnumDefault),
             
             //INDEX
             ("testIndex", testIndex),

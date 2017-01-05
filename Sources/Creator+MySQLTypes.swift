@@ -349,6 +349,30 @@ extension Schema.Creator {
         self.custom(name, type: "LONGTEXT", optional: optional, unique: unique, default: value)
     }
     
+    public func `enum`(
+        _ name: String,
+        options: [String],
+        optional: Bool = false,
+        unique: Bool = false,
+        default value: NodeRepresentable? = nil
+        ) {
+        
+        var typeSQL: String = "ENUM("
+        
+        for option in options {
+            if(typeSQL.characters.last != "(") {
+                typeSQL += ","
+            }
+            
+            typeSQL += "'" + option + "'"
+        }
+        
+        typeSQL += ")"
+        
+        self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
+    }
+    
+    // MARK: Indexes
     
     /// A helper function to create foreign keys
     /// Use to execute the query drop.database.driver.raw()
