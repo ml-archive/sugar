@@ -301,31 +301,52 @@ extension Schema.Creator {
         self.custom(name, type: "VARCHAR(" + String(length) + ")", optional: optional, unique: unique, default: value)
     }
     
+    /// crete TEXT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
     public func text(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "TEXT", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "TEXT", optional: optional, unique: unique, default: value)
     }
     
-    public func mediumtext(
+    /// crete MEDIUMTEXT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
+    public func mediumText(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "TEXT", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "MEDIUMTEXT", optional: optional, unique: unique, default: value)
     }
     
+    /// crete LONGTEXT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
     public func longText(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "LONGTEXT", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "LONGTEXT", optional: optional, unique: unique, default: value)
     }
     
     /*

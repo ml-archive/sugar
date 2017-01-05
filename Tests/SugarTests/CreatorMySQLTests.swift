@@ -832,6 +832,165 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: TEXT
+    func testText() {
+        let builder = Schema.Creator("table")
+        builder.text("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` TEXT NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testTextOptional() {
+        let builder = Schema.Creator("table")
+        builder.text("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` TEXT)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testTextUnique() {
+        let builder = Schema.Creator("table")
+        builder.text("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` TEXT UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testTextDefault() {
+        let builder = Schema.Creator("table")
+        builder.text("column", optional: true, default: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` TEXT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    // MARK: MEDIUMTEXT
+    func testMediumText() {
+        let builder = Schema.Creator("table")
+        builder.mediumText("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMTEXT NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumTextOptional() {
+        let builder = Schema.Creator("table")
+        builder.mediumText("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMTEXT)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumTextUnique() {
+        let builder = Schema.Creator("table")
+        builder.mediumText("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMTEXT UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testMediumTextDefault() {
+        let builder = Schema.Creator("table")
+        builder.mediumText("column", optional: true, default: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` MEDIUMTEXT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    // MARK: LONGTEXT
+    func testLongText() {
+        let builder = Schema.Creator("table")
+        builder.longText("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testLongTextOptional() {
+        let builder = Schema.Creator("table")
+        builder.longText("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testLongTextUnique() {
+        let builder = Schema.Creator("table")
+        builder.longText("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testLongTextDefault() {
+        let builder = Schema.Creator("table")
+        builder.longText("column", optional: true, default: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` LONGTEXT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -921,6 +1080,24 @@ class CreatorMySQLTests: XCTestCase {
             ("testVarcharOptional", testVarcharOptional),
             ("testVarcharUnique", testVarcharUnique),
             ("testVarcharDefault", testVarcharDefault),
+            
+            //TEXT
+            ("testText", testText),
+            ("testTextOptional", testTextOptional),
+            ("testTextUnique", testTextUnique),
+            ("testTextDefault", testTextDefault),
+            
+            //MEDIUMTEXT
+            ("testMediumText", testMediumText),
+            ("testMediumTextOptional", testMediumTextOptional),
+            ("testMediumTextUnique", testMediumTextUnique),
+            ("testMediumTextDefault", testMediumTextDefault),
+            
+            //LONGTEXT
+            ("testLongText", testLongText),
+            ("testLongTextOptional", testLongTextOptional),
+            ("testLongTextUnique", testLongTextUnique),
+            ("testLongTextDefault", testLongTextDefault),
         ]
     }
 }
