@@ -349,6 +349,15 @@ extension Schema.Creator {
         self.custom(name, type: "LONGTEXT", optional: optional, unique: unique, default: value)
     }
     
+    
+    /// Create ENUM type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - options: the different options of the enum
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
     public func `enum`(
         _ name: String,
         options: [String],
