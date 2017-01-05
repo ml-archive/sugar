@@ -264,18 +264,23 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: value)
     }
     
-    /*
-     MARK: String datatypes
-     */
     
+    /// crete CHAR typ
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - length: length of column
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - default: default value
     public func char(
         _ name: String,
         length: UInt = 4,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "CHAR(" + String(length) + ")", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "CHAR(" + String(length) + ")", optional: optional, unique: unique, default: value)
     }
     
     public func varchar(
@@ -283,12 +288,21 @@ extension Schema.Creator {
         length: UInt = 255,
         optional: Bool = false,
         unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
+        default value: NodeRepresentable? = nil
         ) {
-        self.custom(name, type: "VARCHAR(" + String(length) + ")", optional: optional, unique: unique, default: defaultValue)
+        self.custom(name, type: "VARCHAR(" + String(length) + ")", optional: optional, unique: unique, default: value)
     }
     
     public func text(
+        _ name: String,
+        optional: Bool = false,
+        unique: Bool = false,
+        defaultValue: NodeRepresentable? = nil
+        ) {
+        self.custom(name, type: "TEXT", optional: optional, unique: unique, default: defaultValue)
+    }
+    
+    public func mediumtext(
         _ name: String,
         optional: Bool = false,
         unique: Bool = false,

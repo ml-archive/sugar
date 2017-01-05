@@ -299,7 +299,6 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
-    
     func testSmallIntegerUnique() {
         let builder = Schema.Creator("table")
         builder.smallInteger("column", optional: true, unique: true)
@@ -700,6 +699,73 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: CHAR
+    func testChar() {
+        let builder = Schema.Creator("table")
+        builder.char("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` CHAR(4) NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testCharLength() {
+        let builder = Schema.Creator("table")
+        builder.char("column", length: 5)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` CHAR(5) NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testCharOptional() {
+        let builder = Schema.Creator("table")
+        builder.char("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` CHAR(4))")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    
+    func testCharUnique() {
+        let builder = Schema.Creator("table")
+        builder.char("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` CHAR(4) UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testCharDefault() {
+        let builder = Schema.Creator("table")
+        builder.char("column", optional: true, default: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` CHAR(4) DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -775,6 +841,13 @@ class CreatorMySQLTests: XCTestCase {
             ("testDoubleUnique", testDoubleUnique),
             ("testDoubleDefault", testDoubleDefault),
             ("testDoublePrecisionDigist", testDoublePrecisionDigist),
+            
+            //CHAR
+            ("testChar", testChar),
+            ("testCharLength", testCharLength),
+            ("testCharOptional", testCharOptional),
+            ("testCharUnique", testCharUnique),
+            ("testCharDefault", testCharDefault),
         ]
     }
 }
