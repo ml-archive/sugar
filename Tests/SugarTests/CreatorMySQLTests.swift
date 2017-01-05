@@ -259,6 +259,73 @@ class CreatorMySQLTests: XCTestCase {
         XCTAssertEqual(values.count, 0)
     }
     
+    // MARK: SMALLINT
+    func testSmallInteger() {
+        let builder = Schema.Creator("table")
+        builder.smallInteger("column")
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` SMALLINT NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testSmallIntegerSigned() {
+        let builder = Schema.Creator("table")
+        builder.smallInteger("column", signed: false)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` SMALLINT UNSIGNED NOT NULL)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testSmallIntegerOptional() {
+        let builder = Schema.Creator("table")
+        builder.smallInteger("column", optional: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` SMALLINT)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    
+    func testSmallIntegerUnique() {
+        let builder = Schema.Creator("table")
+        builder.smallInteger("column", optional: true, unique: true)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` SMALLINT UNIQUE)")
+        XCTAssertEqual(values.count, 0)
+    }
+    
+    func testSmallIntegerDefault() {
+        let builder = Schema.Creator("table")
+        builder.smallInteger("column", optional: true, defaultValue: 0)
+        
+        let sql = builder.schema.sql
+        let serializer = MySQLSerializer(sql: sql)
+        
+        let (statement, values) = serializer.serialize()
+        
+        XCTAssertEqual(statement, "CREATE TABLE `table` (`column` SMALLINT DEFAULT '0')")
+        XCTAssertEqual(values.count, 0)
+    }
+    
     static var allTests : [(String, (CreatorMySQLTests) -> () throws -> Void)] {
         return [
             // DATE
@@ -289,6 +356,13 @@ class CreatorMySQLTests: XCTestCase {
             ("testTinyIntegerOptional", testTinyIntegerOptional),
             ("testTinyIntegerUnique", testTinyIntegerUnique),
             ("testTinyIntegerDefault", testTinyIntegerDefault),
+            
+            //SMALLINT
+            ("testSmallInteger", testSmallInteger),
+            ("testSmallIntegerSigned", testSmallIntegerSigned),
+            ("testSmallIntegerOptional", testSmallIntegerOptional),
+            ("testSmallIntegerUnique", testSmallIntegerUnique),
+            ("testSmallIntegerDefault", testSmallIntegerDefault),
         ]
     }
 }

@@ -108,15 +108,14 @@ extension Schema.Creator {
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
     }
     
-    public func boolean(
-        _ name: String,
-        optional: Bool = false,
-        unique: Bool = false,
-        defaultValue: NodeRepresentable? = nil
-        ) {
-        self.custom(name, type: "TINYINT(1) UNSIGNED", optional: optional, unique: unique, default: defaultValue)
-    }
-    
+    /// Create a SMALLINT type
+    ///
+    /// - Parameters:
+    ///   - name: name of column
+    ///   - signed: make column signed/unsigned
+    ///   - optional: make column optional
+    ///   - unique: make column unique
+    ///   - defaultValue: default value
     public func smallInteger(
         _ name: String,
         signed: Bool = true,
@@ -124,12 +123,10 @@ extension Schema.Creator {
         unique: Bool = false,
         defaultValue: NodeRepresentable? = nil
         ) {
-        var typeSQL: String = ""
+        var typeSQL: String = "SMALLINT"
         
-        if (signed) {
-            typeSQL = "SMALLINT"
-        } else {
-            typeSQL = "SMALLINT UNSIGNED"
+        if (!signed) {
+            typeSQL += " UNSIGNED"
         }
         
         self.custom(name, type: typeSQL, optional: optional, unique: unique, default: defaultValue)
