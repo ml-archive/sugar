@@ -1,4 +1,4 @@
-# Slugify
+# Sugar
 [![Language](https://img.shields.io/badge/Swift-3-brightgreen.svg)](http://swift.org)
 [![Build Status](https://travis-ci.org/nodes-vapor/sugar.svg?branch=master)](https://travis-ci.org/nodes-vapor/sugar)
 [![codecov](https://codecov.io/gh/nodes-vapor/sugar/branch/master/graph/badge.svg)](https://codecov.io/gh/nodes-vapor/sugar)
