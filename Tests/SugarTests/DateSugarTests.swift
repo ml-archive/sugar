@@ -3,6 +3,16 @@ import Foundation
 @testable import Sugar
 
 class DateSugarTests: XCTestCase {
+    func testEndOfDay() {
+        let dateTimeStr = "2016-01-02 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfDay.toDateTimeString(), "2016-01-02 23:59:59")
+    }
+    
+    func testStartOfDay() {
+        let dateTimeStr = "2016-01-02 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfDay.toDateTimeString(), "2016-01-02 00:00:00")
+    }
+    
     func testDateTime() {
         let dateTimeStr = "2016-01-02 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.toDateTimeString(), dateTimeStr)
