@@ -142,14 +142,37 @@ extension Date {
     }
     
     //MARK: Enum parsers
+    
+    /// Parse from Format
+    ///
+    /// - Parameters:
+    ///   - format: Format
+    ///   - date: Date?
+    /// - Returns: Date
     public static func parse(_ format: Format, _ date: String) -> Date? {
         return parse(format.rawValue, date)
     }
     
+    
+    /// Parse or Fail
+    /// Should be used if you want a parse error if parsing failed
+    ///
+    /// - Parameters:
+    ///   - format: Format
+    ///   - date: Date
+    /// - Returns: Date
     public static func parseOrFail(_ format: Format, _ date: String) throws -> Date {
         return try parseOrFail(format.rawValue, date)
     }
     
+    
+    /// Parse from Format with fallback
+    ///
+    /// - Parameters:
+    ///   - format: Format
+    ///   - date: Date
+    ///   - fallback: Date
+    /// - Returns: Date
     public static func parse(_ format: Format, _ date: String, _ fallback: Date) -> Date {
         return parse(format.rawValue, date, fallback)
     }
