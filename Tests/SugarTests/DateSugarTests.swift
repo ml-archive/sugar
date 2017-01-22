@@ -110,8 +110,8 @@ class DateSugarTests: XCTestCase {
         return [
             
             ("testStartOfMonth", testStartOfMonth),
-            ("testEndOfMonthLarge", testEndOfMonthLarge),
             ("testEndOfMonthVerySmall", testEndOfMonthVerySmall),
+            ("testEndOfMonthLarge", testEndOfMonthLarge),
             ("testEndOfDay", testEndOfDay),
             ("testStartOfDay", testStartOfDay),
             ("testDateTime", testDateTime),
