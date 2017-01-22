@@ -3,20 +3,34 @@ import Foundation
 @testable import Sugar
 
 class DateSugarTests: XCTestCase {
+    
+    func testAddDay() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addDay().toDateTimeString(), "2016-01-16 12:23:45")
+    }
+    
+    func testAddMultipleDays() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addDays(10).toDateTimeString(), "2016-01-25 12:23:45")
+    }
+    
+    func testAddMultipleDaysOverMonth() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addDays(30).toDateTimeString(), "2016-02-14 12:23:45")
+    }
+    
     func testStartOfMonth() {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfMonth.toDateTimeString(), "2016-01-01 00:00:00")
     }
     
-    func testEndOfMonthLarge() throws {
+    func testEndOfMonthLarge() {
         let dateTimeStr = "2016-01-15 12:23:45"
-        try print(Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString())
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-01-31 23:59:59")
     }
     
-    func testEndOfMonthVerySmall() throws {
+    func testEndOfMonthVerySmall() {
         let dateTimeStr = "2016-02-15 12:23:45"
-        try print(Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString())
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-02-29 23:59:59")
     }
     
