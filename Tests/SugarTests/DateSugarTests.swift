@@ -3,6 +3,21 @@ import Foundation
 @testable import Sugar
 
 class DateSugarTests: XCTestCase {
+    func testStartOfMonth() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfMonth.toDateTimeString(), "2016-01-01 00:00:00")
+    }
+    
+    func testEndOfMonthLarge() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-01-31 23:59:59")
+    }
+    
+    func testEndOfMonthVerySmall() {
+        let dateTimeStr = "2016-02-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-02-29 23:59:59")
+    }
+    
     func testEndOfDay() {
         let dateTimeStr = "2016-01-02 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfDay.toDateTimeString(), "2016-01-02 23:59:59")
@@ -93,6 +108,12 @@ class DateSugarTests: XCTestCase {
     
     static var allTests : [(String, (DateSugarTests) -> () throws -> Void)] {
         return [
+            
+            ("testStartOfMonth", testStartOfMonth),
+            ("testEndOfMonthLarge", testEndOfMonthLarge),
+            ("testEndOfMonthVerySmall", testEndOfMonthVerySmall),
+            ("testEndOfDay", testEndOfDay),
+            ("testStartOfDay", testStartOfDay),
             ("testDateTime", testDateTime),
             ("testDate", testDate),
             ("testISO8601", testISO8601),

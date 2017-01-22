@@ -15,6 +15,19 @@ extension Date {
         return (date?.addingTimeInterval(-1))!
     }
     
+    var startOfMonth : Date {
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month])
+        let components = calendar.dateComponents(unitFlags, from: self)
+        return calendar.date(from: components)!
+    }
+    
+    var endOfOfMonth : Date {
+        var components = DateComponents()
+        components.month = 1
+        let date = Calendar.current.date(byAdding: components, to: self.startOfMonth)
+        return (date?.addingTimeInterval(-1))!
+    }
     
     public enum Error: Swift.Error {
         case couldNotParse
