@@ -156,6 +156,12 @@ extension Date {
     
 
     //MARK: Formatters
+    
+    /// To argument format
+    ///
+    /// - Parameter format: String fx: yyyy-MM-dd
+    /// - Returns: String
+    /// - Throws: Error
     public func to(_ format: String) throws -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -163,17 +169,41 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    
+    /// To argument format
+    ///
+    /// - Parameter format: Format
+    /// - Returns: String
+    /// - Throws: Error
     public func to(_ format: Format) throws -> String {
         return try to(format.rawValue)
     }
     
+    
+    /// Format date To DateTime (MySQL)
+    /// Format: yyyy-MM-dd HH:mm:ss
+    ///
+    /// - Returns: String
+    /// - Throws: Error
     public func toDateTimeString() throws -> String {
         return try self.to(.dateTime)
+    }
+    
+    /// Format date To Date (MySQL)
+    /// Format: yyyy-MM-dd
+    ///
+    /// - Returns: String
+    /// - Throws: Error
+    public func toDateString() throws -> String {
+        return try self.to(.date)
     }
     
     //MARK:  compares
     
     
+    /// Is past or now
+    ///
+    /// - Returns: Bool
     public func isPastOrNow() -> Bool {
         return self.isPast() || self.isNow()
     }
