@@ -1,7 +1,39 @@
 import Foundation
 
 extension Date {
-      var startOfDay : Date {
+    func addDays(_ days: Int) -> Date {
+        return self.addingTimeInterval(TimeInterval(days.dayInSec))
+    }
+    
+    func addDay() -> Date {
+        return self.addingTimeInterval(TimeInterval(1.dayInSec))
+    }
+    
+    func subDays(_ days: Int) -> Date {
+        return self.addingTimeInterval(TimeInterval(-days.dayInSec))
+    }
+    
+    func subDay() -> Date {
+        return self.addingTimeInterval(TimeInterval(-1.dayInSec))
+    }
+    
+    func addWeeks(_ weeks: Int) -> Date {
+        return self.addingTimeInterval(TimeInterval(weeks.weekInSec))
+    }
+    
+    func addWeek() -> Date {
+        return self.addingTimeInterval(TimeInterval(1.weekInSec))
+    }
+    
+    func subWeeks(_ weeks: Int) -> Date {
+        return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
+    }
+    
+    func subWeek() -> Date {
+        return self.addingTimeInterval(TimeInterval(-1.weekInSec))
+    }
+    
+    var startOfDay : Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
         let components = calendar.dateComponents(unitFlags, from: self)
