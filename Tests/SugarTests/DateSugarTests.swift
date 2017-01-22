@@ -159,6 +159,11 @@ class DateSugarTests: XCTestCase {
     
     static var allTests : [(String, (DateSugarTests) -> () throws -> Void)] {
         return [
+            ("testSubWeek", testSubWeek),
+            ("testSubMultipleWeeks", testSubMultipleWeeks),
+            
+            ("testAddWeek", testAddWeek),
+            ("testAddMultipleWeeks", testAddMultipleWeeks),
             
             ("testSubDay", testSubDay),
             ("testSubMultipleDays", testSubMultipleDays),
