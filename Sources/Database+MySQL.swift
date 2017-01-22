@@ -39,6 +39,41 @@ extension Database {
         
         try self.driver.raw(Database.foreign(parentTable: parentTable, parentPrimaryKey: parentTable, childTable: childTable, childForeignKey: childForeignKey))
     }
+
+    /// A helper function to remove foreign keys.
+    /// Use to execute the query drop.database.driver.raw().
+    ///
+    /// - Parameters:
+    ///   - parentTable: Parent table.
+    ///   - parentPrimaryKey: Parent column.
+    ///   - childTable: Child table.
+    /// - Returns: MySQL query.
+    public static func removeForeign(
+        parentTable: String,
+        parentPrimaryKey: String,
+        childTable: String
+    ) -> String {
+        return "ALTER TABLE \(childTable) DROP FOREIGN KEY \(childTable)_\(parentTable)_\(parentPrimaryKey)_foreign"
+    }
+
+    /// A helper function to remove foreign keys.
+    ///
+    /// - Parameters:
+    ///   - parentTable: Parent table.
+    ///   - parentPrimaryKey: Parent column.
+    ///   - childTable: Child table.
+    /// - Throws: On MySQL error.
+    public func removeForeign(
+        parentTable: String,
+        parentPrimaryKey: String,
+        childTable: String
+    ) throws {
+        try self.driver.raw(Database.removeForeign(
+            parentTable: parentTable,
+            parentPrimaryKey: parentTable,
+            childTable: childTable
+        ))
+    }
    
     // MARK: Index
     /// A helper function to index
