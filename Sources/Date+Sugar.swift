@@ -112,6 +112,14 @@ extension Date {
     }
     
     //MARK:  Custom parsers
+    
+    
+    /// Parse
+    ///
+    /// - Parameters:
+    ///   - format: String fx: yyyy-MM-dd
+    ///   - date: String
+    /// - Returns: Date?
     public static func parse(_ format: String, _ date: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -119,6 +127,14 @@ extension Date {
         return dateFormatter.date(from: date)
     }
     
+    
+    /// Parse or fail, if you want a parse error if parsing fails
+    ///
+    /// - Parameters:
+    ///   - format: String fx: yyyy-MM-dd
+    ///   - date: String
+    /// - Returns: Date
+    /// - Throws: Parse error
     public static func parseOrFail(_ format: String, _ date: String) throws -> Date {
         let dateOptional = parse(format, date)
         
@@ -130,6 +146,14 @@ extension Date {
         return date
     }
     
+    
+    /// Parse wit fallback
+    ///
+    /// - Parameter 
+    ///   - format: String fx: yyyy-MM-dd
+    ///   - date: String
+    ///   - fallback: Fallback Date
+    /// - Returns: Date
     public static func parse(_ format: String, _ date: String, _ fallback: Date) -> Date {
         let dateOptional = parse(format, date)
         
@@ -147,8 +171,8 @@ extension Date {
     ///
     /// - Parameters:
     ///   - format: Format
-    ///   - date: Date?
-    /// - Returns: Date
+    ///   - date: String
+    /// - Returns: Date?
     public static func parse(_ format: Format, _ date: String) -> Date? {
         return parse(format.rawValue, date)
     }
@@ -159,7 +183,7 @@ extension Date {
     ///
     /// - Parameters:
     ///   - format: Format
-    ///   - date: Date
+    ///   - date: String
     /// - Returns: Date
     public static func parseOrFail(_ format: Format, _ date: String) throws -> Date {
         return try parseOrFail(format.rawValue, date)
@@ -170,7 +194,7 @@ extension Date {
     ///
     /// - Parameters:
     ///   - format: Format
-    ///   - date: Date
+    ///   - date: String
     ///   - fallback: Date
     /// - Returns: Date
     public static func parse(_ format: Format, _ date: String, _ fallback: Date) -> Date {
