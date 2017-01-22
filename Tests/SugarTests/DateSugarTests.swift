@@ -8,13 +8,15 @@ class DateSugarTests: XCTestCase {
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfMonth.toDateTimeString(), "2016-01-01 00:00:00")
     }
     
-    func testEndOfMonthLarge() {
+    func testEndOfMonthLarge() throws {
         let dateTimeStr = "2016-01-15 12:23:45"
+        try print(Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString())
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-01-31 23:59:59")
     }
     
-    func testEndOfMonthVerySmall() {
+    func testEndOfMonthVerySmall() throws {
         let dateTimeStr = "2016-02-15 12:23:45"
+        try print(Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString())
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfOfMonth.toDateTimeString(), "2016-02-29 23:59:59")
     }
     
