@@ -25,12 +25,12 @@ extension Date {
         return self.addingTimeInterval(TimeInterval(1.weekInSec))
     }
     
-    public func subWeeks(_ weeks: Int) -> Date {
-        return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
-    }
-    
     public func subWeek() -> Date {
         return self.addingTimeInterval(TimeInterval(-1.weekInSec))
+    }
+    
+    public func subWeeks(_ weeks: Int) -> Date {
+        return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
     }
     
     public var startOfDay : Date {

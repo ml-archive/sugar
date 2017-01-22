@@ -4,6 +4,26 @@ import Foundation
 
 class DateSugarTests: XCTestCase {
     
+    func testSubWeek() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subWeek().toDateTimeString(), "2016-01-08 12:23:45")
+    }
+    
+    func testSubMultipleWeeks() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subWeeks(4).toDateTimeString(), "2015-12-18 12:23:45")
+    }
+    
+    func testAddWeek() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addWeek().toDateTimeString(), "2016-01-22 12:23:45")
+    }
+    
+    func testAddMultipleWeeks() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addWeeks(4).toDateTimeString(), "2016-02-12 12:23:45")
+    }
+    
     func testSubDay() {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subDay().toDateTimeString(), "2016-01-14 12:23:45")
