@@ -9,6 +9,13 @@ extension Date {
         return date!
     }
     
+    public func addMonths(_ months: Int) -> Date {
+        var components = DateComponents()
+        components.month = months
+        let date = Calendar.current.date(byAdding: components, to: self)
+        return date!
+    }
+    
     public func addDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(days.dayInSec))
     }
