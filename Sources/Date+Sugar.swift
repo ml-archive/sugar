@@ -2,6 +2,31 @@ import Foundation
 
 extension Date {
     
+    
+    // TODO
+    /*
+    public var startOfWeek : Date {
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .weekday])
+        let components = calendar.dateComponents(unitFlags, from: self.startOfDay)
+        return calendar.date(from: components)!
+    }
+     */
+    
+    public func subMonth() -> Date {
+        var components = DateComponents()
+        components.month = -1
+        let date = Calendar.current.date(byAdding: components, to: self)
+        return date!
+    }
+    
+    public func subMonths(_ months: Int) -> Date {
+        var components = DateComponents()
+        components.month = -months
+        let date = Calendar.current.date(byAdding: components, to: self)
+        return date!
+    }
+    
     public func addMonth() -> Date {
         var components = DateComponents()
         components.month = 1
@@ -147,22 +172,87 @@ extension Date {
     }
     
     //MARK:  compares
+    
+    
+    public func isPastOrNow() -> Bool {
+        return self.isPast() || self.isNow()
+    }
+    
+    
+    /// Is past
+    ///
+    /// - Returns: Bool
     public func isPast() -> Bool {
         return self.compare(Date()).rawValue < 0
     }
     
+    
+    /// Is future or now
+    ///
+    /// - Returns: Bool
+    public func isFutureOrNow() -> Bool {
+        return self.isFuture() || self.isNow()
+    }
+    
+    
+    /// Is Now
+    ///
+    /// - Returns: Bool
+    public func isNow() -> Bool {
+        do {
+            try print(self.toDateTimeString())
+            try print(Date().toDateTimeString())
+        } catch {
+            
+        }
+        return self.isEqual(Date())
+    }
+    
+    
+    /// Is in future
+    ///
+    /// - Returns: Bool
     public func isFuture() -> Bool {
         return self.compare(Date()).rawValue > 0
     }
     
-    public func isAfter(_ date: Date) -> Bool {
-        return self.compare(date).rawValue > 0
+    /// Is after or equal
+    ///
+    /// - Parameter date: Date
+    /// - Returns: Bool
+    public func isAfterOrEqual(_ date: Date) -> Bool {
+        return self.isAfter(date) || isEqual(date)
     }
     
+    /// Is After
+    ///
+    /// - Parameter date: Date
+    /// - Returns: Bool
+    public func isAfter(_ date: Date) -> Bool {
+        return date.compare(self).rawValue > 0
+    }
+    
+    /// Is before or equal
+    ///
+    /// - Parameter date: Date
+    /// - Returns: Bool
+    public func isBeforeOrEqual(_ date: Date) -> Bool {
+        return self.isBefore(date) || self.isEqual(date)
+    }
+    
+    
+    /// Is Before
+    ///
+    /// - Parameter date: Date
+    /// - Returns: Bool
     public func isBefore(_ date: Date) -> Bool {
         return self.compare(date).rawValue < 0
     }
     
+    /// is Euqal
+    ///
+    /// - Parameter date: Date
+    /// - Returns: Bool
     public func isEqual(_ date: Date) -> Bool {
         return self.compare(date).rawValue == 0
     }

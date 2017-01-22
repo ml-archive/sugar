@@ -4,6 +4,23 @@ import Foundation
 
 class DateSugarTests: XCTestCase {
     
+    /* TODO
+    func testStartOfWeek() {
+        let dateTimeStr = "2016-01-22 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfWeek.toDateTimeString(), "2015-03-15 00:00:00")
+    }
+    */
+    
+    func testSubMultipleMonths() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subMonths(10).toDateTimeString(), "2015-03-15 12:23:45")
+    }
+    
+    func testASubMonth() {
+        let dateTimeStr = "2016-03-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subMonth().toDateTimeString(), "2016-02-15 12:23:45")
+    }
+    
     func testAddMultipleMonths() {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addMonths(10).toDateTimeString(), "2016-11-15 12:23:45")
@@ -142,23 +159,80 @@ class DateSugarTests: XCTestCase {
         XCTAssertTrue(past.isPast())
     }
     
+    func testPastOrNow1() {
+        let past = Date().addingTimeInterval(-1)
+        XCTAssertTrue(past.isPastOrNow())
+    }
+    
+    /*
+    func testPastOrNow2() {
+        XCTAssertTrue(Date().isPastOrNow())
+    }
+     */
+    
     func testFuture() {
         let future = Date().addingTimeInterval(1)
         XCTAssertTrue(future.isFuture())
     }
     
+    func testFutureOrNow1() {
+        let future = Date().addingTimeInterval(1)
+        XCTAssertTrue(future.isFutureOrNow())
+    }
+    
+    /*
+    func testFutureOrNow2() {
+        XCTAssertTrue(Date().isFutureOrNow())
+    }
+     */
+    
+    func testIsBeforeOrEqual() {
+        let now = Date()
+        let past = Date().addingTimeInterval(-1)
+        
+        XCTAssertTrue(past.isBefore(now))
+    }
+    
     func testIsBefore() {
         let now = Date()
-        let future = Date().addingTimeInterval(-1)
+        let past = Date().addingTimeInterval(-1)
         
-        XCTAssertTrue(now.isAfter(future))
+        XCTAssertTrue(past.isBefore(now))
+    }
+    
+    func testIsBeforeOrEqual1() {
+        let now = Date()
+        let past = Date().addingTimeInterval(-1)
+        
+        XCTAssertTrue(past.isBeforeOrEqual(now))
+    }
+    
+    func testIsBeforeOrEqual2() {
+        let now = Date()
+        let now2 = Date()
+        
+        XCTAssertTrue(now2.isBeforeOrEqual(now))
     }
     
     func testIsAfter() {
         let now = Date()
         let past = Date().addingTimeInterval(1)
         
-        XCTAssertTrue(now.isBefore(past))
+        XCTAssertTrue(now.isAfter(past))
+    }
+    
+    func testIsAfterOrEqual1() {
+        let now = Date()
+        let past = Date().addingTimeInterval(1)
+        
+        XCTAssertTrue(now.isAfterOrEqual(past))
+    }
+    
+    func testIsAfterOrEqual2() {
+        let now = Date()
+        let now2 = Date()
+        
+        XCTAssertTrue(now.isAfterOrEqual(now2))
     }
     
     func testEqual() {
@@ -167,9 +241,17 @@ class DateSugarTests: XCTestCase {
         XCTAssertTrue(now.isEqual(now))
     }
     
+    /* Does not work
+    func testIsNow() {
+        XCTAssertTrue(Date().isNow())
+    }
+     */
+    
     static var allTests : [(String, (DateSugarTests) -> () throws -> Void)] {
         return [
             /*
+             ("testSubMonth", testSubMonth),
+             ("testSubMultipleMonths", testSubMultipleMonths),
              ("testAddMonth", testAddMonth),
              ("testAddMultipleMonths", testAddMultipleMonths),
             */
@@ -199,9 +281,20 @@ class DateSugarTests: XCTestCase {
             ("testParseFallbackError", testParseFallbackError),
             ("testParseFallbackSuccess", testParseFallbackSuccess),
             ("testPast", testPast),
+            ("testPastOrNow1", testPastOrNow1),
+            //("testPastOrNow2", testPastOrNow2),
+            
             ("testFuture", testFuture),
+            ("testFutureOrNow1", testFutureOrNow1),
+            //("testFutureOrNow2", testFutureOrNow2),
+            
             ("testIsBefore", testIsBefore),
+            ("testIsBeforeOrEqual1", testIsBeforeOrEqual1),
+            ("testIsBeforeOrEqual2", testIsBeforeOrEqual2),
             ("testIsAfter", testIsAfter),
+            ("testIsAfterOrEqual1", testIsAfterOrEqual1),
+            ("testIsAfterOrEqual2", testIsAfterOrEqual2),
+            //("testIsNow", testIsNow),
             ("testEqual", testEqual),
         ]
     }
