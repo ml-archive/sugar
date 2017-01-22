@@ -1,60 +1,60 @@
 import Foundation
 
 extension Date {
-    func addDays(_ days: Int) -> Date {
+    public func addDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(days.dayInSec))
     }
     
-    func addDay() -> Date {
+    public func addDay() -> Date {
         return self.addingTimeInterval(TimeInterval(1.dayInSec))
     }
     
-    func subDays(_ days: Int) -> Date {
+    public func subDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(-days.dayInSec))
     }
     
-    func subDay() -> Date {
+    public func subDay() -> Date {
         return self.addingTimeInterval(TimeInterval(-1.dayInSec))
     }
     
-    func addWeeks(_ weeks: Int) -> Date {
+    public func addWeeks(_ weeks: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(weeks.weekInSec))
     }
     
-    func addWeek() -> Date {
+    public func addWeek() -> Date {
         return self.addingTimeInterval(TimeInterval(1.weekInSec))
     }
     
-    func subWeeks(_ weeks: Int) -> Date {
+    public func subWeeks(_ weeks: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
     }
     
-    func subWeek() -> Date {
+    public func subWeek() -> Date {
         return self.addingTimeInterval(TimeInterval(-1.weekInSec))
     }
     
-    var startOfDay : Date {
+    public var startOfDay : Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
     }
     
-    var endOfDay : Date {
+    public var endOfDay : Date {
         var components = DateComponents()
         components.day = 1
         let date = Calendar.current.date(byAdding: components, to: self.startOfDay)
         return (date?.addingTimeInterval(-1))!
     }
     
-    var startOfMonth : Date {
+    public var startOfMonth : Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
     }
     
-    var endOfOfMonth : Date {
+    public var endOfOfMonth : Date {
         var components = DateComponents()
         components.month = 1
         let date = Calendar.current.date(byAdding: components, to: self.startOfMonth)
