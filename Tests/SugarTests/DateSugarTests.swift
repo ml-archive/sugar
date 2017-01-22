@@ -129,9 +129,9 @@ class DateSugarTests: XCTestCase {
             /*
             ("testEndOfMonthVerySmall", testEndOfMonthVerySmall),
             ("testEndOfMonthLarge", testEndOfMonthLarge),
-            */
             ("testEndOfDay", testEndOfDay),
             ("testStartOfDay", testStartOfDay),
+ */
             ("testDateTime", testDateTime),
             ("testDate", testDate),
             ("testISO8601", testISO8601),
