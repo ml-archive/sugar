@@ -4,6 +4,21 @@ import Foundation
 
 class DateSugarTests: XCTestCase {
     
+    func testSubDay() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subDay().toDateTimeString(), "2016-01-14 12:23:45")
+    }
+    
+    func testSubMultipleDays() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subDays(10).toDateTimeString(), "2016-01-05 12:23:45")
+    }
+    
+    func testSubMultipleDaysOverMonth() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subDays(30).toDateTimeString(), "2015-12-16 12:23:45")
+    }
+    
     func testAddDay() {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addDay().toDateTimeString(), "2016-01-16 12:23:45")
@@ -125,6 +140,13 @@ class DateSugarTests: XCTestCase {
     static var allTests : [(String, (DateSugarTests) -> () throws -> Void)] {
         return [
             
+            ("testSubDay", testSubDay),
+            ("testSubMultipleDays", testSubMultipleDays),
+            ("testSubMultipleDaysOverMonth", testSubMultipleDaysOverMonth),
+            
+            ("testAddDay", testAddDay),
+            ("testAddMultipleDays", testAddMultipleDays),
+            ("testAddMultipleDaysOverMonth", testAddMultipleDaysOverMonth),
             ("testStartOfMonth", testStartOfMonth),
             /*
             ("testEndOfMonthVerySmall", testEndOfMonthVerySmall),
