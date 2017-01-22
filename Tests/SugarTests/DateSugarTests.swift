@@ -4,6 +4,11 @@ import Foundation
 
 class DateSugarTests: XCTestCase {
     
+    func testAddMonth() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addMonth().toDateTimeString(), "2016-02-15 12:23:45")
+    }
+    
     func testSubWeek() {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.subWeek().toDateTimeString(), "2016-01-08 12:23:45")

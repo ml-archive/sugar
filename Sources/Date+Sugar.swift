@@ -1,6 +1,14 @@
 import Foundation
 
 extension Date {
+    
+    public func addMonth() -> Date {
+        var components = DateComponents()
+        components.month = 1
+        let date = Calendar.current.date(byAdding: components, to: self)
+        return date!
+    }
+    
     public func addDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(days.dayInSec))
     }
