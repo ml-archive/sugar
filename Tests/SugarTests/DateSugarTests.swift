@@ -4,6 +4,11 @@ import Foundation
 
 class DateSugarTests: XCTestCase {
     
+    func testEndOfWeek() {
+        let dateTimeStr = "2017-01-21 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.endOfWeek.toDateTimeString(), "2017-01-22 23:59:59")
+    }
+    
     func testStartOfWeek() {
         let dateTimeStr = "2017-01-22 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.startOfWeek.toDateTimeString(), "2017-01-16 00:00:00")

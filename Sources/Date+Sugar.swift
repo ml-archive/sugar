@@ -25,6 +25,13 @@ extension Date {
         return startOfWeek
     }
     
+    public var endOfWeek : Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
+        components.weekday = 1 // Monday
+        let startOfWeek = calendar.date(from: components)!
+        return startOfWeek.endOfDay
+    }
     
     public func subMonth() -> Date {
         var components = DateComponents()
