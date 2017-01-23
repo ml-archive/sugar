@@ -5,8 +5,20 @@ import FluentMySQL
 @testable import Sugar
 
 class DatabaseMySQLTests: XCTestCase {
-    
-    //MARK: Indexes
+
+    static var allTests : [(String, (DatabaseMySQLTests) -> () throws -> Void)] {
+        return [
+            //INDEX
+            ("testIndex", testIndex),
+            ("testIndexName", testIndexName),
+            
+            //FOREIGN
+            ("testForeign", testForeign),
+        ]
+    }
+
+    // MARK: - Indexes.
+
     func testIndex() {
         let statement = Database.index(table: "table", column: "column")
         
@@ -18,21 +30,22 @@ class DatabaseMySQLTests: XCTestCase {
         
         XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX index_test (column)")
     }
-    
+
+    // MARK: - Foreign keys.
+
     func testForeign() {
         let statement = Database.foreign(parentTable: "table_a", parentPrimaryKey: "a", childTable: "table_b", childForeignKey: "b")
         
         XCTAssertEqual(statement, "ALTER TABLE table_b ADD CONSTRAINT table_b_table_a_a_foreign FOREIGN KEY(b) REFERENCES table_a(a)")
     }
-    
-    static var allTests : [(String, (DatabaseMySQLTests) -> () throws -> Void)] {
-        return [
-            //INDEX
-            ("testIndex", testIndex),
-            ("testIndexName", testIndexName),
-            
-            //FOREIGN
-            ("testForeign", testForeign),
-        ]
+
+    func testRemoveForeign() {
+        let statement = Database.removeForeign(
+            parentTable: "table_a",
+            parentPrimaryKey: "a",
+            childTable: "table_b"
+        )
+        
+        XCTAssertEqual(statement, "ALTER TABLE table_b DROP FOREIGN KEY table_b_table_a_a_foreign")
     }
 }
