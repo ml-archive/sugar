@@ -15,24 +15,34 @@ extension Date {
     
     // MARK: Manipulators
     
-    // TODO
-    
-    public var startOfWeek : Date {
+    /// Start of week
+    /// Take you to monday 00:00:00 current week
+    ///
+    /// - Returns: Date
+    public func startOfWeek() -> Date {
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay)
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
         components.weekday = 2 // Monday
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
     
-    public var endOfWeek : Date {
+    
+    /// End of week
+    /// Take you to sunday 00:00:00 current week
+    ///
+    /// - Returns: Date
+    public func endOfWeek() -> Date {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
         components.weekday = 1 // Monday
         let startOfWeek = calendar.date(from: components)!
-        return startOfWeek.endOfDay
+        return startOfWeek.endOfDay()
     }
     
+    /// Sub month
+    ///
+    /// - Returns: Date
     public func subMonth() -> Date {
         var components = DateComponents()
         components.month = -1
@@ -40,6 +50,10 @@ extension Date {
         return date!
     }
     
+    /// Sub months
+    ///
+    /// - Parameter months: Int
+    /// - Returns: Date
     public func subMonths(_ months: Int) -> Date {
         var components = DateComponents()
         components.month = -months
@@ -47,6 +61,9 @@ extension Date {
         return date!
     }
     
+    /// Add month
+    ///
+    /// - Returns: Date
     public func addMonth() -> Date {
         var components = DateComponents()
         components.month = 1
@@ -54,6 +71,10 @@ extension Date {
         return date!
     }
     
+    /// Add months
+    ///
+    /// - Parameter months: Int
+    /// - Returns: Date
     public func addMonths(_ months: Int) -> Date {
         var components = DateComponents()
         components.month = months
@@ -61,63 +82,104 @@ extension Date {
         return date!
     }
     
+    /// Add days
+    ///
+    /// - Parameter days: Int
+    /// - Returns: Date
     public func addDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(days.dayInSec))
     }
     
+    /// Add day
+    ///
+    /// - Returns: Date
     public func addDay() -> Date {
         return self.addingTimeInterval(TimeInterval(1.dayInSec))
     }
     
+    /// Sub days
+    ///
+    /// - Parameter days: Int
+    /// - Returns: Date
     public func subDays(_ days: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(-days.dayInSec))
     }
     
+    /// Sub day
+    ///
+    /// - Returns: Date
     public func subDay() -> Date {
         return self.addingTimeInterval(TimeInterval(-1.dayInSec))
     }
     
+    /// Add weeks
+    ///
+    /// - Parameter weeks: Int
+    /// - Returns: Date
     public func addWeeks(_ weeks: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(weeks.weekInSec))
     }
     
+    /// Add week
+    ///
+    /// - Returns: Date
     public func addWeek() -> Date {
         return self.addingTimeInterval(TimeInterval(1.weekInSec))
     }
     
+    /// Sub week
+    ///
+    /// - Returns: Date
     public func subWeek() -> Date {
         return self.addingTimeInterval(TimeInterval(-1.weekInSec))
     }
     
+    /// Sub weeks
+    ///
+    /// - Parameter weeks: Int
+    /// - Returns: Date
     public func subWeeks(_ weeks: Int) -> Date {
         return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
     }
     
-    public var startOfDay : Date {
+    /// Start of day
+    ///
+    /// - Returns: Date
+    public func startOfDay() -> Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
     }
     
-    public var endOfDay : Date {
+    /// End of day
+    ///
+    /// - Returns: Date
+    public func endOfDay() -> Date {
         var components = DateComponents()
         components.day = 1
-        let date = Calendar.current.date(byAdding: components, to: self.startOfDay)
+        let date = Calendar.current.date(byAdding: components, to: self.startOfDay())
         return (date?.addingTimeInterval(-1))!
     }
     
-    public var startOfMonth : Date {
+    
+    /// Start of month
+    ///
+    /// - Returns: Date
+    public func startOfMonth() -> Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
     }
     
-    public var endOfOfMonth : Date {
+    /// End of month
+    ///
+    /// - Returns: Date
+    public func endOfOfMonth() -> Date {
         var components = DateComponents()
         components.month = 1
-        let date = Calendar.current.date(byAdding: components, to: self.startOfMonth)
+        let date = Calendar.current.date(byAdding: components, to: self.startOfMonth())
         return (date?.addingTimeInterval(-1))!
     }
     
@@ -347,7 +409,7 @@ extension Date {
     
     /// Make a copy
     ///
-    /// - Returns: <#return value description#>
+    /// - Returns: Date
     public func copy() -> Date {
         return Date(timeIntervalSince1970: self.timeIntervalSince1970)
     }
