@@ -16,14 +16,15 @@ extension Date {
     // MARK: Manipulators
     
     // TODO
-    /*
+    
     public var startOfWeek : Date {
         let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .weekday])
-        let components = calendar.dateComponents(unitFlags, from: self.startOfDay)
-        return calendar.date(from: components)!
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay)
+        components.weekday = 2 // Monday
+        let startOfWeek = calendar.date(from: components)!
+        return startOfWeek
     }
-     */
+    
     
     public func subMonth() -> Date {
         var components = DateComponents()
