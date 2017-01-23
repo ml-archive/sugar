@@ -1,7 +1,19 @@
 import Foundation
 
 extension Date {
+    // MARK: Errors
+    public enum Error: Swift.Error {
+        case couldNotParse
+    }
     
+    // MARK: Formats
+    public enum Format: String {
+        case dateTime = "yyyy-MM-dd HH:mm:ss"
+        case date = "yyyy-MM-dd"
+        case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
+    }
+    
+    // MARK: Manipulators
     
     // TODO
     /*
@@ -99,16 +111,6 @@ extension Date {
         components.month = 1
         let date = Calendar.current.date(byAdding: components, to: self.startOfMonth)
         return (date?.addingTimeInterval(-1))!
-    }
-    
-    public enum Error: Swift.Error {
-        case couldNotParse
-    }
-    
-    public enum Format: String {
-        case dateTime = "yyyy-MM-dd HH:mm:ss"
-        case date = "yyyy-MM-dd"
-        case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
     
     //MARK:  Custom parsers
@@ -334,4 +336,11 @@ extension Date {
         return self.compare(date).rawValue == 0
     }
  
+    
+    /// Make a copy
+    ///
+    /// - Returns: <#return value description#>
+    public func copy() -> Date {
+        return Date(timeIntervalSince1970: self.timeIntervalSince1970)
+    }
 }
