@@ -29,12 +29,12 @@ extension Date {
     
     
     /// End of week
-    /// Take you to sunday 00:00:00 current week
+    /// Take you to sunday 23:59:59 current week
     ///
     /// - Returns: Date
     public func endOfWeek() -> Date {
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
         components.weekday = 1 // Monday
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek.endOfDay()
