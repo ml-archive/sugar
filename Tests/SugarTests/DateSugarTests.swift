@@ -120,9 +120,8 @@ class DateSugarTests: XCTestCase {
     }
     
     func testISO8601() {
-        let timezoneDelta = TimeZone.current.secondsFromGMT()/3600
-        let iso8601Str = "2016-12-29T12:35:51+0" + String(timezoneDelta) + "00"
-        XCTAssertEqual(try Date.parse(.ISO8601, iso8601Str)?.to(.ISO8601), iso8601Str)
+        let iso8601Str = "2016-12-29T12:35:51+0100"
+        XCTAssertEqual(Date.parse(.ISO8601, iso8601Str)?.timeIntervalSince1970.doubleValue, 1483011351)
     }
     
     func testParseOrFailError() {
