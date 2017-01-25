@@ -1,6 +1,16 @@
 import Node
 import Foundation
 
+extension Node {
+    public var date: Date? {
+        do {
+            return try Date(node: self)
+        } catch {
+            return nil
+        }
+    }
+}
+
 extension Date: NodeConvertible {
     public func makeNode(context: Context = EmptyNode) throws -> Node {
         return .string(dateFormatterMySQL.string(from: self))
