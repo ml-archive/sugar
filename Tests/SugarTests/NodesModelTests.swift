@@ -1,6 +1,7 @@
 import Vapor
 import Fluent
 import XCTest
+import Foundation
 
 @testable import Sugar
 
