@@ -1,7 +1,9 @@
 import XCTest
+
 @testable import SugarTests
 
 XCTMain([
-     testCase(DateSugarTests.allTests),
-     testCase(DatabaseMySQLTests.allTests),
+    testCase(DatabaseMySQLTests.allTests),
+    testCase(DateSugarTests.allTests),
+    testCase(NodesModelTests.allTests),
 ])

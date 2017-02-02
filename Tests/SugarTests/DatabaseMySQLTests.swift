@@ -1,6 +1,7 @@
 import XCTest
 import Fluent
 import FluentMySQL
+import Foundation
 
 @testable import Sugar
 
