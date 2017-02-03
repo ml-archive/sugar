@@ -55,7 +55,7 @@ class TestDriver: Driver {
                     return false
                 }
                 
-                return key == "deleted_at" && comparison == .equals
+                return key == "deletedAt" && comparison == .equals
             }) else {
                 return .array([Node([
                     "name": "filter_not_applied"
@@ -84,9 +84,9 @@ struct TestUser: NodesModel {
     
     var name: String
     
-    var created_at: Date?
-    var updated_at: Date?
-    var deleted_at: Date?
+    var createdAt: Date?
+    var updatedAt: Date?
+    var deletedAt: Date?
     
     init(name: String, age: Int) {
         self.name = name
