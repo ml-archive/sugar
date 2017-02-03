@@ -3,19 +3,19 @@ import Fluent
 import Foundation
 
 public protocol NodesModel: Model {
-    var created_at: Date? { set get }
-    var updated_at: Date? { set get }
-    var deleted_at: Date? { set get }
+    var createdAt: Date? { set get }
+    var updatedAt: Date? { set get }
+    var deletedAt: Date? { set get }
     
     static var softDeletable: Bool { get }
 }
 
 extension NodesModel {
-    var deleted_at: Date? {
+    public var deletedAt: Date? {
         return nil
     }
     
-    static var softDeletable: Bool {
+    public static var softDeletable: Bool {
         return true
     }
 }
@@ -23,30 +23,30 @@ extension NodesModel {
 extension NodesModel {
     //FIXME(Brett): not going to get called until Vapor fixes it
     public mutating func willCreate() {
-        created_at = Date()
-        updated_at = Date()
+        createdAt = Date()
+        updatedAt = Date()
     }
     
     //FIXME(Brett): not going to get called until Vapor fixes it
     public mutating func willUpdate() {
-        updated_at = Date()
+        updatedAt = Date()
     }
     
     public mutating func save() throws {
         let now = Date()
         
-        if created_at == nil {
-            created_at = now
+        if createdAt == nil {
+            createdAt = now
         }
         
-        updated_at = now
+        updatedAt = now
         
         try Self.query().save(&self)
     }
     
     public mutating func delete() throws {
         if Self.softDeletable {
-            deleted_at = Date()
+            deletedAt = Date()
             try save()
         } else {
             try Self.query().delete(self)
@@ -62,7 +62,7 @@ extension NodesModel {
         
         var query = try Self.query().filter(idKey, .equals, id)
         if Self.softDeletable {
-            query = try query.filter("deleted_at", .equals, Node.null)
+            query = try query.filter("deletedAt", .equals, Node.null)
         }
         
         return try query.first()
@@ -71,7 +71,7 @@ extension NodesModel {
     public static func all() throws -> [Self] {
         var query = try Self.query()
         if Self.softDeletable {
-            query = try query.filter("deleted_at", .equals, Node.null)
+            query = try query.filter("deletedAt", .equals, Node.null)
         }
         
         return try query.all()
@@ -86,7 +86,7 @@ extension Query where T: NodesModel {
         
         if T.softDeletable {
             query.filters = [
-                Filter(T.self, .compare("deleted_at", .equals, Node.null))
+                Filter(T.self, .compare("deletedAt", .equals, Node.null))
             ]
         }
         
@@ -102,7 +102,7 @@ extension Query where T: NodesModel {
         
         if T.softDeletable {
             query.filters = [
-                Filter(T.self, .compare("deleted_at", .equals, Node.null))
+                Filter(T.self, .compare("deletedAt", .equals, Node.null))
             ]
         }
         
@@ -122,7 +122,7 @@ extension Query where T: NodesModel {
         
         // filter out soft-deleted models on fetch and count queries
         if action == .fetch || action == .count, T.softDeletable {
-            let filter = Filter(T.self, .compare("deleted_at", .equals, Node.null))
+            let filter = Filter(T.self, .compare("deletedAt", .equals, Node.null))
             filters.append(filter)
         }
         
