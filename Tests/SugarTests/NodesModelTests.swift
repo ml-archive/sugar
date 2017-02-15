@@ -1,3 +1,4 @@
+/*
 import Vapor
 import Fluent
 import XCTest
@@ -107,3 +108,4 @@ struct TestUser: NodesModel {
     static func prepare(_ database: Database) throws {}
     static func revert(_ database: Database) throws {}
 }
+*/
