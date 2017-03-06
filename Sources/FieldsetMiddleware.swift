@@ -1,0 +1,19 @@
+import HTTP
+import Vapor
+
+public class FieldsetMiddleware: Middleware {
+    let key = "_fieldset"
+    public init() {}
+    
+    public func respond(to request: Request, chainingTo next: Responder) throws -> Response {
+        // Add fieldset to next request
+        request.storage[key] = try request.session().data[key]
+        try request.session().data[key] = nil
+        
+        let respond = try next.respond(to: request)
+        
+        try request.session().data[key] = respond.storage[key] as? Node ?? nil
+        
+        return respond
+    }
+}
