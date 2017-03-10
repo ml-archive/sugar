@@ -37,7 +37,7 @@ extension Database {
         childForeignKey: String
         ) throws {
         
-        try self.driver.raw(Database.foreign(parentTable: parentTable, parentPrimaryKey: parentTable, childTable: childTable, childForeignKey: childForeignKey))
+        try self.driver.raw(Database.foreign(parentTable: parentTable, parentPrimaryKey: parentPrimaryKey, childTable: childTable, childForeignKey: childForeignKey))
     }
 
     /// A helper function to remove foreign keys.

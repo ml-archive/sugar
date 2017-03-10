@@ -5,10 +5,10 @@ extension String {
     
     /// Random alpha numeric string
     ///
-    /// Note this is not 
+    /// Note this is not
     ///
-    /// - Parameter length: <#length description#>
-    /// - Returns: <#return value description#>
+    /// - Parameter length: length int
+    /// - Returns: string
     public static func randomAlphaNumericString(_ length: Int = 64) -> String {
         let letters: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let len = letters.count
