@@ -192,9 +192,13 @@ extension Date {
     ///   - format: String fx: yyyy-MM-dd
     ///   - date: String
     /// - Returns: Date?
-    public static func parse(_ format: String, _ date: String) -> Date? {
+    public static func parse(_ format: String, _ date: String, timezone: String? = nil) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        
+        if let timezone = timezone {
+            dateFormatter.timeZone = TimeZone(identifier: timezone)
+        }
         
         return dateFormatter.date(from: date)
     }
@@ -207,9 +211,8 @@ extension Date {
     ///   - date: String
     /// - Returns: Date
     /// - Throws: Parse error
-    public static func parseOrFail(_ format: String, _ date: String) throws -> Date {
-        let dateOptional = parse(format, date)
-        
+    public static func parseOrFail(_ format: String, _ date: String, timezone: String? = nil) throws -> Date {
+        let dateOptional = parse(format, date, timezone: timezone)
         
         guard let date = dateOptional else {
             throw Error.couldNotParse
@@ -226,9 +229,8 @@ extension Date {
     ///   - date: String
     ///   - fallback: Fallback Date
     /// - Returns: Date
-    public static func parse(_ format: String, _ date: String, _ fallback: Date) -> Date {
-        let dateOptional = parse(format, date)
-        
+    public static func parse(_ format: String, _ date: String, _ fallback: Date, timezone: String? = nil) -> Date {
+        let dateOptional = parse(format, date, timezone: timezone)
         
         guard let date = dateOptional else {
             return fallback
@@ -245,8 +247,8 @@ extension Date {
     ///   - format: Format
     ///   - date: String
     /// - Returns: Date?
-    public static func parse(_ format: Format, _ date: String) -> Date? {
-        return parse(format.rawValue, date)
+    public static func parse(_ format: Format, _ date: String, timezone: String? = nil) -> Date? {
+        return parse(format.rawValue, date, timezone: timezone)
     }
     
     
@@ -257,8 +259,8 @@ extension Date {
     ///   - format: Format
     ///   - date: String
     /// - Returns: Date
-    public static func parseOrFail(_ format: Format, _ date: String) throws -> Date {
-        return try parseOrFail(format.rawValue, date)
+    public static func parseOrFail(_ format: Format, _ date: String, timezone: String? = nil) throws -> Date {
+        return try parseOrFail(format.rawValue, date, timezone: timezone)
     }
     
     
@@ -269,8 +271,8 @@ extension Date {
     ///   - date: String
     ///   - fallback: Date
     /// - Returns: Date
-    public static func parse(_ format: Format, _ date: String, _ fallback: Date) -> Date {
-        return parse(format.rawValue, date, fallback)
+    public static func parse(_ format: Format, _ date: String, _ fallback: Date, timezone: String? = nil) -> Date {
+        return parse(format.rawValue, date, fallback, timezone: timezone)
     }
     
 
@@ -281,9 +283,13 @@ extension Date {
     /// - Parameter format: String fx: yyyy-MM-dd
     /// - Returns: String
     /// - Throws: Error
-    public func to(_ format: String) throws -> String {
+    public func to(_ format: String, timezone: String? = nil) throws -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        
+        if let timezone = timezone {
+            dateFormatter.timeZone = TimeZone(identifier: timezone)
+        }
         
         return dateFormatter.string(from: self)
     }
@@ -294,8 +300,8 @@ extension Date {
     /// - Parameter format: Format
     /// - Returns: String
     /// - Throws: Error
-    public func to(_ format: Format) throws -> String {
-        return try to(format.rawValue)
+    public func to(_ format: Format, timezone: String? = nil) throws -> String {
+        return try to(format.rawValue, timezone: timezone)
     }
     
     
@@ -304,8 +310,8 @@ extension Date {
     ///
     /// - Returns: String
     /// - Throws: Error
-    public func toDateTimeString() throws -> String {
-        return try self.to(.dateTime)
+    public func toDateTimeString(timezone: String? = nil) throws -> String {
+        return try self.to(.dateTime, timezone: timezone)
     }
     
     /// Format date To Date (MySQL)
@@ -313,8 +319,8 @@ extension Date {
     ///
     /// - Returns: String
     /// - Throws: Error
-    public func toDateString() throws -> String {
-        return try self.to(.date)
+    public func toDateString(timezone: String? = nil) throws -> String {
+        return try self.to(.date, timezone: timezone)
     }
     
     //MARK:  compares
@@ -347,10 +353,10 @@ extension Date {
     /// Is Now
     ///
     /// - Returns: Bool
-    public func isNow() -> Bool {
+    public func isNow(timezone: String? = nil) -> Bool {
         do {
-            try print(self.toDateTimeString())
-            try print(Date().toDateTimeString())
+            try print(self.toDateTimeString(timezone: timezone))
+            try print(Date().toDateTimeString(timezone: timezone))
         } catch {
             
         }
