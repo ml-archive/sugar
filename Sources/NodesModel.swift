@@ -44,10 +44,16 @@ extension NodesModel {
         try Self.query().save(&self)
     }
     
-    public mutating func delete() throws {
+    public func delete() throws {
         if Self.softDeletable {
-            deletedAt = Date()
-            try save()
+            var temp = self
+            temp.deletedAt = Date()
+            
+            self.willDelete()
+            
+            try temp.save()
+            
+            self.didDelete()
         } else {
             try Self.query().delete(self)
         }
