@@ -76,6 +76,7 @@ extension Database {
     }
    
     // MARK: Index
+
     /// A helper function to index
     /// Use to execute the query drop.database.driver.raw()
     ///
@@ -107,11 +108,26 @@ extension Database {
         try self.driver.raw(Database.index(table: table, column: column, name: name))
     }
 
+    /// Removes an index.
+    /// Use to execute the query drop.database.driver.raw()
+    ///
+    /// - Parameters:
+    ///   - table: Table name.
+    ///   - column: Column name.
+    ///   - name: Name of index.
+    /// - Returns: MySQL query.
     public static func removeIndex(table: String, column: String, name: String? = nil) -> String {
         let nameString = name ?? column
         return "ALTER TABLE " + table + " DROP INDEX " + nameString
     }
 
+    /// Removes an index.
+    ///
+    /// - Parameters:
+    ///   - table: Table name.
+    ///   - column: Column name.
+    ///   - name: Name of index.
+    /// - Throws: On MySQL errors.
     public func removeIndex(table: String, column: String, name: String? = nil) throws {
         try self.driver.raw(Database.removeIndex(table: table, column: column, name: name))
     }
