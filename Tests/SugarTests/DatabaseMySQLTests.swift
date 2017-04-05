@@ -12,6 +12,8 @@ class DatabaseMySQLTests: XCTestCase {
             //INDEX
             ("testIndex", testIndex),
             ("testIndexName", testIndexName),
+            ("testRemoveIndex", testIndexName),
+            ("testRemoveIndexWithName", testIndexName),
             
             //FOREIGN
             ("testForeign", testForeign),
@@ -31,6 +33,19 @@ class DatabaseMySQLTests: XCTestCase {
         
         XCTAssertEqual(statement, "ALTER TABLE table ADD INDEX index_test (column)")
     }
+
+    func testRemoveIndex() {
+        let statement = Database.removeIndex(table: "table", column: "column")
+        
+        XCTAssertEqual(statement, "ALTER TABLE table DROP INDEX column")
+    }
+
+    func testRemoveIndexWithName() {
+        let statement = Database.removeIndex(table: "table", column: "column", name: "index_test")
+        
+        XCTAssertEqual(statement, "ALTER TABLE table DROP INDEX index_test")
+    }
+
 
     // MARK: - Foreign keys.
 

@@ -106,4 +106,13 @@ extension Database {
     public func index(table: String, column: String, name: String? = nil) throws {
         try self.driver.raw(Database.index(table: table, column: column, name: name))
     }
+
+    public static func removeIndex(table: String, column: String, name: String? = nil) -> String {
+        let nameString = name ?? column
+        return "ALTER TABLE " + table + " DROP INDEX " + nameString
+    }
+
+    public func removeIndex(table: String, column: String, name: String? = nil) throws {
+        try self.driver.raw(Database.removeIndex(table: table, column: column, name: name))
+    }
 }
