@@ -19,7 +19,7 @@ extension Database {
         childTable: String,
         childForeignKey: String
         ) -> String {
-        return "ALTER TABLE " + childTable + " ADD CONSTRAINT " + childTable + "_" + parentTable + "_" + parentPrimaryKey + "_" + childForeignKey + "_foreign FOREIGN KEY(" + childForeignKey + ") REFERENCES " + parentTable + "(" + parentPrimaryKey + ")"
+        return "ALTER TABLE " + childTable + " ADD CONSTRAINT " + childTable + "_" + childForeignKey + "_" + parentTable + "_" + parentPrimaryKey + "_foreign FOREIGN KEY(" + childForeignKey + ") REFERENCES " + parentTable + "(" + parentPrimaryKey + ")"
     }
     
     /// A helper function to execute foreign index
@@ -47,7 +47,7 @@ extension Database {
     ///   - parentTable: Parent table.
     ///   - parentPrimaryKey: Parent column.
     ///   - childTable: Child table.
-    ///   - childForeignKey: children column
+    ///   - childForeignKey: Children column.
     /// - Returns: MySQL query.
     public static func removeForeign(
         parentTable: String,
@@ -55,7 +55,7 @@ extension Database {
         childTable: String,
         childForeignKey: String
     ) -> String {
-        return "ALTER TABLE \(childTable) DROP FOREIGN KEY \(childTable)_\(parentTable)_\(parentPrimaryKey)_\(childForeignKey)_foreign"
+        return "ALTER TABLE \(childTable) DROP FOREIGN KEY \(childTable)_\(childForeignKey)_\(parentTable)_\(parentPrimaryKey)_foreign"
     }
 
     /// A helper function to remove foreign keys.
@@ -64,7 +64,7 @@ extension Database {
     ///   - parentTable: Parent table.
     ///   - parentPrimaryKey: Parent column.
     ///   - childTable: Child table.
-    ///   - childForeignKey: children column
+    ///   - childForeignKey: Children column.
     /// - Throws: On MySQL error.
     public func removeForeign(
         parentTable: String,
