@@ -384,7 +384,7 @@ extension Date {
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isAfter(_ date: Date) -> Bool {
-        return date.compare(self).rawValue > 0
+        return self.compare(date).rawValue > 0
     }
     
     /// Is before or equal

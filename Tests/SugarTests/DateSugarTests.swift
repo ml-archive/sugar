@@ -219,14 +219,14 @@ class DateSugarTests: XCTestCase {
     
     func testIsAfter() {
         let now = Date()
-        let past = Date().addingTimeInterval(1)
+        let past = Date().addingTimeInterval(-1)
         
         XCTAssertTrue(now.isAfter(past))
     }
     
     func testIsAfterOrEqual1() {
         let now = Date()
-        let past = Date().addingTimeInterval(1)
+        let past = Date().addingTimeInterval(-1)
         
         XCTAssertTrue(now.isAfterOrEqual(past))
     }
