@@ -37,7 +37,7 @@ class DatabaseMySQLTests: XCTestCase {
     func testForeign() {
         let statement = Database.foreign(parentTable: "table_a", parentPrimaryKey: "a", childTable: "table_b", childForeignKey: "b")
         
-        XCTAssertEqual(statement, "ALTER TABLE table_b ADD CONSTRAINT table_b_table_a_a_b_foreign FOREIGN KEY(b) REFERENCES table_a(a)")
+        XCTAssertEqual(statement, "ALTER TABLE table_b ADD CONSTRAINT table_b_b_table_a_a_foreign FOREIGN KEY(b) REFERENCES table_a(a)")
     }
 
     func testRemoveForeign() {
@@ -48,6 +48,6 @@ class DatabaseMySQLTests: XCTestCase {
             childForeignKey: "b"
         )
         
-        XCTAssertEqual(statement, "ALTER TABLE table_b DROP FOREIGN KEY table_b_table_a_a_b_foreign")
+        XCTAssertEqual(statement, "ALTER TABLE table_b DROP FOREIGN KEY table_b_b_table_a_a_foreign")
     }
 }
