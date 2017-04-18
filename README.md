@@ -17,7 +17,7 @@ Update your `Package.swift` file.
 
 ## Getting started 🚀
 
-```
+```swift
 import Sugar
 ```
 
