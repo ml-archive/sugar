@@ -3,8 +3,8 @@ import PackageDescription
 let package = Package(
     name: "Sugar",
     dependencies: [
-        .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 1),
-        .Package(url: "https://github.com/vapor/mysql-driver.git", majorVersion: 1),
-        .Package(url: "https://github.com/bygri/vapor-forms.git", majorVersion:0)
+        .Package(url: "https://github.com/vapor/vapor.git", Version(2,0,0, prereleaseIdentifiers: ["beta"])),
+        .Package(url: "https://github.com/vapor/fluent-provider.git", Version(1,0,0, prereleaseIdentifiers: ["beta"]))//,
+        //.Package(url: "https://github.com/bygri/vapor-forms.git", majorVersion:0)
     ]
 )

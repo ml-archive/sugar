@@ -11,13 +11,13 @@ extension Node {
     }
 }
 
-extension Date: NodeConvertible {
-    public func makeNode(context: Context = EmptyNode) throws -> Node {
+extension Date {
+    public func makeNode(context: Context = emptyContext) throws -> Node {
         return .string(dateFormatterMySQL.string(from: self))
     }
     
     public init(node: Node, in context: Context) throws {
-        switch node {
+        switch node.wrapped {
         case .number(let number):
             self = Date(timeIntervalSince1970: number.double)
             
@@ -28,15 +28,17 @@ extension Date: NodeConvertible {
                 self = dateISO8601
             } else {
                 throw NodeError.unableToConvert(
-                    node: node,
-                    expected: "MySQL DATETIME or ISO8601 formatted date."
+                    input: node,
+                    expectation: "MySQL DATETIME or ISO8601 formatted date.",
+                    path:  []
                 )
             }
             
         default:
             throw NodeError.unableToConvert(
-                node: node,
-                expected: "\(String.self), \(Int.self) or \(Double.self))"
+                input: node,
+                expectation: "\(String.self), \(Int.self) or \(Double.self))",
+                path: []
             )
         }
     }

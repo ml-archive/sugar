@@ -1,11 +1,11 @@
 import Core
-import Random
+import Crypto
 import Foundation
 
 extension String {
     /// Generates a String of random characters (path safe)
     public static func random(length: Int) throws -> String {
-        return try CryptoRandom.bytes(count: length).base64Encoded.string().replacingOccurrences(
+        return try Random.bytes(count: length).base64Encoded.string().replacingOccurrences(
             of: "/", with: "_"
         )
     }
@@ -79,7 +79,7 @@ extension String {
     
     /// The string being url encoded.
     internal func urlEncoded() throws -> String {
-        return try percentEncoded(try self.makeBytes()).string()
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet())!
     }
 }
 
