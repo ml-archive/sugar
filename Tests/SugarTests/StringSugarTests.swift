@@ -8,7 +8,7 @@ class StringSugarTests: XCTestCase {
         ("testThatUrlEncodingWithDanishCharactersWorks", testThatUrlEncodingWithDanishCharactersWorks),
         ("testThatUrlEncodingWithSpacesWorks", testThatUrlEncodingWithSpacesWorks)
     ]
-    
+
     func testThatUrlEncodingWithDanishCharactersWorks() {
         let url = "æøå"
         let encoded = try! url.urlEncoded()
