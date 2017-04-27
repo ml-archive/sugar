@@ -26,11 +26,19 @@ protocol RawStringConvertible: NodeConvertible {
 extension RawStringConvertible  {
     public init(node: Node) throws {
         guard let string = node.string else {
-            throw Abort.custom(status: .internalServerError, message: "Expected a String")
+            throw Abort(
+                .internalServerError,
+                metadata: nil,
+                reason: "Expected a String"
+            )
         }
         
         guard let state = Self.init(rawValue: string) else {
-            throw Abort.custom(status: .internalServerError, message: "Invalid case: \(string)")
+            throw Abort(
+                .internalServerError,
+                metadata: nil,
+                reason: "Invalid case: \(string)"
+            )
         }
         
         self = state

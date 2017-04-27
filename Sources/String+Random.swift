@@ -1,4 +1,5 @@
 import Random
+import Crypto
 
 extension String {
     
@@ -11,7 +12,7 @@ extension String {
     /// - Returns: string
     public static func randomAlphaNumericString(_ length: Int = 64) -> String {
         let letters: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = letters.count
+        let len = letters.characters.count
         
         var randomString = ""
         for _ in 0 ..< length {
@@ -33,6 +34,6 @@ extension String {
     /// - Returns: String
     /// - Throws: Error
     public static func random(_ length: Int = 64) throws -> String {
-        return try CryptoRandom.bytes(count: length).string()
+        return try Random.bytes(count: length).string()
     }
 }

@@ -95,7 +95,7 @@ extension Database {
         var nameString = name ?? ""
     
         // Add trailing space
-        if(nameString.count > 0) {
+        if(nameString.characters.count > 0) {
             nameString += " "
         }
     
