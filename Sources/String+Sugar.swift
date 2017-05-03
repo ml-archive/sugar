@@ -30,7 +30,7 @@ extension String {
     internal func matches(regex: String) -> [String] {
         #if os(Linux)
             do {
-                let regex = try RegularExpression(pattern: regex, options: [])
+                let regex = try NSRegularExpression(pattern: regex, options: [])
                 let nsString = NSString(string: self)
                 let results = regex.matches(
                     in: self,
