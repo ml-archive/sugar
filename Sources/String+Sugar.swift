@@ -5,7 +5,7 @@ import Foundation
 extension String {
     /// Generates a String of random characters (path safe)
     public static func random(length: Int) throws -> String {
-        return try Random.bytes(count: length).base64Encoded.string().replacingOccurrences(
+        return try Random.bytes(count: length).base64Encoded.makeString().replacingOccurrences(
             of: "/", with: "_"
         )
     }
