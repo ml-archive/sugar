@@ -34,6 +34,6 @@ extension String {
     /// - Returns: String
     /// - Throws: Error
     public static func random(_ length: Int = 64) throws -> String {
-        return try Random.bytes(count: length).string()
+        return try Random.bytes(count: length).makeString()
     }
 }
