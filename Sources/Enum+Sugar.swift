@@ -18,7 +18,7 @@ import Vapor
 ///     let stateFromNode: State = try node.extract("state")
 ///
 /// ```
-protocol RawStringConvertible: NodeConvertible {
+public protocol RawStringConvertible: NodeConvertible {
     init?(rawValue: String)
     var rawValue: String { get }
 }
