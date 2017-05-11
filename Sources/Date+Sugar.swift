@@ -14,7 +14,7 @@ extension Date {
     }
 
     // MARK: Weekdays
-    enum Weekday: Int {
+    public enum Weekday: Int {
         case sunday = 1
         case monday
         case tuesday
@@ -31,8 +31,7 @@ extension Date {
     ///
     /// - Returns: Date
     public func next(_ weekday: Weekday) throws -> Date {
-        var date = self
-        let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: date)
+        let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: self)
         guard let day = components.weekday else {
             throw Abort.serverError
         }
@@ -41,9 +40,8 @@ extension Date {
         if delta <= 0 {
             delta += 7
         }
-        date = date.addDays(delta)
 
-        return date
+        return self.addDays(delta)
     }
 
     /// Start of week
@@ -52,7 +50,7 @@ extension Date {
     /// - Returns: Date
     public func startOfWeek(calendar: Calendar = Calendar()) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
-        components.weekday = .monday
+        components.weekday = .monday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
@@ -64,7 +62,7 @@ extension Date {
     /// - Returns: Date
     public func endOfWeek(calendar: Calendar = Calendar()) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
-        components.weekday = .sunday
+        components.weekday = .sunday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek.endOfDay()
     }
