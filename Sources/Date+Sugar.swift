@@ -30,13 +30,13 @@ extension Date {
     /// Returns the next `weekday` starting from the provided date.
     ///
     /// - Returns: Date
-    public func next(_ weekday: Weekday) throws -> Date {
+    public func next(weekday targetWeekday: Weekday) throws -> Date {
         let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: self)
-        guard let day = components.weekday else {
+        guard let currentWeekday = components.weekday else {
             throw Abort.serverError
         }
 
-        var delta = weekday.rawValue - day
+        var delta = targetWeekday.rawValue - currentWeekday
         if delta <= 0 {
             delta += 7
         }
