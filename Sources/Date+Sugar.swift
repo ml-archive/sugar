@@ -30,8 +30,8 @@ extension Date {
     /// Returns the next `weekday` starting from the provided date.
     ///
     /// - Returns: Date
-    static func next(_ weekday: Weekday, from date: Date) throws -> Date {
-        var date = date
+    public func next(_ weekday: Weekday) throws -> Date {
+        var date = self
         let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: date)
         guard let day = components.weekday else {
             throw Abort.serverError
@@ -50,10 +50,9 @@ extension Date {
     /// Take you to monday 00:00:00 current week
     ///
     /// - Returns: Date
-    public func startOfWeek() -> Date {
-        let calendar = Calendar.current
+    public func startOfWeek(calendar: Calendar = Calendar()) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
-        components.weekday = 2 // Monday
+        components.weekday = .monday
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
@@ -63,10 +62,9 @@ extension Date {
     /// Take you to sunday 23:59:59 current week
     ///
     /// - Returns: Date
-    public func endOfWeek() -> Date {
-        let calendar = Calendar.current
+    public func endOfWeek(calendar: Calendar = Calendar()) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
-        components.weekday = 1 // Monday
+        components.weekday = .sunday
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek.endOfDay()
     }
@@ -176,8 +174,7 @@ extension Date {
     /// Start of day
     ///
     /// - Returns: Date
-    public func startOfDay() -> Date {
-        let calendar = Calendar.current
+    public func startOfDay(calendar: Calendar = Calendar()) -> Date {
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
@@ -186,10 +183,10 @@ extension Date {
     /// End of day
     ///
     /// - Returns: Date
-    public func endOfDay() -> Date {
+    public func endOfDay(calendar: Calendar = Calendar()) -> Date {
         var components = DateComponents()
         components.day = 1
-        let date = Calendar.current.date(byAdding: components, to: self.startOfDay())
+        let date = calendar.date(byAdding: components, to: self.startOfDay())
         return (date?.addingTimeInterval(-1))!
     }
     
@@ -197,8 +194,7 @@ extension Date {
     /// Start of month
     ///
     /// - Returns: Date
-    public func startOfMonth() -> Date {
-        let calendar = Calendar.current
+    public func startOfMonth(calendar: Calendar = Calendar()) -> Date {
         let unitFlags = Set<Calendar.Component>([.year, .month])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
@@ -223,15 +219,14 @@ extension Date {
     ///   - format: String fx: yyyy-MM-dd
     ///   - date: String
     /// - Returns: Date?
-    public static func parse(_ format: String, _ date: String, timezone: String? = nil) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
+    public static func parse(_ format: String, _ date: String, timezone: String? = nil, formatter: DateFormatter = DateFormatter()) -> Date? {
+        formatter.dateFormat = format
         
         if let timezone = timezone {
-            dateFormatter.timeZone = TimeZone(identifier: timezone)
+            formatter.timeZone = TimeZone(identifier: timezone)
         }
         
-        return dateFormatter.date(from: date)
+        return formatter.date(from: date)
     }
     
     
@@ -314,15 +309,14 @@ extension Date {
     /// - Parameter format: String fx: yyyy-MM-dd
     /// - Returns: String
     /// - Throws: Error
-    public func to(_ format: String, timezone: String? = nil) throws -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
+    public func to(_ format: String, timezone: String? = nil, formatter: DateFormatter = DateFormatter()) throws -> String {
+        formatter.dateFormat = format
         
         if let timezone = timezone {
-            dateFormatter.timeZone = TimeZone(identifier: timezone)
+            formatter.timeZone = TimeZone(identifier: timezone)
         }
         
-        return dateFormatter.string(from: self)
+        return formatter.string(from: self)
     }
     
     
