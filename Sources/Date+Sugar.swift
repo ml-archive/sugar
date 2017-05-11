@@ -27,7 +27,7 @@ extension Date {
     // MARK: Manipulators
 
     /// Next
-    /// Take you to next weekday needed from the date given
+    /// Returns the next `weekday` starting from the provided date.
     ///
     /// - Returns: Date
     static func next(_ weekday: Weekday, from date: Date) throws -> Date {
