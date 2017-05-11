@@ -12,9 +12,40 @@ extension Date {
         case date = "yyyy-MM-dd"
         case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
+
+    // MARK: Weekdays
+    enum Weekday: Int {
+        case sunday = 1
+        case monday
+        case tuesday
+        case wednesday
+        case thursday
+        case friday
+        case saturday
+    }
     
     // MARK: Manipulators
-    
+
+    /// Next
+    /// Take you to next weekday needed from the date given
+    ///
+    /// - Returns: Date
+    static func next(_ weekday: Weekday, from date: Date) throws -> Date {
+        var date = date
+        let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: date)
+        guard let day = components.weekday else {
+            throw Abort.serverError
+        }
+
+        var delta = weekday.rawValue - day
+        if delta <= 0 {
+            delta += 7
+        }
+        date = date.addDays(delta)
+
+        return date
+    }
+
     /// Start of week
     /// Take you to monday 00:00:00 current week
     ///
