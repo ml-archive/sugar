@@ -9,7 +9,7 @@ extension QueryRepresentable where Self: ExecutorRepresentable {
     /// - Throws: Error
     public func firstOrFail() throws -> E {
         let query = try makeQuery()
-        query.action = .fetch
+        query.action = .fetch([])
         query.limits.append(RawOr.some(Limit(count: 1)))
 
         guard let model = try query.first() else {
