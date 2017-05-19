@@ -1,17 +1,17 @@
 import Vapor
 import Fluent
 
-protocol SlugWrapable {
+public protocol SlugWrapable {
     static var slugField: String { get }
 }
 
-enum SlugWrapper<T: Parameterizable> {
+public enum SlugWrapper<T: Parameterizable> {
     case id(value: Int)
     case slug(value: String)
 }
 
-extension SlugWrapper {
-    static func make(for parameter: String) throws -> SlugWrapper {
+public extension SlugWrapper {
+    public static func make(for parameter: String) throws -> SlugWrapper {
         if let id = Int(parameter) {
             return SlugWrapper.id(value: id)
         } else {
@@ -27,7 +27,7 @@ extension SlugWrapper: Parameterizable {
 }
 
 extension SlugWrapper where T: Entity & SlugWrapable {
-    internal func resolve() throws -> T {
+    public func resolve() throws -> T {
         switch self {
         case .id(let id):
             guard let lookup = try T.find(id) else {
