@@ -23,8 +23,11 @@ class StringSugarTests: XCTestCase {
     }
 
     func testThatStrongPasswordValidatorWorks() {
-        XCTAssertThrowsError(try StrongPassword().validate("Password"))
-        XCTAssertNoThrow(try StrongPassword().validate("password1!"))
+        XCTAssertThrowsError(try StrongPassword().validate("password"))  // Only one category
+        XCTAssertThrowsError(try StrongPassword().validate("p4ssw0rd"))  // Only two categories
+        XCTAssertThrowsError(try StrongPassword().validate("Aa1!"))      // Three categories, but too short
+        XCTAssertNoThrow(try StrongPassword().validate("p@ssw0rd"))    // Three categories, and long enough
+
     }
 }
 
