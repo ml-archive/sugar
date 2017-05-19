@@ -1,4 +1,5 @@
 import Foundation
+import Vapor
 
 extension Date {
     // MARK: Errors
@@ -48,9 +49,9 @@ extension Date {
     /// Take you to monday 00:00:00 current week
     ///
     /// - Returns: Date
-    public func startOfWeek(calendar: Calendar = Calendar()) -> Date {
+    public func startOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
-        components.weekday = .monday.rawValue
+        components.weekday = Weekday.monday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
@@ -60,9 +61,9 @@ extension Date {
     /// Take you to sunday 23:59:59 current week
     ///
     /// - Returns: Date
-    public func endOfWeek(calendar: Calendar = Calendar()) -> Date {
+    public func endOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
-        components.weekday = .sunday.rawValue
+        components.weekday = Weekday.sunday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek.endOfDay()
     }
@@ -172,7 +173,7 @@ extension Date {
     /// Start of day
     ///
     /// - Returns: Date
-    public func startOfDay(calendar: Calendar = Calendar()) -> Date {
+    public func startOfDay(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
@@ -181,7 +182,7 @@ extension Date {
     /// End of day
     ///
     /// - Returns: Date
-    public func endOfDay(calendar: Calendar = Calendar()) -> Date {
+    public func endOfDay(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         var components = DateComponents()
         components.day = 1
         let date = calendar.date(byAdding: components, to: self.startOfDay())
@@ -192,7 +193,7 @@ extension Date {
     /// Start of month
     ///
     /// - Returns: Date
-    public func startOfMonth(calendar: Calendar = Calendar()) -> Date {
+    public func startOfMonth(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         let unitFlags = Set<Calendar.Component>([.year, .month])
         let components = calendar.dateComponents(unitFlags, from: self)
         return calendar.date(from: components)!
