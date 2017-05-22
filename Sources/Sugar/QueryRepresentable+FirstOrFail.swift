@@ -19,7 +19,6 @@ extension QueryRepresentable where Self: ExecutorRepresentable {
                 reason: "Entity was not found"
             )
         }
-        
         model.exists = true
         
         return model
