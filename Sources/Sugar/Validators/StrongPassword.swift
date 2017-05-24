@@ -15,7 +15,6 @@ private let minLenght = 6
  */
 
 public struct StrongPassword: Validator {
-    public init() {}
 
     public func validate(_ input: String) throws {
         guard input.range(of: regex, options: .regularExpression) != nil && input.count >= minLenght else {

@@ -5,5 +5,6 @@ import XCTest
 XCTMain([
     testCase(DatabaseMySQLTests.allTests),
     testCase(DateSugarTests.allTests),
-    testCase(StringSugarTests.allTests)
+    testCase(StringSugarTests.allTests),
+    testCase(ValidatorsTests.allTests)
 ])
