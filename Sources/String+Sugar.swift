@@ -16,7 +16,7 @@ extension String {
     ///
     /// - Parameter regex: Regex to check for.
     /// - Returns: Returns the match (if any).
-    internal func firstMatch(regex: String) -> String? {
+    public func firstMatch(regex: String) -> String? {
         guard let range = self.range(of: regex, options: .regularExpression) else {
             return nil
         }
@@ -27,7 +27,7 @@ extension String {
     ///
     /// - Parameter regex: Regex to check for.
     /// - Returns: A list of matches (if any).
-    internal func matches(regex: String) -> [String] {
+    public func matches(regex: String) -> [String] {
         #if os(Linux)
             do {
                 let regex = try NSRegularExpression(pattern: regex, options: [])
@@ -58,7 +58,7 @@ extension String {
         #endif
     }
     
-    internal func replace(_ regex: String, with replacement: String) -> String {
+    public func replace(_ regex: String, with replacement: String) -> String {
         var result = self
         
         let matches = self.matches(regex: regex)
@@ -73,12 +73,12 @@ extension String {
     ///
     /// - Parameter regex: Regex to check for.
     /// - Returns: A bool telling if the regex had any matches.
-    internal func isMatching(regex: String) -> Bool {
+    public func isMatching(regex: String) -> Bool {
         return self.range(of: regex, options: .regularExpression) != nil
     }
     
     /// The string being url encoded.
-    internal func urlEncoded() throws -> String {
+    public func urlEncoded() throws -> String {
         return try percentEncoded(try self.makeBytes()).string()
     }
 }
@@ -87,7 +87,7 @@ extension String {
 // MARK: - Convenience for optional strings.
 extension Optional where Wrapped: ExpressibleByStringLiteral {
     /// Falls back to an empty string if no value is found.
-    internal var safeUnwrap: String {
+    public var safeUnwrap: String {
         guard let string = self as? String else {
             return ""
         }
