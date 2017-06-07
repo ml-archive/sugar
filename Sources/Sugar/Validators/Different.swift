@@ -3,7 +3,7 @@ import Validation
 
 /// Validates that matches a given input
 public struct Different<T>: Validator where T: Validatable, T: Equatable {
-    /// The value expected to be in sequence
+    /// The value expected
     public let expectation: T
 
     /// Initialize a validator with the expected value
