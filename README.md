@@ -11,6 +11,7 @@
 ## 📦 Installation
 
 Update your `Package.swift` file.
+
 ```swift
 .Package(url: "https://github.com/nodes-vapor/sugar.git", majorVersion: 1)
 ```
