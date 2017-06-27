@@ -1,19 +1,20 @@
 os:
-    - osx
-language: generic
-sudo: required
+  - osx
 
+language: swift
+sudo: required
 osx_image: xcode8.3
+
 before_install:
-    brew tap vapor/tap;
-    brew update;
-    brew install vapor;
+  brew tap vapor/tap;
+  brew update;
+  brew install vapor;
 
 script:
-    - swift build
-    - swift build -c release
-    - swift test
+  - swift build
+  - swift build -c release
+  - swift test
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
     
