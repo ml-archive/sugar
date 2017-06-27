@@ -13,8 +13,8 @@ before_install:
 script:
   - swift build
   - swift build -c release
-  - swift test
+  - swift package generate-xcodeproj --enable-code-coverage
+  - xcodebuild -scheme sugar -enableCodeCoverage YES test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-    
