@@ -62,6 +62,8 @@ extension Date {
     ///
     /// - Returns: Date
     public func endOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
+        var calendar = calendar
+        calendar.firstWeekday = Weekday.monday.rawValue
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
         components.weekday = Weekday.sunday.rawValue
         let startOfWeek = calendar.date(from: components)!
