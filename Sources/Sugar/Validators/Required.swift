@@ -6,30 +6,18 @@ public struct Required: Validator {
 
     public func validate(_ input: Node?) throws {
         guard let input = input else {
-            throw Abort(
-                .badRequest,
-                metadata: nil,
-                reason: "The value is null."
-            )
+            throw error("The value is null.")
         }
 
         if let string = input.string {
             guard !string.isEmpty else {
-                throw Abort(
-                    .badRequest,
-                    metadata: nil,
-                    reason: "The value is an empty string."
-                )
+                throw error("The value is an empty string.")
             }
         }
 
         if let array = input.array {
             guard array.count > 0 else {
-                throw Abort(
-                    .badRequest,
-                    metadata: nil,
-                    reason: "The value is an empty array."
-                )
+                throw error("The value is an empty array.")
             }
         }
     }

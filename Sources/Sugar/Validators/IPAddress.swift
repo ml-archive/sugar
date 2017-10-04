@@ -21,11 +21,7 @@ public enum IPAddress: Validator {
         case .ip where input.range(of: ipv6Pattern, options: .regularExpression) != nil || input.range(of: ipv4Pattern, options: .regularExpression) != nil :
             break
         default:
-            throw Abort(
-                .badRequest,
-                metadata: nil,
-                reason: "Not valid IP address"
-            )
+            throw error("Invalid IP address.")
         }
     }
 }
