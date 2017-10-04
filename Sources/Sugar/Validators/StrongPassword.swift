@@ -24,11 +24,7 @@ public struct StrongPassword: Validator {
             input.range(of: regex, options: .regularExpression) != nil
             && input.count >= minLength
         else {
-            throw Abort(
-                .badRequest,
-                metadata: nil,
-                reason: "Not strong password"
-            )
+            throw error("Password is not strong enough. It must be be at least \(minLength) characters long and contain a number, a capital letter and a small letter.")
         }
     }
 }

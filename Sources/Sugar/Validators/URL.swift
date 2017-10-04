@@ -7,12 +7,7 @@ public struct URL: Validator {
 
     public func validate(_ input: String) throws {
         guard input.range(of: regex, options: .regularExpression) != nil else {
-            throw Abort(
-                .badRequest,
-                metadata: nil,
-                reason: "Not valid URL"
-            )
+            throw error("Invalid URL.")
         }
-
     }
 }
