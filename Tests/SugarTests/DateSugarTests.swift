@@ -233,7 +233,7 @@ class DateSugarTests: XCTestCase {
         let now = Date()
         let now2 = Date()
         
-        XCTAssertTrue(now.isAfterOrEqual(now2))
+        XCTAssertTrue(now2.isAfterOrEqual(now))
     }
     
     func testEqual() {
