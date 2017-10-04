@@ -7,7 +7,7 @@ public struct JSONValidator: Validator {
         do {
             _ = try JSON(bytes: input.makeBytes())
         } catch {
-            throw Validator.error("Invalid JSON.")
+            throw self.error("Invalid JSON.")
         }
     }
 }
