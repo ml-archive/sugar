@@ -12,34 +12,45 @@ extension Date {
         case date = "yyyy-MM-dd"
         case ISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
     }
+
+    // MARK: Weekdays
+    public enum Weekday: Int {
+        case sunday = 1
+        case monday
+        case tuesday
+        case wednesday
+        case thursday
+        case friday
+        case saturday
+    }
     
     // MARK: Manipulators
-    
     /// Start of week
     /// Take you to monday 00:00:00 current week
     ///
     /// - Returns: Date
-    public func startOfWeek() -> Date {
-        let calendar = Calendar.current
+    public func startOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
+        var calendar = calendar
+        calendar.firstWeekday = Weekday.monday.rawValue
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
-        components.weekday = 2 // Monday
+        components.weekday = Weekday.monday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
-    
-    
+        
     /// End of week
     /// Take you to sunday 23:59:59 current week
     ///
     /// - Returns: Date
-    public func endOfWeek() -> Date {
-        let calendar = Calendar.current
+    public func endOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
+        var calendar = calendar
+        calendar.firstWeekday = Weekday.monday.rawValue
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
-        components.weekday = 1 // Monday
+        components.weekday = Weekday.sunday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek.endOfDay()
     }
-    
+
     /// Sub month
     ///
     /// - Returns: Date
