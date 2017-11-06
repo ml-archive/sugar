@@ -25,6 +25,10 @@ extension Date {
     }
     
     // MARK: Manipulators
+    /// Start of week
+    /// Take you to monday 00:00:00 current week
+    ///
+    /// - Returns: Date
     public func startOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
         var calendar = calendar
         calendar.firstWeekday = Weekday.monday.rawValue
