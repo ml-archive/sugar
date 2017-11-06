@@ -50,6 +50,8 @@ extension Date {
     ///
     /// - Returns: Date
     public func startOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
+	var calendar = calendar
+	calendar.firstWeekday = Weekday.monday.rawValue
         var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
         components.weekday = Weekday.monday.rawValue
         let startOfWeek = calendar.date(from: components)!
