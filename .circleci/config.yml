@@ -28,7 +28,6 @@ jobs:
           key: v1-spm-deps-{{ checksum "Package.resolved" }}
           paths:
             - .build
-      -
   Linux:
     docker:
       - image: brettrtoomey/vapor-ci:0.0.1
