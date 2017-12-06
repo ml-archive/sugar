@@ -2,3 +2,6 @@ coverage:
   range: "0...100"
   ignore:
     - "Tests"
+codecov:
+  ci:
+    - "!circleci.com"
