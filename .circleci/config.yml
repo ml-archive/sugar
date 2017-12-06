@@ -25,8 +25,8 @@ jobs:
             paths:
               - .build
     test:
-      - checkout
       steps:
+        - checkout
         - run:
             name: Build and Run Tests
             no_output_timeout: 1800
