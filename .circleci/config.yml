@@ -1,32 +1,56 @@
 version: 2
 jobs:
-  Linux:
-    docker:
-      - image: brettrtoomey/vapor1-ci:0.0.1
+  MacOS:
+    macos:
+      xcode: "9.2"
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v2-spm-deps-{{ checksum "Package.pins" }}
+            - v1-spm-deps-{{ checksum "Package.swift" }}
       - run:
-          name: Copy Pins Package
-          command: cp Package.pins res
+          name: Install CMySQL and CTLS
+          command: |
+            brew tap vapor/homebrew-tap
+            brew install cmysql
+            brew install ctls
+      - run:
+          name: Build and Run Tests
+          no_output_timeout: 1800
+          command: |
+            swift test -Xswiftc -DNOJSON
+      - save_cache:
+          key: v1-spm-deps-{{ checksum "Package.swift" }}
+          paths:
+            - .build
+  Linux:
+    docker:
+      - image: brettrtoomey/vapor-ci:0.0.1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-spm-deps-{{ checksum "Package.swift" }}
+      - run:
+          name: Copy Resolved Package
+          command: cp Package.resolved res
       - run:
           name: Build and Run Tests
           no_output_timeout: 1800
           command: |
             swift test -Xswiftc -DNOJSON
       - run:
-          name: Restoring Pins Package
-          command: mv res Package.pins
+          name: Restoring Resolved Package
+          command: mv res Package.resolved
       - save_cache:
-          key: v2-spm-deps-{{ checksum "Package.pins" }}
+          key: v2-spm-deps-{{ checksum "Package.swift" }}
           paths:
             - .build
 workflows:
   version: 2
   build-and-test:
     jobs:
+      - MacOS
       - Linux
 experimental:
   notify:
