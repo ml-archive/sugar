@@ -3,7 +3,7 @@
 [![Vapor Version](https://img.shields.io/badge/Vapor-2-F6CBCA.svg)](http://vapor.codes)
 [![Linux Build Status](https://img.shields.io/circleci/project/github/nodes-vapor/sugar.svg?label=Linux)](https://circleci.com/gh/nodes-vapor/sugar)
 [![macOS Build Status](https://img.shields.io/travis/nodes-vapor/sugar.svg?label=macOS)](https://travis-ci.org/nodes-vapor/sugar)
-[![codebeat badge](https://codebeat.co/badges/52c2f960-625c-4a63-ae63-52a24d747da1)](https://codebeat.co/projects/github-com-nodes-vapor-sugar)
+[![codebeat badge](https://codebeat.co/badges/54770476-a759-47f8-9372-1009267a56e0)](https://codebeat.co/projects/github-com-nodes-vapor-sugar-master)
 [![codecov](https://codecov.io/gh/nodes-vapor/sugar/branch/master/graph/badge.svg)](https://codecov.io/gh/nodes-vapor/sugar)
 [![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=https://github.com/nodes-vapor/sugar)](http://clayallsopp.github.io/readme-score?url=https://github.com/nodes-vapor/sugar)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nodes-vapor/sugar/master/LICENSE)
