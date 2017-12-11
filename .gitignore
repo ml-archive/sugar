@@ -10,3 +10,4 @@ node_modules/
 bower_components/
 .swift-version
 Package.pins
+Package.resolved
