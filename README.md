@@ -1,8 +1,7 @@
 # Sugar 🍬
-[![Swift Version](https://img.shields.io/badge/Swift-3.1-brightgreen.svg)](http://swift.org)
+[![Swift Version](https://img.shields.io/badge/Swift-3-brightgreen.svg)](http://swift.org)
 [![Vapor Version](https://img.shields.io/badge/Vapor-2-F6CBCA.svg)](http://vapor.codes)
-[![Linux Build Status](https://img.shields.io/circleci/project/github/nodes-vapor/sugar.svg?label=Linux)](https://circleci.com/gh/nodes-vapor/sugar)
-[![macOS Build Status](https://img.shields.io/travis/nodes-vapor/sugar.svg?label=macOS)](https://travis-ci.org/nodes-vapor/sugar)
+[![Circle CI](https://circleci.com/gh/nodes-vapor/sugar/tree/master.svg?style=shield)](https://circleci.com/gh/nodes-vapor/sugar)
 [![codebeat badge](https://codebeat.co/badges/54770476-a759-47f8-9372-1009267a56e0)](https://codebeat.co/projects/github-com-nodes-vapor-sugar-master)
 [![codecov](https://codecov.io/gh/nodes-vapor/sugar/branch/master/graph/badge.svg)](https://codecov.io/gh/nodes-vapor/sugar)
 [![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=https://github.com/nodes-vapor/sugar)](http://clayallsopp.github.io/readme-score?url=https://github.com/nodes-vapor/sugar)
