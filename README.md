@@ -32,7 +32,7 @@ This package is also used for prototyping features before making PRs to Vapor
 ## 🏆 Credits
 
 This package is developed and maintained by the Vapor team at [Nodes](https://www.nodesagency.com).
-The package owner for this project is [Mauran](https://github.com/mauran).
+The package owner for this project is [Siemen](https://github.com/siemensikkema).
 
 
 ## 📄 License
