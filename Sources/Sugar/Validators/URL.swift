@@ -5,6 +5,8 @@ private let regex = "^(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|1
 
 public struct URL: Validator {
 
+    public init() {}
+    
     public func validate(_ input: String) throws {
         guard input.range(of: regex, options: .regularExpression) != nil else {
             throw error("Invalid URL.")
