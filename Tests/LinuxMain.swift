@@ -1,10 +1,7 @@
 import XCTest
 
-@testable import SugarTests
+import SugarTests
 
-XCTMain([
-    testCase(DatabaseMySQLTests.allTests),
-    testCase(DateSugarTests.allTests),
-    testCase(StringSugarTests.allTests),
-    testCase(ValidatorsTests.allTests)
-])
+var tests = [XCTestCaseEntry]()
+tests += SugarTests.allTests()
+XCTMain(tests)
