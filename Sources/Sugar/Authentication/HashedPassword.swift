@@ -13,7 +13,7 @@ public struct HashedPassword: Codable, Equatable {
 
 extension HasHashedPassword {
     public static func hashPassword(_ data: LosslessDataConvertible) throws -> HashedPassword {
-        return try HashedPassword(BCrypt.hash(data, cost: bCryptCost).base64EncodedString())
+        return try HashedPassword(BCrypt.hash(data, cost: bCryptCost))
     }
 }
 
