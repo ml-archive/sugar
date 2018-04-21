@@ -2,6 +2,7 @@ import Crypto
 
 public protocol HasHashedPassword {
     static var bCryptCost: Int { get }
+    var password: HashedPassword { get }
 }
 
 public struct HashedPassword: Codable, Equatable {
@@ -14,6 +15,10 @@ public struct HashedPassword: Codable, Equatable {
 extension HasHashedPassword {
     public static func hashPassword(_ data: LosslessDataConvertible) throws -> HashedPassword {
         return try HashedPassword(BCrypt.hash(data, cost: bCryptCost))
+    }
+
+    public func verify(_ password: String) throws -> Bool {
+        return try BCrypt.verify(password, created: self.password.value)
     }
 }
 
