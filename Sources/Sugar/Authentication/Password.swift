@@ -62,16 +62,33 @@ extension HasPassword {
     }
 }
 
+/// Types conforming to this protocol can be used for login or register requests
+public protocol HasPasswordString: Decodable {
+    var password: String { get }
+}
+
 // MARK: - MySQLDataConvertible
 
-import MySQL
+import FluentMySQL
 
 extension Password: MySQLDataConvertible {
+
+    /// See `MySQLDataConvertible.convertToMySQLData`
     public func convertToMySQLData() throws -> MySQLData {
         return MySQLData(string: value)
     }
 
+    /// See `MySQLDataConvertible.convertFromMySQLData`
     public static func convertFromMySQLData(_ mysqlData: MySQLData) throws -> Password {
         return try self.init(mysqlData.decode(String.self))
+    }
+}
+
+// MARK: - MySQLColumnDefinitionStaticRepresentable
+extension Password: MySQLColumnDefinitionStaticRepresentable {
+
+    /// See `MySQLColumnDefinitionStaticRepresentable.mySQLColumnDefinition`
+    public static var mySQLColumnDefinition: MySQLColumnDefinition {
+        return .varChar(length: 255)
     }
 }
