@@ -21,7 +21,7 @@ public struct SeederCommand<M: Seedable>: Command {
     }
 
     public func run(using context: CommandContext) throws -> Future<Void> {
-        return context.container.withConnection(to: databaseIdentifier) { db in
+        return context.container.withNewConnection(to: databaseIdentifier) { db in
             let seedable = try M(command: context)
             return seedable.save(on: db).transform(to: ())
         }

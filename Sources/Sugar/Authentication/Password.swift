@@ -52,7 +52,6 @@ extension HasPassword {
         return try Password(BCrypt.hash(password, cost: bCryptCost))
     }
 
-
     /// Verifies whether provided password matches the hashed password.
     ///
     /// - Parameter password: password to verify

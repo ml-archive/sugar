@@ -2,6 +2,8 @@ import Authentication
 import JWT
 import Vapor
 
+/// Types confornming to this protocol will be able to be authenticated through an associated
+/// JWT payload.
 public protocol JWTAuthenticatable: Authenticatable {
     associatedtype JWTPayload: ExpireableSubjectPayload
 
@@ -29,6 +31,14 @@ public protocol JWTAuthenticatable: Authenticatable {
 }
 
 extension JWTAuthenticatable {
+
+    /// Create a signed token by making a payload and a JWT and signing it with the provided signer.
+    ///
+    /// - Parameters:
+    ///   - signer:
+    ///   - currentTime: the time that is used to determine the expiration time
+    ///   - container: a container that is used as the worker for the event loop
+    /// - Returns: a future signed token as a string
     public func signToken(
         using signer: ExpireableJWTSigner,
         currentTime: Date = .init(),
