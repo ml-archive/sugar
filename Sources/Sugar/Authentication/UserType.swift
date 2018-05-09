@@ -19,6 +19,7 @@ public protocol HasReadableUser {
 }
 
 extension UserType where
+    Self: Model,
     Self: PasswordAuthenticatable,
     Self.Database: QuerySupporting,
     Self.Login: HasReadableUser
@@ -36,6 +37,7 @@ extension UserType where
 }
 
 extension UserType where
+    Self: Model,
     Self: PasswordAuthenticatable,
     Self.Database: QuerySupporting
 {
