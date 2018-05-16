@@ -24,7 +24,6 @@ extension HasPassword {
     /// - Parameter password: password string to validate
     /// - Throws: PasswordError.weakPassword when password is not strong enough
     public static func validateStrength(ofPassword password: String) throws {
-        // TODO: stricter validation
         guard password.count > 8 else {
             throw AuthenticationError.weakPassword
         }

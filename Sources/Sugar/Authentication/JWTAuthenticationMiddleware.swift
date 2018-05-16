@@ -49,9 +49,9 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
         return try A
             .authenticate(using: payload, on: req)
             .unwrap(or: AuthenticationError.userNotFound)
-            .flatMap(to: Response.self) { a in
+            .flatMap(to: Response.self) { object in
                 // store the authenticated object on the request
-                try req.authenticate(a)
+                try req.authenticate(object)
                 return try next.respond(to: req)
         }
     }

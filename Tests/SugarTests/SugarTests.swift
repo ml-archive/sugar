@@ -1,16 +1,14 @@
 import XCTest
 @testable import Sugar
 
-final class SugarTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Sugar().text, "Hello, World!")
+class SugarTests: XCTestCase {
+    func testExample() throws {
+        XCTAssertTrue(true)
     }
 
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+    static var allTests : [(String, (SugarTests) -> () throws -> Void)] {
+        return [
+            ("testExample", testExample),
+        ]
+    }
 }

@@ -1,3 +1,6 @@
+import Fluent
+import Vapor
+
 public extension Model where Database: QuerySupporting {
     public static func requireFind(
         _ id: ID,
