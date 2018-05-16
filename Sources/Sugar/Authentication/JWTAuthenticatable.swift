@@ -27,7 +27,7 @@ public protocol JWTAuthenticatable: Authenticatable {
     func makePayload(
         expirationTime: Date,
         on container: Container
-    ) -> Future<JWTPayload>
+    ) throws -> Future<JWTPayload>
 }
 
 extension JWTAuthenticatable {
@@ -43,8 +43,8 @@ extension JWTAuthenticatable {
         using signer: ExpireableJWTSigner,
         currentTime: Date = .init(),
         on container: Container
-    ) -> Future<String> {
-        return makePayload(expirationTime: currentTime + signer.expirationPeriod, on: container)
+    ) throws -> Future<String> {
+        return try makePayload(expirationTime: currentTime + signer.expirationPeriod, on: container)
             .map(to: String?.self) {
                 var jwt = JWT(payload: $0)
                 return try String(bytes: jwt.sign(using: signer.signer), encoding: .utf8)

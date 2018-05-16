@@ -34,7 +34,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
         }
 
         guard let bearer = req.http.headers.bearerAuthorization else {
-            throw AuthenticationError.bearerAuthorizationHeaderRequired
+            return try next.respond(to: req)
         }
 
         let jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signer)
