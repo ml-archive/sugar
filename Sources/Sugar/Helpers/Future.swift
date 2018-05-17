@@ -20,12 +20,8 @@ public extension Future {
         }
     }
 
-    static func value(_ value: T, on worker: Worker) -> Future<T> {
+    static func transform(to value: T, on worker: Worker) -> Future<T> {
         return Future.map(on: worker) { value }
-    }
-
-    func value<T>(_ value: T) -> Future<T> {
-        return map { _ in value }
     }
 }
 

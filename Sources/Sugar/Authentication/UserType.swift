@@ -13,7 +13,22 @@ public protocol UserType {
     func update(with: Update) throws
 
     static func logIn(with: Login, on worker: DatabaseConnectable) -> Future<Self>
+    /// Performs work, such as validation, before the user is being created.
+    ///
+    /// - Parameters:
+    ///   - with: The registration object.
+    ///   - worker: An object for connecting to the database.
+    /// - Returns: A future without a value indicating that the user can be created.
+    /// - Throws: If the user shouldn't be registered.
     static func preRegister(with: Registration, on worker: DatabaseConnectable) throws -> Future<Void>
+
+    /// Performs work, such as validation, before the user is being updated.
+    ///
+    /// - Parameters:
+    ///   - with: The update object.
+    ///   - worker: An object for connecting to the database.
+    /// - Returns: A future without a value indicating that the user can be updated.
+    /// - Throws: If the user shouldn't be updated.
     func preUpdate(with: Update, on worker: DatabaseConnectable) throws -> Future<Void>
 }
 
@@ -74,7 +89,7 @@ extension UserType where
 {
     public func preUpdate(with update: Update, on worker: DatabaseConnectable) throws -> Future<Void> {
         if update.password != nil && (update.username == nil && update.oldPassword == nil) {
-            throw Abort(.internalServerError)
+            throw AuthenticationError.passwordWithoutUsernameOrOldPassword
         }
 
         if let oldPassword = update.oldPassword {
@@ -98,10 +113,10 @@ extension UserType where
                         throw AuthenticationError.usernameAlreadyExists
                     }
                 }
-                .value(())
+                .transform(to: ())
         }
 
-        return Future.value((), on: worker)
+        return .done(on: worker)
     }
 }
 
@@ -133,16 +148,15 @@ extension UserType where
     public static func update(on req: Request) throws -> Future<Self> {
         let user = try req.requireAuthenticated(Self.self)
 
-        return flatMap(
-            to: Self.self,
-            try req.content.decode(Self.Update.self),
-            Future.value(user, on: req))
-        { update, user in
-            return try user.preUpdate(with: update, on: req)
-                .flatMap { _ in
-                    try user.update(with: update)
-                    return user.save(on: req)
-                }
-        }
+        return try req
+            .content
+            .decode(Update.self)
+            .flatTry { update in
+                try user.preUpdate(with: update, on: req)
+            }
+            .flatMap { update in
+                try user.update(with: update)
+                return user.save(on: req)
+            }
     }
 }
