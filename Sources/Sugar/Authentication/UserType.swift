@@ -20,7 +20,10 @@ public protocol UserType {
     ///   - worker: An object for connecting to the database.
     /// - Returns: A future without a value indicating that the user can be created.
     /// - Throws: If the user shouldn't be registered.
-    static func preRegister(with: Registration, on worker: DatabaseConnectable) throws -> Future<Void>
+    static func preRegister(
+        with: Registration,
+        on worker: DatabaseConnectable
+    ) throws -> Future<Void>
 
     /// Performs work, such as validation, before the user is being updated.
     ///
@@ -71,7 +74,10 @@ extension UserType where
     Self.Database: QuerySupporting,
     Self.Registration: HasReadableUser
 {
-    public static func preRegister(with registration: Registration, on worker: DatabaseConnectable) throws -> Future<Void> {
+    public static func preRegister(
+        with registration: Registration,
+        on worker: DatabaseConnectable
+    ) throws -> Future<Void> {
         return try Self.query(on: worker)
             .filter(Self.usernameKey == registration.username)
             .first()
@@ -87,7 +93,10 @@ extension UserType where
     Self.Update: HasUpdatablePassword,
     Self: HasPassword
 {
-    public func preUpdate(with update: Update, on worker: DatabaseConnectable) throws -> Future<Void> {
+    public func preUpdate(
+        with update: Update,
+        on worker: DatabaseConnectable
+    ) throws -> Future<Void> {
         if update.password != nil && (update.username == nil && update.oldPassword == nil) {
             throw AuthenticationError.passwordWithoutUsernameOrOldPassword
         }
