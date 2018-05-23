@@ -16,23 +16,23 @@ public protocol UserType {
     /// Performs work, such as validation, before the user is being created.
     ///
     /// - Parameters:
-    ///   - with: The registration object.
+    ///   - registration: The registration object.
     ///   - worker: An object for connecting to the database.
     /// - Returns: A future without a value indicating that the user can be created.
     /// - Throws: If the user shouldn't be registered.
     static func preRegister(
-        with: Registration,
+        with registration: Registration,
         on worker: DatabaseConnectable
     ) throws -> Future<Void>
 
     /// Performs work, such as validation, before the user is being updated.
     ///
     /// - Parameters:
-    ///   - with: The update object.
+    ///   - registration: The update object.
     ///   - worker: An object for connecting to the database.
     /// - Returns: A future without a value indicating that the user can be updated.
     /// - Throws: If the user shouldn't be updated.
-    func preUpdate(with: Update, on worker: DatabaseConnectable) throws -> Future<Void>
+    func preUpdate(with registration: Update, on worker: DatabaseConnectable) throws -> Future<Void>
 }
 
 public protocol HasReadableUser {
