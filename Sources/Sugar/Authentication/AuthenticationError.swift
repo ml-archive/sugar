@@ -9,6 +9,7 @@ public enum AuthenticationError: String, Error {
     case incorrectPassword
     case incorrectOldPassword
     case passwordWithoutUsernameOrOldPassword
+    case malformedPayload
 }
 
 // MARK: - AbortError
@@ -24,6 +25,7 @@ extension AuthenticationError: AbortError {
         case .incorrectPassword                     : return .unauthorized
         case .incorrectOldPassword                  : return .unauthorized
         case .passwordWithoutUsernameOrOldPassword  : return .unprocessableEntity
+        case .malformedPayload                      : return .badRequest
         }
     }
 
@@ -44,6 +46,8 @@ extension AuthenticationError: AbortError {
             return "Incorrect old password."
         case .passwordWithoutUsernameOrOldPassword:
             return "Password should only be provided when updating it or updating the username."
+        case .malformedPayload:
+            return "Malformed JWT payload received."
         }
     }
 }
