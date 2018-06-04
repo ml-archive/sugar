@@ -26,3 +26,16 @@ public extension String {
         return randomString
     }
 }
+
+#if os(Linux)
+    /// Generates a random number between (and inclusive of)
+    /// the given minimum and maximum.
+    private let randomInitialized: Bool = {
+        /// This stylized initializer is used to work around dispatch_once
+        /// not existing and still guarantee thread safety
+        let current = Date().timeIntervalSinceReferenceDate
+        let salt = current.truncatingRemainder(dividingBy: 1) * 100000000
+        COperatingSystem.srand(UInt32(current + salt))
+        return true
+    }()
+#endif
