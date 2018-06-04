@@ -1,4 +1,5 @@
 import Crypto
+import COperatingSystem
 
 public extension String {
     public static func randomAlphaNumericString(_ length: Int = 64) -> String {
