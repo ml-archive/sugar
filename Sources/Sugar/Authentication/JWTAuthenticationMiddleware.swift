@@ -37,9 +37,14 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
             return try next.respond(to: req)
         }
 
-        let jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signer)
-        let payload = jwt.payload
-        try payload.verify()
+        let jwt: JWT<A.JWTPayload>
+        do {
+            jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signer)
+        } catch let error as JWTError where error.identifier == "exp" {
+            return try Future
+                .transform(to: HTTPResponse.init(status: .unauthorized), on: req)
+                .encode(for: req)
+        }
 
         guard shouldAuthenticate else {
             // we've verified the JWT and authentication is not requested so we're done
@@ -47,7 +52,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
         }
 
         return try A
-            .authenticate(using: payload, on: req)
+            .authenticate(using: jwt.payload, on: req)
             .unwrap(or: AuthenticationError.userNotFound)
             .flatMap(to: Response.self) { object in
                 // store the authenticated object on the request
