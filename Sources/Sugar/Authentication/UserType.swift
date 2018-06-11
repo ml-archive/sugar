@@ -35,6 +35,16 @@ public protocol UserType {
     func preUpdate(with registration: Update, on worker: DatabaseConnectable) throws -> Future<Void>
 }
 
+extension UserType {
+    /// Default implementation that does nothing.
+    public func preUpdate(
+        with registration: Update,
+        on worker: DatabaseConnectable
+    ) throws -> Future<Void> {
+        return .done(on: worker)
+    }
+}
+
 extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
