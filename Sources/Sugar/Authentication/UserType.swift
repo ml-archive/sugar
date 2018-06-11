@@ -35,32 +35,28 @@ public protocol UserType {
     func preUpdate(with registration: Update, on worker: DatabaseConnectable) throws -> Future<Void>
 }
 
-public protocol HasReadableUser {
-    /// The username, sometimes an email address
-    var username: String { get }
-}
-
-public protocol HasUpdatablePassword {
-    var password: String? { get }
-    var oldPassword: String? { get }
-}
-
-public protocol HasUpdatableUsername {
-    var username: String? { get }
+extension UserType {
+    /// Default implementation that does nothing.
+    public func preUpdate(
+        with registration: Update,
+        on worker: DatabaseConnectable
+    ) throws -> Future<Void> {
+        return .done(on: worker)
+    }
 }
 
 extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
     Self.Database: QuerySupporting,
-    Self.Login: HasReadableUser,
-    Self.Registration: HasReadableUser
+    Self.Login: HasReadableUsername,
+    Self.Registration: HasReadableUsername
 {
     public static func logIn(with login: Login, on worker: DatabaseConnectable) -> Future<Self> {
         return Self
             .authenticate(
-                username: login.username,
-                password: login.password,
+                username: login[keyPath: Login.readableUsernameKey],
+                password: login[keyPath: Login.readablePasswordKey],
                 using: BCrypt,
                 on: worker
             )
@@ -72,14 +68,14 @@ extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
     Self.Database: QuerySupporting,
-    Self.Registration: HasReadableUser
+    Self.Registration: HasReadableUsername
 {
     public static func preRegister(
         with registration: Registration,
         on worker: DatabaseConnectable
     ) throws -> Future<Void> {
         return try Self.query(on: worker)
-            .filter(Self.usernameKey == registration.username)
+            .filter(Self.usernameKey == registration[keyPath: Registration.readableUsernameKey])
             .first()
             .nil(or: AuthenticationError.usernameAlreadyExists)
     }
@@ -97,18 +93,22 @@ extension UserType where
         with update: Update,
         on worker: DatabaseConnectable
     ) throws -> Future<Void> {
-        if update.password != nil && (update.username == nil && update.oldPassword == nil) {
+        if
+            update[keyPath: Update.updatablePasswordKey] != nil,
+            update[keyPath: Update.updatableUsernameKey] == nil,
+            update[keyPath: Update.oldPasswordKey] == nil
+        {
             throw AuthenticationError.passwordWithoutUsernameOrOldPassword
         }
 
-        if let oldPassword = update.oldPassword {
+        if let oldPassword = update[keyPath: Update.oldPasswordKey] {
             guard try verify(oldPassword) else {
                 throw AuthenticationError.incorrectOldPassword
             }
         }
 
-        if let username = update.username {
-            guard let password = update.password, try verify(password) else {
+        if let username = update[keyPath: Update.updatablePasswordKey] {
+            guard let password = update[keyPath: Update.updatablePasswordKey], try verify(password) else {
                 throw AuthenticationError.incorrectPassword
             }
 
@@ -169,3 +169,22 @@ extension UserType where
             }
     }
 }
+
+extension JWTAuthenticatable where
+    Self: Model,
+    Self.Database: QuerySupporting,
+    Self.ID: LosslessStringConvertible
+{
+    /// See `JWTAuthenticatable`.
+    public static func authenticate(
+        using payload: JWTPayload,
+        on connection: DatabaseConnectable
+    ) throws -> Future<Self?> {
+        guard let id = ID(payload.sub.value) else {
+            throw Sugar.AuthenticationError.malformedPayload
+        }
+
+        return try find(id, on: connection)
+    }
+}
+
