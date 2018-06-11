@@ -36,7 +36,6 @@ extension HasPassword {
 }
 
 extension HasPassword {
-
     /// Hashes password.
     ///
     /// - Parameter password: password to validate and hash.
