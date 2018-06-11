@@ -26,7 +26,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
     public func respond(
         to req: Request,
         chainingTo next: Responder
-    ) throws -> EventLoopFuture<Response> {
+    ) throws -> Future<Response> {
 
         // return early if authentication has already occurred
         if try req.isAuthenticated(A.self) {

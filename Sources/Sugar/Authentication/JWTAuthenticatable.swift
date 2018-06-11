@@ -31,7 +31,6 @@ public protocol JWTAuthenticatable: Authenticatable {
 }
 
 extension JWTAuthenticatable {
-
     /// Create a signed token by making a payload and a JWT and signing it with the provided signer.
     ///
     /// - Parameters:
