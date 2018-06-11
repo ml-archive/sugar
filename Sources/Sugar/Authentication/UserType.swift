@@ -159,3 +159,22 @@ extension UserType where
             }
     }
 }
+
+extension JWTAuthenticatable where
+    Self: Model,
+    Self.Database: QuerySupporting,
+    Self.ID: LosslessStringConvertible
+{
+    /// See `JWTAuthenticatable`.
+    public static func authenticate(
+        using payload: JWTPayload,
+        on connection: DatabaseConnectable
+    ) throws -> Future<Self?> {
+        guard let id = ID(payload.sub.value) else {
+            throw Sugar.AuthenticationError.malformedPayload
+        }
+
+        return try find(id, on: connection)
+    }
+}
+
