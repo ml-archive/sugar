@@ -23,7 +23,7 @@ extension AuthenticationError: AbortError {
         case .weakPassword                          : return .unprocessableEntity
         case .usernameAlreadyExists                 : return .unprocessableEntity
         case .incorrectPassword                     : return .unauthorized
-        case .incorrectOldPassword                  : return .unauthorized
+        case .incorrectOldPassword                  : return .unprocessableEntity
         case .passwordWithoutUsernameOrOldPassword  : return .unprocessableEntity
         case .malformedPayload                      : return .badRequest
         }
