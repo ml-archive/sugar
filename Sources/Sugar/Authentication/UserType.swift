@@ -107,8 +107,11 @@ extension UserType where
             }
         }
 
-        if let username = update[keyPath: Update.updatablePasswordKey] {
-            guard let password = update[keyPath: Update.updatablePasswordKey], try verify(password) else {
+        if let username = update[keyPath: Update.updatableUsernameKey] {
+            guard
+                let password = update[keyPath: Update.updatablePasswordKey],
+                try verify(password)
+            else {
                 throw AuthenticationError.incorrectPassword
             }
 
