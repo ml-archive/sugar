@@ -9,10 +9,10 @@ public protocol UserType {
     associatedtype Update: Decodable
     associatedtype Public: Content
 
-    init(_: Registration) throws
-    func update(with: Update) throws
+    init(_ registration: Registration) throws
+    func update(with update: Update) throws
 
-    static func logIn(with: Login, on worker: DatabaseConnectable) -> Future<Self>
+    static func logIn(with login: Login, on worker: DatabaseConnectable) -> Future<Self>
     /// Performs work, such as validation, before the user is being created.
     ///
     /// - Parameters:
