@@ -5,7 +5,7 @@ public extension Model {
     public static func requireFind(
         _ id: ID,
         on worker: DatabaseConnectable
-    ) throws -> Future<Self> {
+    ) -> Future<Self> {
         return Self
             .find(id, on: worker)
             .unwrap(or: Abort(.notFound, reason: "\(Self.self) with id \(id) not found"))

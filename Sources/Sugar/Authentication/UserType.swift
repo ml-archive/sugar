@@ -71,7 +71,7 @@ extension UserType where
     public static func preRegister(
         with registration: Registration,
         on worker: DatabaseConnectable
-    ) throws -> Future<Void> {
+    ) -> Future<Void> {
         return Self.query(on: worker)
             .filter(Self.usernameKey == registration[keyPath: Registration.readableUsernameKey])
             .first()
@@ -185,4 +185,3 @@ extension JWTAuthenticatable where
         return find(id, on: connection)
     }
 }
-
