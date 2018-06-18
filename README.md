@@ -13,20 +13,40 @@
 Update your `Package.swift` file.
 
 ```swift
-TODO
+.package(url: "https://github.com/nodes-vapor/sugar.git", from: "3.0.0-beta")
 ```
 
 
 ## Getting started 🚀
+
+Make sure that you've imported Sugar everywhere when needed:
 
 ```swift
 import Sugar
 ```
 
 
-### Note
+## Helpers
 
-This package is also used for prototyping features before making PRs to Vapor
+This package contains a lot of misc. functionality that might not fit into it's own package or that would best to get PR'ed into Vapor. Some examples of what this package contains:
+
+### Environment variables
+
+Access environment variables by writing
+
+```swift
+env("my-key", "my-fallback-value")
+```
+
+### Seeder commands
+
+If you want to make your model seedable, you can conform it to `Seedable` and use `SeederCommand` to wrap your seedable model. This basically means that you can focus on how your model gets initialized when running your command, and save a little code on actually performing the database work.
+
+> Seeding multiple instances of your model will be added - feel free to PR.
+
+### Authentication
+
+This package contains a lot of convenience related to JWT, usernames and passwords which is used in [JWTKeychain](https://github.com/nodes-vapor/jwt-keychain) and [Admin Panel](https://github.com/nodes-vapor/admin-panel).
 
 
 ## 🏆 Credits
