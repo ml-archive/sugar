@@ -5,7 +5,7 @@ public final class CurrentURLProvider: Provider {
 
     public func register(_ services: inout Services) throws {
         services.register { container in
-            return CurrentUrlContainer()
+            return CurrentURLContainer()
         }
     }
 
@@ -14,16 +14,16 @@ public final class CurrentURLProvider: Provider {
     }
 }
 
-public final class CurrentUrlContainer: Codable, Service {
+public final class CurrentURLContainer: Codable, Service {
     public var path: String = ""
 }
 
-public struct CurrentUrlMiddleware: Middleware {
+public struct CurrentURLMiddleware: Middleware {
     public init() {}
 
     /// See Middleware.respond
     public func respond(to req: Request, chainingTo next: Responder) throws -> Future<Response> {
-        let container = try req.privateContainer.make(CurrentUrlContainer.self)
+        let container = try req.privateContainer.make(CurrentURLContainer.self)
         container.path = req.http.urlString
         return try next.respond(to: req)
     }

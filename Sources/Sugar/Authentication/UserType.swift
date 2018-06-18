@@ -9,10 +9,10 @@ public protocol UserType {
     associatedtype Update: Decodable
     associatedtype Public: Content
 
-    init(_: Registration) throws
-    func update(with: Update) throws
+    init(_ registration: Registration) throws
+    func update(with update: Update) throws
 
-    static func logIn(with: Login, on worker: DatabaseConnectable) -> Future<Self>
+    static func logIn(with login: Login, on worker: DatabaseConnectable) -> Future<Self>
     /// Performs work, such as validation, before the user is being created.
     ///
     /// - Parameters:
@@ -71,7 +71,7 @@ extension UserType where
     public static func preRegister(
         with registration: Registration,
         on worker: DatabaseConnectable
-    ) throws -> Future<Void> {
+    ) -> Future<Void> {
         return Self.query(on: worker)
             .filter(Self.usernameKey == registration[keyPath: Registration.readableUsernameKey])
             .first()
@@ -185,4 +185,3 @@ extension JWTAuthenticatable where
         return find(id, on: connection)
     }
 }
-
