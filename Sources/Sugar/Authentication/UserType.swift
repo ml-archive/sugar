@@ -48,7 +48,6 @@ extension UserType {
 extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
-    Self.Database: QuerySupporting,
     Self.Login: HasReadableUsername,
     Self.Registration: HasReadableUsername
 {
@@ -67,14 +66,13 @@ extension UserType where
 extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
-    Self.Database: QuerySupporting,
     Self.Registration: HasReadableUsername
 {
     public static func preRegister(
         with registration: Registration,
         on worker: DatabaseConnectable
     ) throws -> Future<Void> {
-        return try Self.query(on: worker)
+        return Self.query(on: worker)
             .filter(Self.usernameKey == registration[keyPath: Registration.readableUsernameKey])
             .first()
             .nil(or: AuthenticationError.usernameAlreadyExists)
@@ -84,7 +82,6 @@ extension UserType where
 extension UserType where
     Self: Model,
     Self: PasswordAuthenticatable,
-    Self.Database: QuerySupporting,
     Self.Update: HasUpdatableUsername,
     Self.Update: HasUpdatablePassword,
     Self: HasPassword
@@ -115,7 +112,7 @@ extension UserType where
                 throw AuthenticationError.incorrectPassword
             }
 
-            return try Self.query(on: worker)
+            return Self.query(on: worker)
                 .filter(Self.usernameKey == username)
                 .first()
                 .try { user in
@@ -134,8 +131,7 @@ extension UserType where
 
 extension UserType where
     Self: Model,
-    Self: PasswordAuthenticatable,
-    Self.Database: QuerySupporting
+    Self: PasswordAuthenticatable
 {
     public static func logIn(on req: Request) throws -> Future<Self> {
         return try req
@@ -175,7 +171,6 @@ extension UserType where
 
 extension JWTAuthenticatable where
     Self: Model,
-    Self.Database: QuerySupporting,
     Self.ID: LosslessStringConvertible
 {
     /// See `JWTAuthenticatable`.
@@ -187,7 +182,7 @@ extension JWTAuthenticatable where
             throw Sugar.AuthenticationError.malformedPayload
         }
 
-        return try find(id, on: connection)
+        return find(id, on: connection)
     }
 }
 

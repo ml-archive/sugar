@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-public protocol Seedable: Model where Database: QuerySupporting {
+public protocol Seedable: Model {
     static var arguments: [CommandArgument] { get }
     static var options: [CommandOption] { get }
     static var help: String { get }
