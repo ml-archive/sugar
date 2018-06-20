@@ -5,7 +5,6 @@ import Leaf
 /// This is a workaround for not being able to mutate `Leaf`'s `LeafTagConfig`.
 /// - See: https://github.com/vapor/leaf/pull/113.
 public final class MutableLeafTagConfigProvider: Provider {
-
     /// Creates an `MutableLeafTagConfigProvider`.
     public init() {}
 
