@@ -13,8 +13,9 @@ public final class MutableLeafTagConfigProvider: Provider {
     public func register(_ services: inout Services) throws {
         // register LeafProvider here to ensure it does not override our `LeafTagConfig`.
         try services.register(LeafProvider())
+        services.register(MutableLeafTagConfig())
         services.register { container -> LeafTagConfig in
-            let mutableConfig = try container.make(MutableLeafTagConfig.self)
+            let mutableConfig: MutableLeafTagConfig = try container.make()
             var config = LeafTagConfig.default()
             config.use(mutableConfig.storage)
             return config
