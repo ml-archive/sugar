@@ -22,4 +22,18 @@ public extension Date {
             to: self.startOfMonth()
         )!
     }
+
+    public func add(days: Int) -> Date {
+        return Calendar.current.date(
+            byAdding: DateComponents(day: days),
+            to: self
+        )!
+    }
+
+    public func sub(days: Int) -> Date {
+        return Calendar.current.date(
+            byAdding: DateComponents(day: -days),
+            to: self
+        )!
+    }
 }
