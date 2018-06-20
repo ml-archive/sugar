@@ -14,18 +14,17 @@ public enum AuthenticationError: String, Error {
 
 // MARK: - AbortError
 extension AuthenticationError: AbortError {
-
     /// See `AbortError.status`
     public var status: HTTPResponseStatus {
         switch self {
-        case .signingError                          : return .internalServerError
-        case .userNotFound                          : return .unauthorized
-        case .weakPassword                          : return .unprocessableEntity
-        case .usernameAlreadyExists                 : return .unprocessableEntity
-        case .incorrectPassword                     : return .unauthorized
-        case .incorrectOldPassword                  : return .unprocessableEntity
-        case .passwordWithoutUsernameOrOldPassword  : return .unprocessableEntity
-        case .malformedPayload                      : return .badRequest
+        case .signingError: return .internalServerError
+        case .userNotFound: return .unauthorized
+        case .weakPassword: return .unprocessableEntity
+        case .usernameAlreadyExists: return .unprocessableEntity
+        case .incorrectPassword: return .unauthorized
+        case .incorrectOldPassword: return .unprocessableEntity
+        case .passwordWithoutUsernameOrOldPassword: return .unprocessableEntity
+        case .malformedPayload: return .badRequest
         }
     }
 
