@@ -39,7 +39,7 @@ To allow third party packages to register their own Leaf tags, Sugar comes with 
 To have your package register the tags to the shared config, you can do the following:
 
 ```swift
-public func didBoot(_ container: Container) throws -> EventLoopFuture<Void> {
+public func didBoot(_ container: Container) throws -> Future<Void> {
     let tags: MutableLeafTagConfig = try container.make()
     tags.use(MyTag(), as: "mytag")
 
@@ -55,7 +55,7 @@ If you're using a package that uses the shared `MutableLeafTagConfig`, these tag
 public func boot(_ app: Application) throws {
     // Register Leaf tags using the shared config.
     // This allows third party packages to register their own tags.
-    let tags = try app.make(MutableLeafTagConfig.self)
+    let tags: MutableLeafTagConfig = try app.make()
     tags.use(MyAdditionalTag())
 }
 ```
