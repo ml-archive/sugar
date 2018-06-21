@@ -30,6 +30,40 @@ import Sugar
 
 This package contains a lot of misc. functionality that might not fit into it's own package or that would best to get PR'ed into Vapor. Some examples of what this package contains:
 
+### Mutable Leaf tag config
+
+To allow third party packages to register their own Leaf tags, Sugar comes with a `MutableLeafTagConfig`.
+
+#### How to use it in a package
+
+To have your package register the tags to the shared config, you can do the following:
+
+```swift
+public func didBoot(_ container: Container) throws -> Future<Void> {
+    let tags: MutableLeafTagConfig = try container.make()
+    tags.use(MyTag(), as: "mytag")
+
+    return .done(on: container)
+}
+```
+
+#### How to use it in a project
+
+If you're using a package that uses the shared `MutableLeafTagConfig`, these tags will become available in your project automatically. If you have additional tags you want to add, these has to be registered in `boot.swift` instead of `configure.swift` to allow the different providers to have registered their tags to the config first. Here's how you could do it:
+
+```swift
+public func boot(_ app: Application) throws {
+    // Register Leaf tags using the shared config.
+    // This allows third party packages to register their own tags.
+    let tags: MutableLeafTagConfig = try app.make()
+    tags.use(MyAdditionalTag())
+}
+```
+
+> You don't have to register `tags` when adding this in `boot.swift`.
+
+In the case where multiple packages is registering a tag using the same name, the tags can be added manually by defining your own name for the tags.
+
 ### Environment variables
 
 Access environment variables by writing
