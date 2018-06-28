@@ -86,7 +86,7 @@ This package contains a lot of convenience related to JWT, usernames and passwor
 
 Sugar contains a helper function for adding properties while excluding some specific ones. This makes it a bit more convenient if you want to only modify how a single one or a couple of fields gets prepared.
 
-```
+```swift
 extension MyModel: Migration {
     static func prepare(on connection: MySQLConnection) -> Future<Void> {
         return MySQLDatabase.create(self, on: connection) { builder in
