@@ -82,6 +82,21 @@ If you want to make your model seedable, you can conform it to `Seedable` and us
 
 This package contains a lot of convenience related to JWT, usernames and passwords which is used in [JWTKeychain](https://github.com/nodes-vapor/jwt-keychain) and [Admin Panel](https://github.com/nodes-vapor/admin-panel).
 
+### Migrations
+
+Sugar contains a helper function for adding properties while excluding some specific ones. This makes it a bit more convenient if you want to only modify how a single one or a couple of fields gets prepared.
+
+```
+extension MyModel: Migration {
+    static func prepare(on connection: MySQLConnection) -> Future<Void> {
+        return MySQLDatabase.create(self, on: connection) { builder in
+            try addProperties(to: builder, excluding: [\.title])
+            builder.field(for: \.title, type: .varchar(191))
+        }
+    }
+}
+```
+
 
 ## 🏆 Credits
 
