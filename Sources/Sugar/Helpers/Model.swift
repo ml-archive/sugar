@@ -27,8 +27,39 @@ public extension Model {
 
             var copy = self
             copy.fluentID = result.fluentID
+            copy.fluentCreatedAt = result.fluentCreatedAt
+            copy.fluentDeletedAt = result.fluentDeletedAt
 
             return copy.save(on: db)
+        }
+    }
+}
+
+extension Model where Database: SchemaSupporting {
+    public static func addProperties<T: Any>(
+        to builder: SchemaCreator<Self>,
+        excluding fields: [KeyPath<Self, T>]
+    ) throws {
+        guard let idProperty = try Self.reflectProperty(forKey: idKey) else {
+            throw FluentError(identifier: "idProperty", reason: "Unable to reflect ID property for `\(Self.self)`.")
+        }
+
+        let excludedProperties = fields.compactMap {
+            try? Self.reflectProperty(forKey: $0)?.path.first
+        }
+
+        let properties = try Self.reflectProperties(depth: 0).filter {
+            guard let first = $0.path.first else { return false }
+            return !excludedProperties.contains(first)
+        }
+        
+        for property in properties {
+            let field = Database.schemaField(
+                for: property.type,
+                isIdentifier: idProperty.path == property.path,
+                Database.queryField(.reflected(property, rootType: self))
+            )
+            Database.schemaFieldCreate(field, to: &builder.schema)
         }
     }
 }
