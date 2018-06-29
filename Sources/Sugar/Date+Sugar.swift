@@ -212,6 +212,23 @@ extension Date {
         let date = Calendar.current.date(byAdding: components, to: self.startOfMonth())
         return (date?.addingTimeInterval(-1))!
     }
+
+    /// Set hour/min/sec of a date
+    ///
+    /// Replaces `Calendar().date(bySettingHour hour: Int, minute: Int, ...)` which is not
+    /// running on Linux yet.
+    ///
+    /// - Parameters:
+    ///   - hour: Int
+    ///   - minute: Int
+    ///   - second: Int
+    /// - Returns: Date?
+    public func dateBySetting(hour: Int, minute: Int, second: Int) -> Date? {
+
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        guard let date = Calendar.current.date(from: dateComponents) else { return nil }
+        return date.addingTimeInterval(TimeInterval(hour.hourInSec + minute.minInSec + second))
+    }
     
     //MARK:  Custom parsers
     
