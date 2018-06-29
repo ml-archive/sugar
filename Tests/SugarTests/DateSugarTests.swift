@@ -83,6 +83,16 @@ class DateSugarTests: XCTestCase {
         let dateTimeStr = "2016-01-15 12:23:45"
         XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.addDays(30).toDateTimeString(), "2016-02-14 12:23:45")
     }
+
+    func testSetTimeForDate() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.dateBySetting(hour: 1, minute: 2, second: 3)!.toDateTimeString(), "2016-01-15 01:02:03")
+    }
+
+    func testSetTimeForDateOverflow() {
+        let dateTimeStr = "2016-01-15 12:23:45"
+        XCTAssertEqual(try Date.parse(.dateTime, dateTimeStr)?.dateBySetting(hour: 0, minute: 59, second: 61)!.toDateTimeString(), "2016-01-15 01:00:01")
+    }
     
     func testStartOfMonth() {
         let dateTimeStr = "2016-01-15 12:23:45"
@@ -268,6 +278,10 @@ class DateSugarTests: XCTestCase {
             ("testAddMultipleDays", testAddMultipleDays),
             ("testAddMultipleDaysOverMonth", testAddMultipleDaysOverMonth),
             ("testStartOfMonth", testStartOfMonth),
+
+            ("testSetTimeForDate", testSetTimeForDate),
+            ("testSetTimeForDateOverflow", testSetTimeForDateOverflow),
+
             /*
             ("testEndOfMonthVerySmall", testEndOfMonthVerySmall),
             ("testEndOfMonthLarge", testEndOfMonthLarge),
