@@ -22,26 +22,30 @@ public struct StrongPassword: Validator {
     internal let minLength: Int
     internal let minMatchingRegexes: Int
     internal let regexes: [String]
+    internal var errorDescription: String?
 
-    public init(minLength: Int = 6,
-                regexes: [String] = standardRegexes,
-                minMatchingRegexes: Int = 3) {
-
+    public init(
+        minLength: Int = 6,
+        regexes: [String] = standardRegexes,
+        minMatchingRegexes: Int = 3,
+        errorDescription: String? = nil)
+    {
         self.minLength = minLength
         self.regexes = regexes
         self.minMatchingRegexes = minMatchingRegexes
+        self.errorDescription = errorDescription
     }
 
     public func validate(_ input: String) throws {
 
         let matchingRegexesCount = regexes
-            .reduce(0, {$0 + ((input.range(of: $1, options: .regularExpression) == nil) ? 0 : 1) })
+            .reduce(0, {
+                $0 + ((input.range(of: $1, options: .regularExpression) == nil) ? 0 : 1)
+            })
 
-        guard
-            input.count >= minLength,
-            matchingRegexesCount >= minMatchingRegexes
-            else {
-                throw error("Password is not strong enough. It must be be at least \(minLength) characters long and contain a number, a capital letter and a small letter.")
+        guard input.count >= minLength, matchingRegexesCount >= minMatchingRegexes else {
+            throw error(errorDescription ??
+                "Password is not strong enough. It must be be at least \(minLength) characters long and contain \(minMatchingRegexes) of these: a number, a capital letter, a small letter or a special character.")
         }
     }
 }
