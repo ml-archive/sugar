@@ -21,7 +21,13 @@ class ValidatorsTests: XCTestCase {
         XCTAssertThrowsError(try StrongPassword().validate("p4ssw0rd"))  // Only two categories
         XCTAssertThrowsError(try StrongPassword().validate("Aa1!"))      // Three categories, but too short
         XCTAssertNoThrow(try StrongPassword().validate("p@ssw0rd"))      // Three categories, and long enough
-
+        XCTAssertNoThrow(try StrongPassword().validate("Qwer123"))      // Three categories, and long enough
+        XCTAssertThrowsError(try StrongPassword(minLength: 10).validate("Qwer123"))      // Too short
+        XCTAssertNoThrow(try StrongPassword(minMatchingRegexes: 3).validate("Qwer123"))      // 3/3 should work
+        XCTAssertNoThrow(try StrongPassword(minMatchingRegexes: 2).validate("123_pp"))      // 2/3 should work
+        XCTAssertNoThrow(try StrongPassword(minMatchingRegexes: 1).validate("!234DD"))      // 1/3 should work
+        XCTAssertThrowsError(try StrongPassword(minMatchingRegexes: 4).validate("werQ1c"))  // 4/3 should not work
+        XCTAssertThrowsError(try StrongPassword(regexes: [StrongPassword.specialCharRegex], minMatchingRegexes: 4).validate("aA1🔥🔥🔥"))  // Emoji as special char
     }
 
     func testThatURLValidatorWorks() {
