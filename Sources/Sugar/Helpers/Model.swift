@@ -11,13 +11,13 @@ public extension Model {
             .unwrap(or: Abort(.notFound, reason: "\(Self.self) with id \(id) not found"))
     }
 
-    public func saveOrUpdate<T>(
-        given values: [KeyPath<Self, T>: T],
+    public func saveOrUpdate (
+        given values: [Self.Database.QueryFilter],
         on db: DatabaseConnectable
-    ) throws -> Future<Self> where T: Encodable {
+    ) throws -> Future<Self> {
         var query = Self.query(on: db)
-        for (field, value) in values {
-            query = query.filter(field == value)
+        for value in values {
+            query = query.filter(value)
         }
 
         return query.first().flatMap(to: Self.self) { result in
