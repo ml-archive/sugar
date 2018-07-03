@@ -42,6 +42,20 @@ public extension Date {
         )
     }
 
+    public func add(hours: Int) -> Date? {
+        return Calendar.current.date(
+            byAdding: DateComponents(hour: hours),
+            to: self
+        )
+    }
+
+    public func sub(hours: Int) -> Date? {
+        return Calendar.current.date(
+            byAdding: DateComponents(hour: -hours),
+            to: self
+        )
+    }
+
     /// Set hour/min/sec of a date
     ///
     /// Replaces `Calendar().date(bySettingHour hour: Int, minute: Int, ...)` which is not
