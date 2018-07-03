@@ -14,7 +14,7 @@ public final class SimpleAuthMiddleware: Middleware {
 
         guard
             let header = request.auth.header,
-            header.string == token
+            header.string == ("Bearer \(token)")
         else {
             throw Abort.unauthorized
         }
