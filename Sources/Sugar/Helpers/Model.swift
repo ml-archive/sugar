@@ -12,12 +12,12 @@ public extension Model {
     }
 
     public func saveOrUpdate (
-        given values: [Self.Database.QueryFilter],
+        given filters: [Self.Database.QueryFilter],
         on db: DatabaseConnectable
     ) throws -> Future<Self> {
         var query = Self.query(on: db)
-        for value in values {
-            query = query.filter(value)
+        for filter in filters {
+            query = query.filter(filter)
         }
 
         return query.first().flatMap(to: Self.self) { result in
