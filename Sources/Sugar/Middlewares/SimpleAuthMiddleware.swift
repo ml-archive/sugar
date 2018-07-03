@@ -2,7 +2,7 @@ import HTTP
 import Vapor
 import AuthProvider
 
-internal final class SimpleAuthMiddleware: Middleware {
+final class SimpleAuthMiddleware: Middleware {
     private let token: String
 
     internal init(token: String) {
