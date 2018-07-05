@@ -10,7 +10,6 @@ public final class SimpleAuthMiddleware: Middleware {
     }
 
     public func respond(to request: Request, chainingTo next: Responder) throws -> Response {
-        let resp = try next.respond(to: request)
 
         guard
             let header = request.auth.header,
@@ -19,6 +18,6 @@ public final class SimpleAuthMiddleware: Middleware {
             throw Abort.unauthorized
         }
 
-        return resp
+        return try next.respond(to: request)
     }
 }
