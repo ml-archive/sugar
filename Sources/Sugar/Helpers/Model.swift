@@ -36,23 +36,20 @@ public extension Model {
 }
 
 extension Model where Database: SchemaSupporting {
-    public static func addProperties<T: Any>(
+    public static func addProperties(
         to builder: SchemaCreator<Self>,
-        excluding fields: [KeyPath<Self, T>]
+        excluding excludedProperties: [ReflectedProperty?]
     ) throws {
         guard let idProperty = try Self.reflectProperty(forKey: idKey) else {
             throw FluentError(identifier: "idProperty", reason: "Unable to reflect ID property for `\(Self.self)`.")
         }
 
-        let excludedProperties = fields.compactMap {
-            try? Self.reflectProperty(forKey: $0)?.path.first
+        let properties = try Self.reflectProperties(depth: 0).filter { property in
+            !excludedProperties.contains { excludedProperty in
+                property.path == excludedProperty?.path
+            }
         }
 
-        let properties = try Self.reflectProperties(depth: 0).filter {
-            guard let first = $0.path.first else { return false }
-            return !excludedProperties.contains(first)
-        }
-        
         for property in properties {
             let field = Database.schemaField(
                 for: property.type,
@@ -61,5 +58,15 @@ extension Model where Database: SchemaSupporting {
             )
             Database.schemaFieldCreate(field, to: &builder.schema)
         }
+    }
+
+    public static func addProperties<T: Any>(
+        to builder: SchemaCreator<Self>,
+        excluding excludedKeyPaths: [KeyPath<Self, T>]
+    ) throws {
+        let excludedProperties = excludedKeyPaths
+            .compactMap { try? Self.reflectProperty(forKey: $0) }
+
+        try addProperties(to: builder, excluding: excludedProperties)
     }
 }
