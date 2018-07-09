@@ -13,9 +13,12 @@ public extension Model {
 
     public func saveOrUpdate (
         given filters: [Self.Database.QueryFilter],
+        withSoftDeleted: Bool = false,
+        restore: Bool = false,
         on db: DatabaseConnectable
     ) throws -> Future<Self> {
-        var query = Self.query(on: db)
+        var query = Self.query(on: db, withSoftDeleted: withSoftDeleted)
+
         for filter in filters {
             query = query.filter(filter)
         }
@@ -30,7 +33,13 @@ public extension Model {
             copy.fluentCreatedAt = result.fluentCreatedAt
             copy.fluentDeletedAt = result.fluentDeletedAt
 
-            return copy.save(on: db)
+            let future = copy.update(on: db)
+
+            guard restore else {
+                return future
+            }
+
+            return future.flatMap { $0.restore(on: db) }
         }
     }
 }
