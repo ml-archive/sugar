@@ -10,6 +10,7 @@ public enum AuthenticationError: String, Error {
     case incorrectOldPassword
     case passwordWithoutUsernameOrOldPassword
     case malformedPayload
+    case missingToken
 }
 
 // MARK: - AbortError
@@ -25,6 +26,7 @@ extension AuthenticationError: AbortError {
         case .incorrectOldPassword: return .unprocessableEntity
         case .passwordWithoutUsernameOrOldPassword: return .unprocessableEntity
         case .malformedPayload: return .badRequest
+        case .missingToken: return .unauthorized
         }
     }
 
@@ -47,6 +49,8 @@ extension AuthenticationError: AbortError {
             return "Password should only be provided when updating it or updating the username."
         case .malformedPayload:
             return "Malformed JWT payload received."
+        case .missingToken:
+            return "Could not find a Bearer token."
         }
     }
 }

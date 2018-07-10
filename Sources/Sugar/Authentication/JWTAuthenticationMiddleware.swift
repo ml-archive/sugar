@@ -33,7 +33,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
         }
 
         guard let bearer = req.http.headers.bearerAuthorization else {
-            return try next.respond(to: req)
+            throw AuthenticationError.missingToken
         }
 
         let jwt: JWT<A.JWTPayload>

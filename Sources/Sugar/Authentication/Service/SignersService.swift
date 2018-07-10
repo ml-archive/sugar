@@ -8,6 +8,11 @@ public final class SignersService: Service {
         self.storage = signers
     }
     
+    /// Create a new empty collection of `ExpireableJWTSigner`
+    public init() {
+        self.storage = [:]
+    }
+    
     /// Gets an instance of `ExpireableJWTSigner` parsed from the value associated with the `key`
     ///
     /// - Parameter key: key to retrieve
