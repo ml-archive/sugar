@@ -9,13 +9,15 @@ import Vapor
 /// Authentication is skipped if authentication has already occurred, e.g. in a previous middleware.
 public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middleware {
     let shouldAuthenticate: Bool
+    let signerKey: String
 
     /// Creates a new JWT Authentication Middleware
     ///
     /// - Parameters:
     ///   - shouldAuthenticate: whether full authentication (which usually includes a database
     ///     query) should be performed
-    public init(shouldAuthenticate: Bool = true) {
+    public init(using key: String, shouldAuthenticate: Bool = true) {
+        self.signerKey = key
         self.shouldAuthenticate = shouldAuthenticate
     }
 
@@ -36,8 +38,8 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
 
         let jwt: JWT<A.JWTPayload>
         do {
-            let signerService = try req.make(SignerService.self)
-            jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signerService.signer)
+            let signers = try req.make(SignersService.self)
+            jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signers.require(self.signerKey).signer)
         } catch let error as JWTError where error.identifier == "exp" {
             return try Future
                 .transform(to: HTTPResponse.init(status: .unauthorized), on: req)
