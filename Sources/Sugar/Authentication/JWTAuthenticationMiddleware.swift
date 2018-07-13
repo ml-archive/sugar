@@ -14,6 +14,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
     /// Creates a new JWT Authentication Middleware
     ///
     /// - Parameters:
+    ///   - key: the key of the signer you want to use
     ///   - shouldAuthenticate: whether full authentication (which usually includes a database
     ///     query) should be performed
     public init(using key: String, shouldAuthenticate: Bool = true) {

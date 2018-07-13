@@ -42,7 +42,7 @@ public final class SignersService: Service {
     ///
     /// - Parameter key: key to retrieve
     /// - Returns: A `ExpireableJWTSigner`
-    /// - Throws: SignerServiceError if key not exists
+    /// - Throws: SignerServiceError if key does not exist
     public func require(_ key: String) throws -> ExpireableJWTSigner {
         guard let signer = self.get(key) else {
             throw SignerServiceError(identifier: "unknownKID", reason: "No \(ExpireableJWTSigner.self) are available for the supplied `key`", status: .internalServerError)

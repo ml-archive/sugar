@@ -1,10 +1,3 @@
-//
-//  SignerService.swift
-//  Sugar
-//
-//  Created by Gustavo Perdomo on 6/9/18.
-//
-
 import Debugging
 import Vapor
 
