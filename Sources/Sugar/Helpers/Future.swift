@@ -47,3 +47,35 @@ public extension Future where Expectation: Equatable {
         }
     }
 }
+
+public func syncFlatten<T>(futures: [LazyFuture<T>], on worker: Worker) -> Future<[T]> {
+    let promise = worker.eventLoop.newPromise([T].self)
+
+    var results: [T] = []
+
+    var iterator = futures.makeIterator()
+    func handle(_ future: LazyFuture<T>) {
+        do {
+            try future().do { res in
+                results.append(res)
+                if let next = iterator.next() {
+                    handle(next)
+                } else {
+                    promise.succeed(result: results)
+                }
+                }.catch { error in
+                    promise.fail(error: error)
+            }
+        } catch {
+            promise.fail(error: error)
+        }
+    }
+
+    if let first = iterator.next() {
+        handle(first)
+    } else {
+        promise.succeed(result: results)
+    }
+
+    return promise.futureResult
+}
