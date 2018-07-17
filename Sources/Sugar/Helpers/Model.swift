@@ -12,7 +12,7 @@ public extension Model {
     }
 
     public func saveOrUpdate (
-        given filters: [Self.Database.QueryFilter],
+        given filters: [FilterOperator<Self.Database, Self>],
         withSoftDeleted: Bool = false,
         restore: Bool = false,
         on db: DatabaseConnectable
