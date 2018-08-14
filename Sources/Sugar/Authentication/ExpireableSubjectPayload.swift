@@ -15,6 +15,6 @@ extension ExpireableSubjectPayload {
 
     /// See `JWTVerifiable.verify`
     func verify() throws {
-        try exp.verify()
+        try exp.verifyNotExpired()
     }
 }
