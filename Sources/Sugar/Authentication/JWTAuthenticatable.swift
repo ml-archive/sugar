@@ -45,7 +45,7 @@ extension JWTAuthenticatable {
     ) throws -> Future<String> {
         return try makePayload(expirationTime: currentTime + signer.expirationPeriod, on: container)
             .map(to: String?.self) {
-                var jwt = JWT(payload: $0)
+                let jwt = JWT(payload: $0)
                 return try String(bytes: jwt.sign(using: signer.signer), encoding: .utf8)
             }.unwrap(or: AuthenticationError.signingError)
     }
