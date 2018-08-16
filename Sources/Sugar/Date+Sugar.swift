@@ -6,7 +6,7 @@ extension Date {
     public enum Error: Swift.Error {
         case couldNotParse
     }
-    
+
     // MARK: Formats
     public enum Format: String {
         case dateTime = "yyyy-MM-dd HH:mm:ss"
@@ -24,15 +24,15 @@ extension Date {
         case friday
         case saturday
     }
-    
+
     // MARK: Manipulators
 
     /// Next
     /// Returns the next `weekday` starting from the provided date.
     ///
     /// - Returns: Date
-    public func next(weekday targetWeekday: Weekday) throws -> Date {
-        let components = Calendar(identifier: .gregorian).dateComponents([.weekday], from: self)
+    public func next(weekday targetWeekday: Weekday, calendar: Calendar = .current) throws -> Date {
+        let components = calendar.dateComponents([.weekday], from: self)
         guard let currentWeekday = components.weekday else {
             throw Abort.serverError
         }
@@ -42,175 +42,153 @@ extension Date {
             delta += 7
         }
 
-        return self.addDays(delta)
+        return addDays(delta)
     }
 
     /// Start of week
     /// Take you to monday 00:00:00 current week
     ///
     /// - Returns: Date
-    public func startOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
-	var calendar = calendar
-	calendar.firstWeekday = Weekday.monday.rawValue
-        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.startOfDay())
+    public func startOfWeek(calendar: Calendar = .current) -> Date {
+        var calendar = calendar
+        calendar.firstWeekday = Weekday.monday.rawValue
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
         components.weekday = Weekday.monday.rawValue
         let startOfWeek = calendar.date(from: components)!
         return startOfWeek
     }
-    
-    
+
     /// End of week
     /// Take you to sunday 23:59:59 current week
     ///
     /// - Returns: Date
-    public func endOfWeek(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
+    public func endOfWeek(calendar: Calendar = .current) -> Date {
         var calendar = calendar
         calendar.firstWeekday = Weekday.monday.rawValue
-        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self.endOfDay())
+        var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
         components.weekday = Weekday.sunday.rawValue
-        let startOfWeek = calendar.date(from: components)!
-        return startOfWeek.endOfDay()
+        let endOfWeek = calendar.date(from: components)!
+        return endOfWeek.endOfDay(calendar: calendar)
     }
-    
+
     /// Sub month
     ///
     /// - Returns: Date
-    public func subMonth() -> Date {
-        var components = DateComponents()
-        components.month = -1
-        let date = Calendar.current.date(byAdding: components, to: self)
-        return date!
+    public func subMonth(calendar: Calendar = .current) -> Date {
+        return subMonths(1, calendar: calendar)
     }
-    
+
     /// Sub months
     ///
     /// - Parameter months: Int
     /// - Returns: Date
-    public func subMonths(_ months: Int) -> Date {
-        var components = DateComponents()
-        components.month = -months
-        let date = Calendar.current.date(byAdding: components, to: self)
-        return date!
+    public func subMonths(_ months: Int, calendar: Calendar = .current) -> Date {
+        return addMonths(-months, calendar: calendar)
     }
-    
+
     /// Add month
     ///
     /// - Returns: Date
-    public func addMonth() -> Date {
-        var components = DateComponents()
-        components.month = 1
-        let date = Calendar.current.date(byAdding: components, to: self)
-        return date!
+    public func addMonth(calendar: Calendar = .current) -> Date {
+        return addMonths(1, calendar: calendar)
     }
-    
+
     /// Add months
     ///
     /// - Parameter months: Int
     /// - Returns: Date
-    public func addMonths(_ months: Int) -> Date {
-        var components = DateComponents()
-        components.month = months
-        let date = Calendar.current.date(byAdding: components, to: self)
-        return date!
+    public func addMonths(_ months: Int, calendar: Calendar = .current) -> Date {
+        return calendar.date(byAdding: .init(month: months), to: self)!
     }
-    
+
     /// Add days
     ///
     /// - Parameter days: Int
     /// - Returns: Date
-    public func addDays(_ days: Int) -> Date {
-        return self.addingTimeInterval(TimeInterval(days.dayInSec))
+    public func addDays(_ days: Int, calendar: Calendar = .current) -> Date {
+        return calendar.date(byAdding: .init(day: days), to: self)!
     }
-    
+
     /// Add day
     ///
     /// - Returns: Date
-    public func addDay() -> Date {
-        return self.addingTimeInterval(TimeInterval(1.dayInSec))
+    public func addDay(calendar: Calendar = .current) -> Date {
+        return addDays(1, calendar: calendar)
     }
-    
+
     /// Sub days
     ///
     /// - Parameter days: Int
     /// - Returns: Date
-    public func subDays(_ days: Int) -> Date {
-        return self.addingTimeInterval(TimeInterval(-days.dayInSec))
+    public func subDays(_ days: Int, calendar: Calendar = .current) -> Date {
+        return addDays(-days, calendar: calendar)
     }
-    
+
     /// Sub day
     ///
     /// - Returns: Date
-    public func subDay() -> Date {
-        return self.addingTimeInterval(TimeInterval(-1.dayInSec))
+    public func subDay(calendar: Calendar = .current) -> Date {
+        return subDays(1, calendar: calendar)
     }
-    
+
     /// Add weeks
     ///
     /// - Parameter weeks: Int
     /// - Returns: Date
-    public func addWeeks(_ weeks: Int) -> Date {
-        return self.addingTimeInterval(TimeInterval(weeks.weekInSec))
+    public func addWeeks(_ weeks: Int, calendar: Calendar = .current) -> Date {
+        return addDays(weeks * 7, calendar: calendar)
     }
-    
+
     /// Add week
     ///
     /// - Returns: Date
-    public func addWeek() -> Date {
-        return self.addingTimeInterval(TimeInterval(1.weekInSec))
+    public func addWeek(calendar: Calendar = .current) -> Date {
+        return addWeeks(1, calendar: calendar)
     }
-    
+
     /// Sub week
     ///
     /// - Returns: Date
-    public func subWeek() -> Date {
-        return self.addingTimeInterval(TimeInterval(-1.weekInSec))
+    public func subWeek(calendar: Calendar = .current) -> Date {
+        return subWeeks(1, calendar: calendar)
     }
-    
+
     /// Sub weeks
     ///
     /// - Parameter weeks: Int
     /// - Returns: Date
-    public func subWeeks(_ weeks: Int) -> Date {
-        return self.addingTimeInterval(TimeInterval(-weeks.weekInSec))
+    public func subWeeks(_ weeks: Int, calendar: Calendar = .current) -> Date {
+        return addWeeks(-weeks, calendar: calendar)
     }
-    
+
     /// Start of day
     ///
     /// - Returns: Date
-    public func startOfDay(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
-        let unitFlags = Set<Calendar.Component>([.year, .month, .day])
-        let components = calendar.dateComponents(unitFlags, from: self)
+    public func startOfDay(calendar: Calendar = .current) -> Date {
+        let components = calendar.dateComponents([.year, .month, .day], from: self)
         return calendar.date(from: components)!
     }
-    
+
     /// End of day
     ///
     /// - Returns: Date
-    public func endOfDay(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
-        var components = DateComponents()
-        components.day = 1
-        let date = calendar.date(byAdding: components, to: self.startOfDay())
-        return (date?.addingTimeInterval(-1))!
+    public func endOfDay(calendar: Calendar = .current) -> Date {
+        return calendar.date(byAdding: .init(day: 1, second: -1), to: startOfDay())!
     }
-    
-    
+
     /// Start of month
     ///
     /// - Returns: Date
-    public func startOfMonth(calendar: Calendar = Calendar(identifier: .gregorian)) -> Date {
-        let unitFlags = Set<Calendar.Component>([.year, .month])
-        let components = calendar.dateComponents(unitFlags, from: self)
+    public func startOfMonth(calendar: Calendar = .current) -> Date {
+        let components = calendar.dateComponents([.year, .month], from: self)
         return calendar.date(from: components)!
     }
-    
+
     /// End of month
     ///
     /// - Returns: Date
-    public func endOfOfMonth() -> Date {
-        var components = DateComponents()
-        components.month = 1
-        let date = Calendar.current.date(byAdding: components, to: self.startOfMonth())
-        return (date?.addingTimeInterval(-1))!
+    public func endOfOfMonth(calendar: Calendar = .current) -> Date {
+        return calendar.date(byAdding: .init(month: 1, second: -1), to: startOfMonth())!
     }
 
     /// Set hour/min/sec of a date
@@ -223,16 +201,16 @@ extension Date {
     ///   - minute: Int
     ///   - second: Int
     /// - Returns: Date?
-    public func dateBySetting(hour: Int, minute: Int, second: Int) -> Date? {
-
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        guard let date = Calendar.current.date(from: dateComponents) else { return nil }
-        return date.addingTimeInterval(TimeInterval(hour.hourInSec + minute.minInSec + second))
+    public func dateBySetting(hour: Int, minute: Int, second: Int, calendar: Calendar = .current) -> Date? {
+        var components = calendar.dateComponents([.year, .month, .day], from: self)
+        components.hour = hour
+        components.minute = minute
+        components.second = second
+        return calendar.date(from: components)
     }
-    
+
     //MARK:  Custom parsers
-    
-    
+
     /// Parse
     ///
     /// - Parameters:
@@ -241,15 +219,14 @@ extension Date {
     /// - Returns: Date?
     public static func parse(_ format: String, _ date: String, timezone: String? = nil, formatter: DateFormatter = DateFormatter()) -> Date? {
         formatter.dateFormat = format
-        
+
         if let timezone = timezone {
             formatter.timeZone = TimeZone(identifier: timezone)
         }
-        
+
         return formatter.date(from: date)
     }
-    
-    
+
     /// Parse or fail, if you want a parse error if parsing fails
     ///
     /// - Parameters:
@@ -259,34 +236,33 @@ extension Date {
     /// - Throws: Parse error
     public static func parseOrFail(_ format: String, _ date: String, timezone: String? = nil) throws -> Date {
         let dateOptional = parse(format, date, timezone: timezone)
-        
+
         guard let date = dateOptional else {
             throw Error.couldNotParse
         }
-        
+
         return date
     }
-    
-    
+
     /// Parse wit fallback
     ///
-    /// - Parameter 
+    /// - Parameter
     ///   - format: String fx: yyyy-MM-dd
     ///   - date: String
     ///   - fallback: Fallback Date
     /// - Returns: Date
     public static func parse(_ format: String, _ date: String, _ fallback: Date, timezone: String? = nil) -> Date {
         let dateOptional = parse(format, date, timezone: timezone)
-        
+
         guard let date = dateOptional else {
             return fallback
         }
-        
+
         return date
     }
-    
+
     //MARK: Enum parsers
-    
+
     /// Parse from Format
     ///
     /// - Parameters:
@@ -296,8 +272,7 @@ extension Date {
     public static func parse(_ format: Format, _ date: String, timezone: String? = nil) -> Date? {
         return parse(format.rawValue, date, timezone: timezone)
     }
-    
-    
+
     /// Parse or Fail
     /// Should be used if you want a parse error if parsing failed
     ///
@@ -308,8 +283,7 @@ extension Date {
     public static func parseOrFail(_ format: Format, _ date: String, timezone: String? = nil) throws -> Date {
         return try parseOrFail(format.rawValue, date, timezone: timezone)
     }
-    
-    
+
     /// Parse from Format with fallback
     ///
     /// - Parameters:
@@ -320,10 +294,9 @@ extension Date {
     public static func parse(_ format: Format, _ date: String, _ fallback: Date, timezone: String? = nil) -> Date {
         return parse(format.rawValue, date, fallback, timezone: timezone)
     }
-    
 
     //MARK: Formatters
-    
+
     /// To argument format
     ///
     /// - Parameter format: String fx: yyyy-MM-dd
@@ -331,15 +304,14 @@ extension Date {
     /// - Throws: Error
     public func to(_ format: String, timezone: String? = nil, formatter: DateFormatter = DateFormatter()) throws -> String {
         formatter.dateFormat = format
-        
+
         if let timezone = timezone {
             formatter.timeZone = TimeZone(identifier: timezone)
         }
-        
+
         return formatter.string(from: self)
     }
-    
-    
+
     /// To argument format
     ///
     /// - Parameter format: Format
@@ -348,120 +320,114 @@ extension Date {
     public func to(_ format: Format, timezone: String? = nil) throws -> String {
         return try to(format.rawValue, timezone: timezone)
     }
-    
-    
+
     /// Format date To DateTime (MySQL)
     /// Format: yyyy-MM-dd HH:mm:ss
     ///
     /// - Returns: String
     /// - Throws: Error
     public func toDateTimeString(timezone: String? = nil) throws -> String {
-        return try self.to(.dateTime, timezone: timezone)
+        return try to(.dateTime, timezone: timezone)
     }
-    
+
     /// Format date To Date (MySQL)
     /// Format: yyyy-MM-dd
     ///
     /// - Returns: String
     /// - Throws: Error
     public func toDateString(timezone: String? = nil) throws -> String {
-        return try self.to(.date, timezone: timezone)
+        return try to(.date, timezone: timezone)
     }
-    
-    //MARK:  compares
-    
-    
+
+    //MARK: Comparisons
+
     /// Is past or now
     ///
     /// - Returns: Bool
     public func isPastOrNow() -> Bool {
-        return self.isPast() || self.isNow()
+        return isPast() || isNow()
     }
-    
-    
+
     /// Is past
     ///
     /// - Returns: Bool
     public func isPast() -> Bool {
-        return self.compare(Date()).rawValue < 0
+        return compare(Date()).rawValue < 0
     }
-    
-    
+
     /// Is future or now
     ///
     /// - Returns: Bool
     public func isFutureOrNow() -> Bool {
-        return self.isFuture() || self.isNow()
+        return isFuture() || isNow()
     }
-    
-    
+
     /// Is Now
     ///
     /// - Returns: Bool
-    public func isNow(timezone: String? = nil) -> Bool {
-        do {
-            try print(self.toDateTimeString(timezone: timezone))
-            try print(Date().toDateTimeString(timezone: timezone))
-        } catch {
-            
-        }
-        return self.isEqual(Date())
+    public func isNow() -> Bool {
+        return isEqual(Date())
     }
-    
-    
+
+    /// Is Now
+    ///
+    /// - Returns: Bool
+    @available(*, deprecated)
+    public func isNow(timezone: String?) -> Bool {
+        return isNow()
+    }
+
     /// Is in future
     ///
     /// - Returns: Bool
     public func isFuture() -> Bool {
-        return self.compare(Date()).rawValue > 0
+        return compare(Date()).rawValue > 0
     }
-    
+
     /// Is after or equal
     ///
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isAfterOrEqual(_ date: Date) -> Bool {
-        return self.isAfter(date) || isEqual(date)
+        return isAfter(date) || isEqual(date)
     }
-    
+
     /// Is After
     ///
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isAfter(_ date: Date) -> Bool {
-        return self.compare(date).rawValue > 0
+        return compare(date).rawValue > 0
     }
-    
+
     /// Is before or equal
     ///
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isBeforeOrEqual(_ date: Date) -> Bool {
-        return self.isBefore(date) || self.isEqual(date)
+        return isBefore(date) || isEqual(date)
     }
-    
-    
+
     /// Is Before
     ///
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isBefore(_ date: Date) -> Bool {
-        return self.compare(date).rawValue < 0
+        return compare(date).rawValue < 0
     }
-    
+
     /// is Euqal
     ///
     /// - Parameter date: Date
     /// - Returns: Bool
     public func isEqual(_ date: Date) -> Bool {
-        return self.compare(date).rawValue == 0
+        return compare(date).rawValue == 0
     }
- 
-    
+
     /// Make a copy
     ///
     /// - Returns: Date
     public func copy() -> Date {
-        return Date(timeIntervalSince1970: self.timeIntervalSince1970)
+        return Date(timeIntervalSince1970: timeIntervalSince1970)
     }
 }
