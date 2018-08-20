@@ -4,7 +4,7 @@ extension RedisClient {
     public func expire(_ key: String, after deadline: Int) -> Future<Int> {
         let resp = command("EXPIRE", [RedisData(bulk: key), RedisData(bulk: "\(deadline)")]).map(to: Int.self) { data in
             guard let value = data.int else {
-                throw RedisError(identifier: "expire", reason: "Could not convert resp to int", source: .capture())
+                throw RedisError(identifier: "expire", reason: "Could not convert response to int")
             }
 
             return value
