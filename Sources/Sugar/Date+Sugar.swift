@@ -165,8 +165,7 @@ extension Date {
     ///
     /// - Returns: Date
     public func startOfDay(calendar: Calendar = .current) -> Date {
-        let components = calendar.dateComponents([.year, .month, .day], from: self)
-        return calendar.date(from: components)!
+        return calendar.startOfDay(for: self)
     }
 
     /// End of day
