@@ -31,3 +31,5 @@ extension Future {
             }
     }
 }
+
+extension Either: Equatable where L: Equatable, R: Equatable {}
