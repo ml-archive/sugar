@@ -32,4 +32,19 @@ extension Future {
     }
 }
 
-extension Either: Equatable where L: Equatable, R: Equatable {}
+extension Either: Equatable where L: Equatable, R: Equatable {
+    #if swift(>=4.2)
+        // automatically synthesized in swift 4.2
+    #else
+    public static func == (lhs: Either<L, R>, rhs: Either<L, R>) -> Bool {
+        switch (lhs, rhs) {
+        case (.left(let lhs), .left(let rhs)) where lhs == rhs:
+            return true
+        case (.right(let lhs), .right(let rhs)) where lhs == rhs:
+            return true
+        default:
+            return false
+        }
+    }
+    #endif
+}
