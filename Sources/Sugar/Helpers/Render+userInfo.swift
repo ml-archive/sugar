@@ -64,7 +64,7 @@ extension TagContext {
     }
 }
 
-private let requestUserInfoKey = "_submissions:request"
+private let requestUserInfoKey = "_sugar:request"
 
 // MARK: - Error
 
