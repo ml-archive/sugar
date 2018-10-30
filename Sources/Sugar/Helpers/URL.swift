@@ -8,7 +8,7 @@ public extension URL {
 
         let currentItems = components.queryItems ?? []
         components.queryItems = currentItems + item
-        return components.url
+        return components.url ?? self
     }
 
     public func addQueryItems(from url: URL) -> URL {
