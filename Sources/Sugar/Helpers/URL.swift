@@ -13,7 +13,7 @@ public extension URL {
 
     public func addQueryItems(from url: URL) -> URL {
         guard
-            let items = URLComponents(url: URL, resolvingAgainstBaseURL: false)?.queryItems
+            let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems
         else {
             return self
         }
