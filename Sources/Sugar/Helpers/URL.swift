@@ -1,7 +1,7 @@
 import Foundation
 
 public extension URL {
-    public func addQueryItems(_ item: [URLQueryItem]) -> URL? {
+    public func addQueryItems(_ item: [URLQueryItem]) -> URL {
         guard var components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
             return nil
         }
