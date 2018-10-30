@@ -5,7 +5,7 @@ public final class CurrentUserProvider<U: Authenticatable>: Provider {
     public init() {}
 
     public func register(_ services: inout Services) throws {
-        services.register { container in
+        services.register { _ in
             return CurrentUserContainer<U>()
         }
     }

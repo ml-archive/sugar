@@ -70,6 +70,8 @@ public extension Date {
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
         guard let date = Calendar.current.date(from: dateComponents) else { return nil }
-        return date.addingTimeInterval(TimeInterval(hour * Date.hourInSec + minute * Date.minInSec + second))
+        return date.addingTimeInterval(
+            TimeInterval(hour * Date.hourInSec + minute * Date.minInSec + second)
+        )
     }
 }
