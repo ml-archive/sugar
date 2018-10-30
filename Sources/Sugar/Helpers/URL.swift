@@ -11,7 +11,7 @@ public extension URL {
         return components.url
     }
 
-    public func addQueryItems(from URL: URL) -> URL? {
+    public func addQueryItems(from url: URL) -> URL {
         guard
             let items = URLComponents(url: URL, resolvingAgainstBaseURL: false)?.queryItems
         else {
