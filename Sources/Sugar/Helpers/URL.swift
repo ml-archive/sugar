@@ -15,7 +15,7 @@ public extension URL {
         guard
             let items = URLComponents(url: URL, resolvingAgainstBaseURL: false)?.queryItems
         else {
-            return nil
+            return self
         }
 
         return addQueryItems(items)
