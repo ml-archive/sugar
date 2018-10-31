@@ -50,7 +50,10 @@ extension Model where Database: SchemaSupporting {
         excluding excludedProperties: [ReflectedProperty?]
     ) throws {
         guard let idProperty = try Self.reflectProperty(forKey: idKey) else {
-            throw FluentError(identifier: "idProperty", reason: "Unable to reflect ID property for `\(Self.self)`.")
+            throw FluentError(
+                identifier: "idProperty",
+                reason: "Unable to reflect ID property for `\(Self.self)`."
+            )
         }
 
         let properties = try Self.reflectProperties(depth: 0).filter { property in

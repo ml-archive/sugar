@@ -20,7 +20,7 @@ public struct Payload: ExpireableSubjectPayload {
         self.exp = exp
         self.sub = sub
     }
-    
+
     /// See `JWTVerifiable`
     public func verify(using signer: JWTSigner) throws {
         try exp.verifyNotExpired()

@@ -36,7 +36,7 @@ extension ViewRenderer {
         userInfo: [AnyHashable: Any] = [:],
         on req: Request
     ) -> Future<View> {
-        return render(path, Dictionary<String, String>(), userInfo: userInfo, on: req)
+        return render(path, [String: String](), userInfo: userInfo, on: req)
     }
 }
 
