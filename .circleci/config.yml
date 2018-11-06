@@ -11,6 +11,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            export HOMEBREW_NO_AUTO_UPDATE=1
             brew tap vapor/homebrew-tap
             brew install cmysql
             brew install ctls
@@ -47,21 +48,10 @@ jobs:
           name: Copy Package File
           command: cp Package.swift res
       - run:
-          name: Install dependencies
-          command: |
-            git clone https://github.com/danger/danger-swift.git
-            cd danger-swift
-            make install
-            npm install -g danger
-      - run:
           name: Build and Run Tests
           no_output_timeout: 1800
           command: |
             swift test -Xswiftc -DNOJSON
-      - run:
-          name: Run Danger
-          command: |
-            danger-swift ci
       - run:
           name: Restoring Package File
           command: mv res Package.swift
