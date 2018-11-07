@@ -1,37 +1,17 @@
-import Foundation
-
-public extension Int {
-    public var minsInSecs: Int {
+public extension Numeric {
+    public var minsInSecs: Self {
         return self * 60
     }
 
-    public var hoursInSecs: Int {
+    public var hoursInSecs: Self {
         return self.minsInSecs * 60
     }
 
-    public var daysInSecs: Int {
+    public var daysInSecs: Self {
         return self.hoursInSecs * 24
     }
 
-    public var weeksInSecs: Int {
-        return self.daysInSecs * 7
-    }
-}
-
-public extension TimeInterval {
-    public var minsInSecs: TimeInterval {
-        return self * 60
-    }
-
-    public var hoursInSecs: TimeInterval {
-        return self.minsInSecs * 60
-    }
-
-    public var daysInSecs: TimeInterval {
-        return self.hoursInSecs * 24
-    }
-
-    public var weeksInSecs: TimeInterval {
+    public var weeksInSecs: Self {
         return self.daysInSecs * 7
     }
 }
