@@ -1,6 +1,8 @@
 import XCTest
-@testable import SugarTests
 
-XCTMain([
-     testCase(SugarTests.allTests),
-])
+import SugarTests
+
+var tests = [XCTestCaseEntry]()
+tests += SugarTests.__allTests()
+
+XCTMain(tests)
