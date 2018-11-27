@@ -9,10 +9,6 @@ public extension Environment {
         return ProcessInfo.processInfo.environment[key] ?? fallback
     }
 
-    public static func get(_ key: String) -> String? {
-        return ProcessInfo.processInfo.environment[key]
-    }
-
     public static func assertGet(_ key: String) throws -> String {
         guard let value = Environment.get(key) else {
             throw Environment.EnvironmentError.keyNotFound(key: key)
