@@ -30,10 +30,6 @@ import Sugar
 
 This package contains a lot of misc. functionality that might not fit into it's own package or that would best to get PR'ed into Vapor. Some examples of what this package contains:
 
-### Mutable Leaf tag config
-
-To allow third party packages to register their own Leaf tags, Sugar comes with a `MutableLeafTagConfig`.
-
 #### How to use it in a package
 
 To have your package register the tags to the shared config, you can do the following:
