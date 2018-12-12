@@ -4,8 +4,8 @@ import Fluent
 import Vapor
 
 public protocol UserType {
-    associatedtype Login: HasReadablePassword
-    associatedtype Registration: HasReadablePassword
+    associatedtype Login: HasReadablePassword & RequestCreatable
+    associatedtype Registration: HasReadablePassword & RequestCreatable
     associatedtype Update: Decodable
     associatedtype Public: Content
 
@@ -134,17 +134,16 @@ extension UserType where
     Self: PasswordAuthenticatable
 {
     public static func logIn(on req: Request) throws -> Future<Self> {
-        return try req
-            .content
-            .decode(Login.self)
+        return try Login
+            .create(on: req)
             .flatMap(to: Self.self) { login in
                 Self.logIn(with: login, on: req)
             }
     }
 
     public static func register(on req: Request) throws -> Future<Self> {
-        return try req.content
-            .decode(Registration.self)
+        return try Registration
+            .create(on: req)
             .flatTry { registration in
                 try Self.preRegister(with: registration, on: req)
             }
