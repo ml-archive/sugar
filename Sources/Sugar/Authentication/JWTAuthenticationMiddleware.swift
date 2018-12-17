@@ -42,7 +42,7 @@ public final class JWTAuthenticationMiddleware<A: JWTAuthenticatable>: Middlewar
             jwt = try JWT<A.JWTPayload>(from: bearer.token, verifiedUsing: signer)
         } catch let error as JWTError where error.identifier == "exp" {
             return try Future
-                .transform(to: HTTPResponse.init(status: .unauthorized), on: req)
+                .transform(to: HTTPResponse(status: .unauthorized), on: req)
                 .encode(for: req)
         }
 
