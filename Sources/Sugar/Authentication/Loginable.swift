@@ -1,6 +1,7 @@
 import Authentication
 import Vapor
 
+/// Expresses the ability for a type (e.g. a user type) to be logged in.
 public protocol Loginable {
 
     /// Payload containing the information required to perform a login.
