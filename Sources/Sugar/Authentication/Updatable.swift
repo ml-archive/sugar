@@ -15,8 +15,8 @@ extension Updatable {
 extension Updatable where Update: Decodable {
     public func applyUpdate(on req: Request) -> Future<Self> {
         return preUpdate(on: req)
-            .try {
-                try self.update(req.content.syncDecode(Update.self))
+            .flatTry {
+                try req.content.decode(Update.self).map(self.update)
             }
             .transform(to: self)
     }
