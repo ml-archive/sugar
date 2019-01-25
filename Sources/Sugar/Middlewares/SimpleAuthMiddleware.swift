@@ -4,11 +4,20 @@ import AuthProvider
 
 public final class SimpleAuthMiddleware: Middleware {
     private let token: String
+    private let authSource: (Request) -> String?
     private let shouldAuth: (Request) -> Bool
+    private let error: AbortError
 
-    public init(token: String, shouldAuth: @escaping (Request) -> Bool = { _ in true }) {
+    public init(
+        token: String,
+        authSource: @escaping (Request) -> String? = { $0.auth.header?.string },
+        shouldAuth: @escaping (Request) -> Bool = { _ in true },
+        error: AbortError = Abort.unauthorized
+    ) {
         self.token = token
+        self.authSource = authSource
         self.shouldAuth = shouldAuth
+        self.error = error
     }
 
     public func respond(to request: Request, chainingTo next: Responder) throws -> Response {
@@ -18,8 +27,8 @@ public final class SimpleAuthMiddleware: Middleware {
         }
 
         // Check for token
-        guard let header = request.auth.header, header.string == token else {
-            throw Abort.unauthorized
+        guard let authSource = authSource(request), authSource == token else {
+            throw error
         }
 
         return try next.respond(to: request)
