@@ -22,7 +22,7 @@ extension RedisClient {
     ) -> Future<Int> where E: RedisDataConvertible {
         return set(key, to: data)
             .flatMap {
-                return self.expire(key, after: expiration)
+                self.expire(key, after: expiration)
             }
     }
 
