@@ -53,8 +53,6 @@ extension Creatable {
 
 /// A special case of Creatable where the associated `Create` type is the type itself (see the
 /// extension below).
-///
-/// See: `Creatable`.
 public protocol SelfCreatable: Creatable, Decodable {}
 
 extension SelfCreatable {
