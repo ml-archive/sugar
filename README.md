@@ -13,9 +13,8 @@
 Update your `Package.swift` file.
 
 ```swift
-.package(url: "https://github.com/nodes-vapor/sugar.git", from: "3.0.0-beta")
+.package(url: "https://github.com/nodes-vapor/sugar.git", from: "4.0.0")
 ```
-
 
 ## Getting started 🚀
 
@@ -25,40 +24,9 @@ Make sure that you've imported Sugar everywhere when needed:
 import Sugar
 ```
 
-
 ## Helpers
 
 This package contains a lot of misc. functionality that might not fit into it's own package or that would best to get PR'ed into Vapor. Some examples of what this package contains:
-
-#### How to use it in a package
-
-To have your package register the tags to the shared config, you can do the following:
-
-```swift
-public func didBoot(_ container: Container) throws -> Future<Void> {
-    let tags: MutableLeafTagConfig = try container.make()
-    tags.use(MyTag(), as: "mytag")
-
-    return .done(on: container)
-}
-```
-
-#### How to use it in a project
-
-If you're using a package that uses the shared `MutableLeafTagConfig`, these tags will become available in your project automatically. If you have additional tags you want to add, these has to be registered in `boot.swift` instead of `configure.swift` to allow the different providers to have registered their tags to the config first. Here's how you could do it:
-
-```swift
-public func boot(_ app: Application) throws {
-    // Register Leaf tags using the shared config.
-    // This allows third party packages to register their own tags.
-    let tags: MutableLeafTagConfig = try app.make()
-    tags.use(MyAdditionalTag())
-}
-```
-
-> You don't have to register `tags` when adding this in `boot.swift`.
-
-In the case where multiple packages is registering a tag using the same name, the tags can be added manually by defining your own name for the tags.
 
 ### Environment variables
 
@@ -93,12 +61,10 @@ extension MyModel: Migration {
 }
 ```
 
-
 ## 🏆 Credits
 
 This package is developed and maintained by the Vapor team at [Nodes](https://www.nodesagency.com).
 The package owner for this project is [Siemen](https://github.com/siemensikkema).
-
 
 ## 📄 License
 
