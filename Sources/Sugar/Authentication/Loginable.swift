@@ -51,7 +51,7 @@ extension Loginable where
 
 extension Loginable where Self.Login: Decodable {
 
-    /// Convenience function to combines `preLogin` and `logIn`.
+    /// Convenience function that combines `preLogin` and `logIn`.
     ///
     /// - Parameter req: the request.
     /// - Returns: an instance of self in the `Future` on successful login.
