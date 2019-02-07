@@ -16,7 +16,7 @@ import Vapor
 /// way as other `Creatable` types.
 public protocol Creatable {
 
-    /// Decodable Payload used to 
+    /// Decodable Payload that can be used to initialize an instance.
     associatedtype Create: Decodable
 
     /// A step that is to be performed during the actual creation. Can be used for validation.
