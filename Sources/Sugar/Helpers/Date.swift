@@ -13,44 +13,44 @@ public extension Date {
         return Date().endOfMonth()
     }
 
-    public func startOfMonth() -> Date? {
-        return Calendar.current.date(
-            from: Calendar.current.dateComponents([.year, .month],
-            from: Calendar.current.startOfDay(for: self))
+    public func startOfMonth(calendar: Calendar = .current) -> Date? {
+        return calendar.date(
+            from: calendar.dateComponents([.year, .month],
+            from: calendar.startOfDay(for: self))
         )
     }
 
-    public func endOfMonth() -> Date? {
+    public func endOfMonth(calendar: Calendar = .current) -> Date? {
         guard let startOfMonth = self.startOfMonth() else { return nil }
-        return Calendar.current.date(
+        return calendar.date(
             byAdding: DateComponents(month: 1, day: -1),
             to: startOfMonth
         )
     }
 
-    public func add(days: Int) -> Date? {
-        return Calendar.current.date(
+    public func add(days: Int, calendar: Calendar = .current) -> Date? {
+        return calendar.date(
             byAdding: DateComponents(day: days),
             to: self
         )
     }
 
-    public func sub(days: Int) -> Date? {
-        return Calendar.current.date(
+    public func sub(days: Int, calendar: Calendar = .current) -> Date? {
+        return calendar.date(
             byAdding: DateComponents(day: -days),
             to: self
         )
     }
 
-    public func add(hours: Int) -> Date? {
-        return Calendar.current.date(
+    public func add(hours: Int, calendar: Calendar = .current) -> Date? {
+        return calendar.date(
             byAdding: DateComponents(hour: hours),
             to: self
         )
     }
 
-    public func sub(hours: Int) -> Date? {
-        return Calendar.current.date(
+    public func sub(hours: Int, calendar: Calendar = .current) -> Date? {
+        return calendar.date(
             byAdding: DateComponents(hour: -hours),
             to: self
         )
@@ -66,10 +66,14 @@ public extension Date {
     ///   - minute: Int
     ///   - second: Int
     /// - Returns: Date?
-    public func dateBySetting(hour: Int, minute: Int, second: Int) -> Date? {
-
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        guard let date = Calendar.current.date(from: dateComponents) else { return nil }
+    public func dateBySetting(
+        hour: Int,
+        minute: Int,
+        second: Int,
+        calendar: Calendar = .current
+    ) -> Date? {
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+        guard let date = calendar.date(from: dateComponents) else { return nil }
         return date.addingTimeInterval(
             TimeInterval(hour * Date.hourInSec + minute * Date.minInSec + second)
         )
