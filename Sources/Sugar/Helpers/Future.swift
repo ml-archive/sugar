@@ -19,10 +19,6 @@ public extension Future {
             try callback(expectation).map { _ in expectation }
         }
     }
-
-    static func transform(to value: T, on worker: Worker) -> Future<T> {
-        return Future.map(on: worker) { value }
-    }
 }
 
 public extension Future where Expectation: OptionalType {
