@@ -10,10 +10,26 @@
 
 ## 📦 Installation
 
-Update your `Package.swift` file.
+Add `Sugar` to the package dependencies (in your `Package.swift` file):
 
 ```swift
-.package(url: "https://github.com/nodes-vapor/sugar.git", from: "4.0.0")
+dependencies: [
+    ...,
+    .package(url: "https://github.com/nodes-vapor/sugar.git", from: "4.0.0-beta")
+]
+```
+
+as well as to your target (e.g. "App"):
+
+```swift
+targets: [
+    ...
+    .target(
+        name: "App",
+        dependencies: [... "Sugar" ...]
+    ),
+    ...
+]
 ```
 
 ## Getting started 🚀
