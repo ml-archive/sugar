@@ -21,3 +21,11 @@ extension Updatable where Update: Decodable {
             .transform(to: self)
     }
 }
+
+extension Future where T: Updatable, T.Update: Decodable {
+    public func applyUpdate(on req: Request) -> Future<T> {
+        return flatMap {
+            $0.applyUpdate(on: req)
+        }
+    }
+}
