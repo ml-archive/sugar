@@ -13,12 +13,6 @@ public extension Future {
             try callback(expectation).map { _ in expectation }
         }
     }
-
-    public func flatTry(_ callback: @escaping (Expectation) throws -> Future<Any>) -> Future<T> {
-        return flatMap { expectation in
-            try callback(expectation).map { _ in expectation }
-        }
-    }
 }
 
 public extension Future where Expectation: OptionalType {
