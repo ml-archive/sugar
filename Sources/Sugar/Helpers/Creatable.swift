@@ -55,7 +55,7 @@ extension Creatable {
 /// extension below).
 public protocol SelfCreatable: Creatable, Decodable {}
 
-extension SelfCreatable {
+extension Creatable where Create == Self {
 
     /// See `Creatable`. Default implementation of `init` where the created value is directly
     /// assigned to itself.
