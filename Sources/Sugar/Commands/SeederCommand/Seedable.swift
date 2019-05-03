@@ -10,11 +10,11 @@ public protocol Seedable: Model {
 }
 
 public extension Seedable {
-    public static var arguments: [CommandArgument] {
+    static var arguments: [CommandArgument] {
         return []
     }
 
-    public static var options: [CommandOption] {
+    static var options: [CommandOption] {
         return []
     }
 }

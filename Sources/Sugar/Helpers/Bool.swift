@@ -1,5 +1,5 @@
 public extension Bool {
-    public init(from string: String) {
+    init(from string: String) {
         self = ["1", "true"].contains(string.lowercased())
     }
 }

@@ -2,7 +2,7 @@ import Fluent
 import Vapor
 
 public extension Model {
-    public static func requireFind(
+    static func requireFind(
         _ id: ID,
         on worker: DatabaseConnectable
     ) -> Future<Self> {
@@ -11,7 +11,7 @@ public extension Model {
             .unwrap(or: Abort(.notFound, reason: "\(Self.self) with id \(id) not found"))
     }
 
-    public func saveOrUpdate (
+    func saveOrUpdate (
         given filters: [FilterOperator<Self.Database, Self>],
         withSoftDeleted: Bool = false,
         restore: Bool = false,
