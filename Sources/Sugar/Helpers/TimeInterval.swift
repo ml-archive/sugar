@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Optional where Wrapped == TimeInterval {
-    public var dateRelativeTo1970: Date? {
+    var dateRelativeTo1970: Date? {
         guard let date = self else {
             return nil
         }
@@ -11,7 +11,7 @@ public extension Optional where Wrapped == TimeInterval {
 }
 
 public extension TimeInterval {
-    public var dateRelativeTo1970: Date {
+    var dateRelativeTo1970: Date {
         return Date(timeIntervalSince1970: self)
     }
 }

@@ -2,7 +2,7 @@ import Crypto
 import COperatingSystem
 
 public extension String {
-    public static func randomAlphaNumericString(_ length: Int = 64) -> String {
+    static func randomAlphaNumericString(_ length: Int = 64) -> String {
         func makeRandom(min: Int, max: Int) -> Int {
             let top = max - min + 1
             #if os(Linux)

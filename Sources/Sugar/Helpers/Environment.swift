@@ -5,11 +5,11 @@ public extension Environment {
         case keyNotFound(key: String)
     }
 
-    public static func get(_ key: String, _ fallback: String) -> String {
+    static func get(_ key: String, _ fallback: String) -> String {
         return ProcessInfo.processInfo.environment[key] ?? fallback
     }
 
-    public static func assertGet(_ key: String) throws -> String {
+    static func assertGet(_ key: String) throws -> String {
         guard let value = Environment.get(key) else {
             throw Environment.EnvironmentError.keyNotFound(key: key)
         }

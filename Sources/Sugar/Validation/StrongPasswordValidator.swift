@@ -71,7 +71,7 @@ fileprivate struct StrongPasswordValidator<T>: ValidatorType {
 }
 
 fileprivate extension Sequence where Iterator.Element == PasswordRegex {
-    fileprivate var requirements: String {
+    var requirements: String {
         return self.map { $0.description }.joined(separator: ", ")
     }
 }
