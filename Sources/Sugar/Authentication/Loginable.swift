@@ -5,7 +5,7 @@ import Vapor
 public protocol Loginable {
 
     /// Payload containing the information required to perform a login.
-    associatedtype Login: HasReadablePassword
+    associatedtype Login
 
     /// Used to perform any pre-login steps such as validation.
     ///
@@ -33,7 +33,8 @@ extension Loginable {
 
 extension Loginable where
     Self: PasswordAuthenticatable,
-    Self.Login: HasReadableUsername
+    Self.Login: HasReadableUsername,
+    Self.Login: HasReadablePassword
 {
     /// Default implementation that uses functionality provided by `PasswordAuthenticatable`.
     /// See `Loginable`.
