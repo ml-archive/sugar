@@ -1,13 +1,13 @@
 version: 2
 jobs:
-  MacOS:
+  MacOS-Swift-4.2:
     macos:
       xcode: "10.1.0"
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v1-spm-deps-{{ checksum "Package.swift" }}
+            - macos-swift4.2-v1-spm-deps-{{ checksum "Package.swift" }}
       - run:
           name: Install dependencies
           command: |
@@ -26,17 +26,43 @@ jobs:
           command: |
             bash <(curl -s https://codecov.io/bash)
       - save_cache:
-          key: v1-spm-deps-{{ checksum "Package.swift" }}
+          key: macos-swift4.2-v1-spm-deps-{{ checksum "Package.swift" }}
           paths:
             - .build
-  Linux:
+  MacOS-Swift-5:
+    macos:
+      xcode: "10.2.1"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - macos-swift5-v1-spm-deps-{{ checksum "Package.resolved" }}
+      - run:
+          name: Install dependencies
+          command: |
+            export HOMEBREW_NO_AUTO_UPDATE=1
+            brew tap vapor/homebrew-tap
+            brew install cmysql
+            brew install ctls
+            brew install libressl
+            brew install cstack
+      - run:
+          name: Build and Run Tests
+          no_output_timeout: 1800
+          command: |
+            swift test -Xswiftc -DNOJSON
+      - save_cache:
+          key: macos-swift5-v1-spm-deps-{{ checksum "Package.resolved" }}
+          paths:
+            - .build
+  Linux-Swift-4.2:
     docker:
       - image: nodesvapor/vapor-ci:swift-4.2
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v4-spm-deps-{{ checksum "Package.swift" }}
+            - linux-swift4.2-v1-spm-deps-{{ checksum "Package.swift" }}
       - run:
           name: Copy Package File
           command: cp Package.swift res
@@ -49,15 +75,40 @@ jobs:
           name: Restoring Package File
           command: mv res Package.swift
       - save_cache:
-          key: v4-spm-deps-{{ checksum "Package.swift" }}
+          key: linux-swift4.2-v1-spm-deps-{{ checksum "Package.swift" }}
+          paths:
+            - .build
+  Linux-Swift-5:
+    docker:
+      - image: nodesvapor/vapor-ci:swift-5.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - linux-swift5-v1-spm-deps-{{ checksum "Package.swift" }}
+      - run:
+          name: Copy Package File
+          command: cp Package.swift res
+      - run:
+          name: Build and Run Tests
+          no_output_timeout: 1800
+          command: |
+            swift test -Xswiftc -DNOJSON
+      - run:
+          name: Restoring Package File
+          command: mv res Package.swift
+      - save_cache:
+          key: linux-swift5-v1-spm-deps-{{ checksum "Package.swift" }}
           paths:
             - .build
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - MacOS
-      - Linux
+      - MacOS-Swift-4.2
+      - MacOS-Swift-5
+      - Linux-Swift-4.2
+      - Linux-Swift-5
 experimental:
   notify:
     branches:
