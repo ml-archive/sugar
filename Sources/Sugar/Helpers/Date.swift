@@ -70,7 +70,7 @@ public extension Date {
         hour: Int,
         minute: Int,
         second: Int,
-        calendar: Calendar = .current
+        calendar: Calendar = Calendar(identifier: .gregorian)
     ) -> Date? {
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
         guard let date = calendar.date(from: dateComponents) else { return nil }

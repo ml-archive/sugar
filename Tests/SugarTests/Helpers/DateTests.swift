@@ -10,10 +10,12 @@ final class DateTests: XCTestCase {
 
         let calendarComponents: Set<Calendar.Component> = Set([.year, .month, .day, .hour, .minute, .second])
 
+        let calendar = Calendar(identifier: .gregorian)
+
         let today = Date()
         let todayStartOfDay = today.dateBySetting(hour: 0, minute: 0, second: 0)!
-        let todayComps = Calendar.current.dateComponents(calendarComponents, from: today)
-        let todayStartOfDayComps = Calendar.current.dateComponents(calendarComponents, from: todayStartOfDay)
+        let todayComps = calendar.dateComponents(calendarComponents, from: today)
+        let todayStartOfDayComps = calendar.dateComponents(calendarComponents, from: todayStartOfDay)
 
         XCTAssertEqual(todayStartOfDayComps.year, todayComps.year, "Year changed!")
         XCTAssertEqual(todayStartOfDayComps.month, todayComps.month, "Month changed!")
