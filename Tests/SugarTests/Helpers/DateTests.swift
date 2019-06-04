@@ -11,7 +11,7 @@ final class DateTests: XCTestCase {
         let calendarComponents: Set<Calendar.Component> = Set([.year, .month, .day, .hour, .minute, .second])
 
         let today = Date()
-        let todayStartOfDay = today.dateBySetting(hour: 0, minute: 0, second: 0, calendar: .current)!
+        let todayStartOfDay = today.dateBySetting(hour: 0, minute: 0, second: 0)!
         let todayComps = Calendar.current.dateComponents(calendarComponents, from: today)
         let todayStartOfDayComps = Calendar.current.dateComponents(calendarComponents, from: todayStartOfDay)
 
