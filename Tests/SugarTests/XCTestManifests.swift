@@ -16,10 +16,17 @@ extension StrongPasswordValidatorTests {
     ]
 }
 
+extension DateTests {
+    static let __allTests = [
+        ("testDateBySettingHourMinuteSecond", testDateBySettingHourMinuteSecond)
+    ]
+}
+
 #if !os(macOS)
 public func __allTests() -> [XCTestCaseEntry] {
     return [
         testCase(StrongPasswordValidatorTests.__allTests),
+        testCase(DateTests.__allTests),
     ]
 }
 #endif
