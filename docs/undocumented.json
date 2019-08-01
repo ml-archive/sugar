@@ -1,0 +1,656 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 5,
+      "symbol": "AuthenticationError.signingError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 6,
+      "symbol": "AuthenticationError.userNotFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 7,
+      "symbol": "AuthenticationError.weakPassword",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 8,
+      "symbol": "AuthenticationError.usernameAlreadyExists",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 9,
+      "symbol": "AuthenticationError.incorrectPassword",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 10,
+      "symbol": "AuthenticationError.incorrectOldPassword",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 11,
+      "symbol": "AuthenticationError.passwordWithoutUsernameOrOldPassword",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/AuthenticationError.swift",
+      "line": 12,
+      "symbol": "AuthenticationError.malformedPayload",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/ExpireableJWTSigner.swift",
+      "line": 13,
+      "symbol": "ExpireableJWTSigner.init(expirationPeriod:signer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Authentication/JWTAuthenticatable.swift",
+      "line": 8,
+      "symbol": "JWTAuthenticatable.JWTPayload",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 4,
+      "symbol": "Seedable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 5,
+      "symbol": "Seedable.arguments",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 6,
+      "symbol": "Seedable.options",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 7,
+      "symbol": "Seedable.help",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 9,
+      "symbol": "Seedable.init(command:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 12,
+      "symbol": "Seedable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 13,
+      "symbol": "Seedable.arguments",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/Seedable.swift",
+      "line": 17,
+      "symbol": "Seedable.options",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/SeederCommand.swift",
+      "line": 4,
+      "symbol": "SeederCommand",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Commands/SeederCommand/SeederCommand.swift",
+      "line": 7,
+      "symbol": "SeederCommand.init(databaseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Array.swift",
+      "line": 2,
+      "symbol": "Array.subscript(safe:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Bool.swift",
+      "line": 2,
+      "symbol": "Bool.init(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/CommandConfig.swift",
+      "line": 4,
+      "symbol": "CommandConfig.use(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 5,
+      "symbol": "Date.hourInSec",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 6,
+      "symbol": "Date.minInSec",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 8,
+      "symbol": "Date.startOfMonth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 12,
+      "symbol": "Date.endOfMonth()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 16,
+      "symbol": "Date.startOfMonth(calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 23,
+      "symbol": "Date.endOfMonth(calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 31,
+      "symbol": "Date.add(days:calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 38,
+      "symbol": "Date.sub(days:calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 45,
+      "symbol": "Date.add(hours:calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Date.swift",
+      "line": 52,
+      "symbol": "Date.sub(hours:calendar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Either.swift",
+      "line": 5,
+      "symbol": "Either.left(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Either.swift",
+      "line": 6,
+      "symbol": "Either.right(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 4,
+      "symbol": "Environment.EnvironmentError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 5,
+      "symbol": "Environment.EnvironmentError.keyNotFound(key:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 8,
+      "symbol": "Environment.get(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 12,
+      "symbol": "Environment.assertGet(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 20,
+      "symbol": "env(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 24,
+      "symbol": "env(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Environment.swift",
+      "line": 28,
+      "symbol": "assertEnv(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Future.swift",
+      "line": 4,
+      "symbol": "Future.try(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Future.swift",
+      "line": 11,
+      "symbol": "Future.flatTry(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Future.swift",
+      "line": 19,
+      "symbol": "Future.nil(or:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Future.swift",
+      "line": 29,
+      "symbol": "Future.equal(_:or:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Future.swift",
+      "line": 41,
+      "symbol": "syncFlatten(futures:on:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Model.swift",
+      "line": 5,
+      "symbol": "Model.requireFind(_:on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Model.swift",
+      "line": 14,
+      "symbol": "Model.saveOrUpdate(given:withSoftDeleted:restore:on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Model.swift",
+      "line": 48,
+      "symbol": "Model.addProperties(to:excluding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Model.swift",
+      "line": 75,
+      "symbol": "Model.addProperties(to:excluding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/PublicRepresentable.swift",
+      "line": 3,
+      "symbol": "PublicRepresentable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/PublicRepresentable.swift",
+      "line": 4,
+      "symbol": "PublicRepresentable.Public",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/PublicRepresentable.swift",
+      "line": 5,
+      "symbol": "PublicRepresentable.convertToPublic(on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Redis.swift",
+      "line": 4,
+      "symbol": "RedisClient.expire(_:after:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Redis.swift",
+      "line": 18,
+      "symbol": "RedisClient.set(_:to:expiration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Redis.swift",
+      "line": 29,
+      "symbol": "RedisClient.jsonSet(_:to:expiration:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/SecondsConverter.swift",
+      "line": 5,
+      "symbol": "Numeric.minsInSecs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/SecondsConverter.swift",
+      "line": 9,
+      "symbol": "Numeric.hoursInSecs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/SecondsConverter.swift",
+      "line": 13,
+      "symbol": "Numeric.daysInSecs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/SecondsConverter.swift",
+      "line": 17,
+      "symbol": "Numeric.weeksInSecs",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/String.swift",
+      "line": 5,
+      "symbol": "String.randomAlphaNumericString(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/TimeInterval.swift",
+      "line": 4,
+      "symbol": "Optional.dateRelativeTo1970",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/TimeInterval.swift",
+      "line": 14,
+      "symbol": "TimeInterval.dateRelativeTo1970",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/URL.swift",
+      "line": 4,
+      "symbol": "URL.addQueryItems(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/URL.swift",
+      "line": 14,
+      "symbol": "URL.addQueryItems(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 3,
+      "symbol": "Updatable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 4,
+      "symbol": "Updatable.Update",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 5,
+      "symbol": "Updatable.preUpdate(on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 6,
+      "symbol": "Updatable.update(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 9,
+      "symbol": "Updatable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 10,
+      "symbol": "Updatable.preUpdate(on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 15,
+      "symbol": "Updatable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 16,
+      "symbol": "Updatable.applyUpdate(on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Helpers/Updatable.swift",
+      "line": 26,
+      "symbol": "Future.applyUpdate(on:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 3,
+      "symbol": "CurrentURLProvider",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 4,
+      "symbol": "CurrentURLProvider.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 17,
+      "symbol": "CurrentURLContainer",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 18,
+      "symbol": "CurrentURLContainer.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 21,
+      "symbol": "CurrentURLMiddleware",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentURLMiddleware.swift",
+      "line": 22,
+      "symbol": "CurrentURLMiddleware.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 4,
+      "symbol": "CurrentUserProvider",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 5,
+      "symbol": "CurrentUserProvider.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 18,
+      "symbol": "CurrentUserContainer",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 19,
+      "symbol": "CurrentUserContainer.user",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 22,
+      "symbol": "CurrentUserMiddleware",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Middlewares/CurrentUserMiddleware.swift",
+      "line": 23,
+      "symbol": "CurrentUserMiddleware.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/StrongPasswordValidator.swift",
+      "line": 3,
+      "symbol": "PasswordRegex",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/StrongPasswordValidator.swift",
+      "line": 4,
+      "symbol": "PasswordRegex.pattern",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/StrongPasswordValidator.swift",
+      "line": 5,
+      "symbol": "PasswordRegex.description",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/StrongPasswordValidator.swift",
+      "line": 7,
+      "symbol": "PasswordRegex.init(pattern:description:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/StrongPasswordValidator.swift",
+      "line": 14,
+      "symbol": "Validator.strongPassword(regexes:requiredMatches:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/emilmarashliev/Projects/sugar/Sources/Sugar/Validation/UniqueField.swift",
+      "line": 15,
+      "symbol": "validateThat(only:has:for:on:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/emilmarashliev/Projects/sugar"
+}
