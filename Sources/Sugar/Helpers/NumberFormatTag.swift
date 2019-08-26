@@ -12,6 +12,8 @@ import Leaf
 ///   - number: Double
 ///   - decimals: Int (default: 2 decimals)
 public final class NumberFormatTag: TagRenderer {
+    public init() {}
+
     public func render(tag: TagContext) throws -> Future<TemplateData> {
 
         guard let number = tag.parameters[safe: 0]?.double else {
