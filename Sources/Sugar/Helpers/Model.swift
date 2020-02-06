@@ -11,7 +11,22 @@ public extension Model {
             .unwrap(or: Abort(.notFound, reason: "\(Self.self) with id \(id) not found"))
     }
 
-    func saveOrUpdate (
+    @available(*, deprecated, message: "use `creatOrUpdate(given:withSoftDeleted:restore:on)`")
+    func saveOrUpdate(
+        given filters: [FilterOperator<Self.Database, Self>],
+        withSoftDeleted: Bool = false,
+        restore: Bool = false,
+        on db: DatabaseConnectable
+    ) throws -> Future<Self> {
+        return try createOrUpdate(
+            given: filters,
+            withSoftDeleted: withSoftDeleted,
+            restore: restore,
+            on: db
+        )
+    }
+
+    func createOrUpdate(
         given filters: [FilterOperator<Self.Database, Self>],
         withSoftDeleted: Bool = false,
         restore: Bool = false,
@@ -25,7 +40,7 @@ public extension Model {
 
         return query.first().flatMap(to: Self.self) { result in
             guard let result = result else {
-                return self.save(on: db)
+                return self.create(on: db)
             }
 
             var copy = self
