@@ -9,9 +9,6 @@ jobs:
           keys:
             - macos-swift4.2-v1-spm-deps-{{ checksum "Package.swift" }}
       - run:
-          name: Set Ruby Version
-          command: echo 'chruby ruby-2.6' >> ~/.bash_profile
-      - run:
           name: Install dependencies
           command: |
             export HOMEBREW_NO_AUTO_UPDATE=1
