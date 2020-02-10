@@ -15,7 +15,7 @@ Add `Sugar` to the package dependencies (in your `Package.swift` file):
 ```swift
 dependencies: [
     ...,
-    .package(url: "https://github.com/nodes-vapor/sugar.git", from: "4.0.0-beta")
+    .package(url: "https://github.com/nodes-vapor/sugar.git", from: "4.0.0")
 ]
 ```
 
@@ -80,7 +80,6 @@ extension MyModel: Migration {
 ## 🏆 Credits
 
 This package is developed and maintained by the Vapor team at [Nodes](https://www.nodesagency.com).
-The package owner for this project is [Siemen](https://github.com/siemensikkema).
 
 ## 📄 License
 
